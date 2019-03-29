@@ -83,11 +83,11 @@
  border: 1px solid #58b195;
 }
 #accountNO{
-  border: 1px solid #f01708;
+  border: 3px solid #f01708;
 }
 
 #passwordNO{
- border: 1px solid #f01708;
+ border: 3px solid #f01708;
 }
 
 #login_warn{

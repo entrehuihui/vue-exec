@@ -7,8 +7,23 @@
           <div class="login_stype">Login</div>
           <div id="login_warn">{{msg}}</div>
           <div class="login_stype">
-            <input id="account" type="text" placeholder="Account" ref="account">
-            <input id="password" type="password" placeholder="Password" ref="password">
+            <input
+              id="account"
+              type="text"
+              placeholder="Account"
+              ref="account"
+              @blur="accountOver()"
+              @keyup="accountOver()"
+            >
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              ref="password"
+              @keyup.enter="login()"
+              @blur="passwordOver()"
+              @keyup="passwordOver()"
+            >
           </div>
           <div id="login_remember" v-on:click="login_remember()">
             <div>
@@ -35,6 +50,27 @@ export default {
     }
   },
   methods: {
+    // 失去焦点
+    accountOver: function() {
+      var account = this.$refs.account.value;
+      if (account == "") {
+        this.$refs.account.placeholder = "Account cannot be empty";
+        this.$refs.account.id = "accountNO";
+        return;
+      }
+      this.$refs.account.placeholder = "Account";
+      this.$refs.account.id = "account";
+    },
+    passwordOver: function() {
+      var password = this.$refs.password.value;
+      if (password == "") {
+        this.$refs.password.placeholder = "password can not be blank";
+        this.$refs.password.id = "passwordNO";
+        return;
+      }
+      this.$refs.password.placeholder = "password can not be blank";
+      this.$refs.password.id = "password";
+    },
     //绑定事件的关键代码
     login: async function() {
       var account = this.$refs.account.value;
@@ -46,7 +82,7 @@ export default {
         return;
       }
       if (password == "") {
-        this.$refs.password.placeholder = "password can not be blank";
+        this.$refs.password.placeholder = "Password";
         this.$refs.password.id = "passwordNO";
         return;
       }
@@ -59,6 +95,7 @@ export default {
       // console.log(retData);
       if (retData.Code == 200) {
         console.log(retData);
+        this.$router.push("/mains");
       } else {
         this.msg = retData.Msg;
       }

@@ -1,0 +1,191 @@
+#roomnumlist{
+   width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 7800;
+    background: rgb(236, 232, 232);
+    text-align:center;
+}
+#roomnumlist_left{
+    position: fixed;
+    height: 100%;
+    width: 200px;
+    background: rgb(37, 36, 36);
+}
+
+#roomnumlist_left div{
+    position: relative; 
+    width:auto;
+    height:auto;
+    max-width:90%;
+    max-height:90%;
+    top: 3%;
+    color: rgb(255, 255, 255);
+    text-align:center;
+    margin:20% 0;
+}
+#roomnumlist_logo img{
+   width:auto;
+   height:auto;
+   max-width:90%;
+   max-height:90%;
+}
+
+#roomnumlist_top{
+    left: 200px;
+    position: relative; 
+    height: 200px;
+    width: 1703px;
+}
+
+#roomnumlist_title{
+    position: relative; 
+    top: 40px;
+    height: 130px;
+    width: 100%;
+}
+
+#roomnumlist_select{
+    position: relative; 
+    width: 100%;
+    height: 60px;
+    border:  2px solid #c9c3c3;
+}
+#roomnumlist_select div{
+    position: relative; 
+    /* top: 3px; */
+    float: left;
+    display:inline;
+    margin:10px;
+}
+
+.roomnumnlist_select_a{
+    font-size:20px;
+}
+
+#roomnumlist_select input{
+    border: 2px solid #dbdbdb;
+    border-radius: 2px;
+    height: 20px;
+    width: 100px
+}
+
+#roomnumlist_select button{
+    position: relative; 
+    top: 12px;
+}
+
+#roomnumlist_data{
+    left: 200px;
+    position: relative; 
+    width: 1703px;
+    height: 670px;
+}
+
+.roomnumlist_data_info_title{
+    position: relative; 
+    top: -5px;
+    width: 100%;
+    height: 30px;
+    background: rgb(211, 212, 211);
+    margin:5px 0;
+}
+
+
+.roomnumlist_data_a{
+    float: left;
+    position: relative; 
+    left: 10px;
+    width: 40px;
+    height: 100%;
+    text-align:center;
+    font-size:17px;
+    overflow:hidden;
+}
+.roomnumlist_data_b{
+    float: left;
+    position: relative; 
+    left: 30px;
+    width: 300px;
+    height: 100%;
+    text-align:center;
+    font-size:17px;
+    overflow:hidden;
+}
+
+.roomnumlist_data_c{
+    float: left;
+    position: relative; 
+    left: 30px;
+    width: 100px;
+    height: 100%;
+    text-align:center;
+    font-size:17px;
+    overflow:hidden;
+}
+
+.roomnumlist_data_d{
+    float: left;
+    position: relative; 
+    left: 30px;
+    width: 100px;
+    height: 100%;
+    text-align:center;
+    font-size:17px;
+    overflow:hidden;
+}
+
+.roomnumlist_data_e{
+    float: left;
+    position: relative; 
+    left: 30px;
+    width: 500px;
+    height: 100%;
+    text-align:center;
+    font-size:17px;
+    overflow:hidden;
+}
+
+.roomnumlist_data_f{
+    float: left;
+    position: relative; 
+    left: 30px;
+    width: 100px;
+    height: 100%;
+    text-align:center;
+    font-size:17px;
+    overflow:hidden;
+}
+
+.roomnumlist_data_g{
+    float: left;
+    position: relative; 
+    left: 30px;
+    width: 300px;
+    height: 100%;
+    text-align:center;
+    font-size:17px;
+    overflow:hidden;
+}
+
+
+.roomnumlist_data_info{
+    width: 100%;
+    height: 60px;
+    margin:5px 0;
+    cursor:pointer;
+    line-height:60px;
+}
+
+
+.roomnumlist_data_info:hover{
+    background: rgb(92, 218, 190);
+}
+
+#roomnumlist_button{
+    left: 200px;
+    position: relative; 
+    width: 100% - 200px;
+    height: 70px;
+}
+

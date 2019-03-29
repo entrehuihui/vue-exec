@@ -34,8 +34,12 @@
                 class="mains_add_room"
                 id="mians_add_room_a"
                 v-on:click="mains_addRoomNum(true)"
-              >添加户型</div>
-              <div class="mains_add_room" id="mians_add_room_b" v-on:click="mians_addRoom()">添加房间</div>
+              >户型列表</div>
+              <div
+                class="mains_add_room"
+                id="mians_add_room_b"
+                v-on:click="mians_addRoom(true)"
+              >添加房间</div>
             </div>
           </div>
           <div id="mains_set">
@@ -71,7 +75,9 @@
         :img="v.Img"
       ></milieu-devices>
     </div>
-    <milieu-addroomnum :isShow="addroomnumShow" v-on:transparentclose="mains_addRoomNum(false)"></milieu-addroomnum>
+    <milieu-roomnumlist :isShow="addroomnumShow" v-on:transparentclose="mains_addRoomNum(false)"></milieu-roomnumlist>
+    <milieu-addroom :isShow="addroomShow" v-on:transparentclose="mians_addRoom(false)"></milieu-addroom>
+    <!-- <milieu-roomnumlist :isShow="roomnumListShow" v-on:transparentclose="mians_addRoom(false)"></milieu-roomnumlist> -->
   </div>
 </template>
 
@@ -79,7 +85,9 @@
 import req from "../global/request.vue";
 import milieu from "../components/milieu.vue";
 import devices from "../components/devices.vue";
-import addroomnum from "../components/addroomnum.vue";
+// import addroomnum from "../components/addroomnum.vue";
+import addroom from "../components/addroom.vue";
+import roomnumlist from "../components/roomnumlist.vue";
 export default {
   data: function() {
     return {
@@ -94,7 +102,10 @@ export default {
       },
       isShow: false,
       roomDevicesInfo: {},
-      addroomnumShow: false
+      addroomnumShow: false,
+      addroomShow: false,
+      roomnumListShow: false,
+      devicesType: 99
     };
   },
   methods: {
@@ -102,7 +113,7 @@ export default {
     mians_getRoomLatyout: getRoomLatyout,
     mains_getRoomDevices: getRoomDevices,
     mains_addRoomNum: addRoomNumf,
-    mians_addRoom: addRoom
+    mians_addRoom: addRoomf
   },
   watch: {},
   mounted() {
@@ -112,11 +123,13 @@ export default {
   components: {
     "milieu-info": milieu,
     "milieu-devices": devices,
-    "milieu-addroomnum": addroomnum
+    "milieu-addroom": addroom,
+    "milieu-roomnumlist": roomnumlist
   }
 };
-
-async function addRoom() {}
+async function addRoomf(mothod = false) {
+  this.addroomShow = mothod;
+}
 
 async function addRoomNumf(mothod = false) {
   this.addroomnumShow = mothod;
@@ -152,14 +165,15 @@ async function getRoomLatyout() {
   }
   this.roomLayout = retData.Data;
   if (this.roomLayout.length != 0) {
-    this.mains_getRoomDevices(0);
     this.isShow = true;
   } else {
     this.isShow = false;
   }
+  this.mains_getRoomDevices(0);
 }
 
 async function getRoomDevices(index = -1, types = 99) {
+  this.devicesType = types;
   if (this.roomLayout.length == 0) {
     return;
   }

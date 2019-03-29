@@ -1,4 +1,6 @@
-#addroomnum_transparent{
+
+
+#addroominfo_transparent{
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -12,7 +14,7 @@
     opacity: 0.5;
 }
 
-#addroomnum_entity{
+#addroominfo_entity{
 	position: absolute;
 	z-index: 8801;
     left: 30%;
@@ -27,7 +29,7 @@
     float: left;
 }
 
-#addroom_close{
+#addroominfo_close{
     position: relative;
     float: right;
     width: 25px;
@@ -37,13 +39,13 @@
     cursor:pointer;
 }
 
-#addroom_close img{
+#addroominfo_close img{
     width:100%;
     height:auto;
 }
 
 
-#addroom_input_name{
+#addroominfo_input_name{
     left: 150px;
     top: 50px;
     float: left;
@@ -54,7 +56,7 @@
     text-align:center;
 }
 
-#addroom_input_top_a{
+#addroominfo_input_top_a{
     position: relative;
     width: 400px;
     height: 300px;
@@ -63,13 +65,13 @@
     float: left;
 }
 
-.addroom_info_c{
+.addroominfo_info_c{
     width: 100px;
     height: 200px;
     float: left;
 }
 
-.addroom_info_b{
+.addroominfo_info_b{
     width: 150px;
     height: 30px;
     line-height:30px;
@@ -79,7 +81,7 @@
     font-size:20px;
 }
 
-.addroom_info_d{
+.addroominfo_info_d{
     width: 300px;
     height: 30px;
     line-height:30px;
@@ -87,7 +89,7 @@
     font-size:18px;
 }
 
-.addroom_info_d_false{
+.addroominfo_info_d_false{
     width: 300px;
     height: 30px;
     line-height:30px;
@@ -96,7 +98,7 @@
     border: 2px solid #f01708;
 }
 
-.addroom_info_d input{
+.addroominfo_info_d input{
     border: 1px solid #dbdbdb;
     border-radius: 4px;
     position: relative;
@@ -104,7 +106,7 @@
 
 
 
-.addroom_bbuttton{
+.addroominfo_bbuttton{
     left: 150px;
     float: left;
     position: relative;
@@ -114,7 +116,7 @@
     text-align:center;
 }
 
-.addroom_bbuttton button{
+.addroominfo_bbuttton button{
     width: 60px;
     height: 30px;
     margin:10px 0;
@@ -126,10 +128,10 @@
     background: -webkit-linear-gradient(left,#8652ff,#1bd1f5);
 }
 
-#addroom_info_d_true:hover{
+#addroominfo_info_d_true:hover{
     background: rgb(62, 194, 22);
 }
 
-#addroom_info_d_false:hover{
+#addroominfo_info_d_false:hover{
     background: rgb(247, 47, 12);
 }

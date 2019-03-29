@@ -5,6 +5,10 @@ import App from './App'
 import router from './router'
 Vue.config.productionTip = false
 
+//全局变量引用
+import global from '@/global/variable.js'
+Vue.prototype.global = global
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

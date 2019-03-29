@@ -110,7 +110,7 @@
     width: 85px;
     font-size:15px;
     text-align:center;
-    background: rgb(189, 243, 173);
+    background: rgb(35, 192, 231);
     text-decoration:none;
     line-height:30px;
     border-top-left-radius: 20px;
@@ -202,11 +202,12 @@
     left: 13.5%;
     width: 86%;
     z-index:0;
-    height: 100%;
+    height: 75%;
     background: rgb(248, 248, 248);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     float: left;
+    overflow:auto;
 }
