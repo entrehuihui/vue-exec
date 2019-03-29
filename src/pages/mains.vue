@@ -75,9 +75,8 @@
         :img="v.Img"
       ></milieu-devices>
     </div>
-    <milieu-roomnumlist :isShow="addroomnumShow" v-on:transparentclose="mains_addRoomNum(false)"></milieu-roomnumlist>
+    <milieu-roomnumlist :isShow="addroomnumShow" v-on:returnMains="mains_addRoomNum(false)"></milieu-roomnumlist>
     <milieu-addroom :isShow="addroomShow" v-on:transparentclose="mians_addRoom(false)"></milieu-addroom>
-    <!-- <milieu-roomnumlist :isShow="roomnumListShow" v-on:transparentclose="mians_addRoom(false)"></milieu-roomnumlist> -->
   </div>
 </template>
 

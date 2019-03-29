@@ -50,23 +50,7 @@ export default {
     }
   },
   methods: {
-    updateData: function(temp, elec, pm25) {
-      //   if (temp == 0) {
-      //     this.$refs.temp.style.display = "none";
-      //   } else {
-      //     this.$refs.temp.style.display = "visible";
-      //   }
-      //   if (elec == 0) {
-      //     this.$refs.elec.style.display = "none";
-      //   } else {
-      //     this.$refs.elec.style.display = "visible";
-      //   }
-      //   if (pm25 == 0) {
-      //     this.$refs.PM25.style.display = "none";
-      //   } else {
-      //     this.$refs.PM25.style.display = "visible";
-      //   }
-    }
+    updateData: function(temp, elec, pm25) {}
   },
   mounted() {
     this.updateData(0, 0, 0);

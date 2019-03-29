@@ -74,6 +74,9 @@ export default {
       this.inputNum = null;
       this.inputDetails = null;
       this.inputStatus = true;
+      this.name = true;
+      this.num = true;
+      this.details = true;
       this.$emit("transparentclose");
     },
     transparentTrue: postData,

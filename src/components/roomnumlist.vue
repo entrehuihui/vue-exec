@@ -1,7 +1,7 @@
 <template>
   <div id="roomnumlist" v-show="isShow">
     <!-- 左侧栏 -->
-    <div id="roomnumlist_left">
+    <div id="roomnumlist_left" v-on:click="returnMains()">
       <div id="roomnumlist_logo">
         <img src="/static/img/logo.png" alt>
       </div>
@@ -10,6 +10,9 @@
     <div id="roomnumlist_top">
       <div id="roomnumlist_title">
         <h1>布局列表</h1>
+      </div>
+      <div id="roomnumlist_top_return" v-on:click="returnMains()">
+        <img src="/static/img/return.jpg" alt>
       </div>
       <div id="roomnumlist_select">
         <div>
@@ -46,8 +49,18 @@
         <div class="roomnumlist_data_c">{{v.Floor}}</div>
         <div class="roomnumlist_data_d">{{v.RoomNum}}</div>
         <div class="roomnumlist_data_e">{{v.Details}}</div>
-        <div class="roomnumlist_data_f">{{v.status}}</div>
-        <div class="roomnumlist_data_g">详情</div>
+        <div class="roomnumlist_data_f">
+          <div :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'">已启用</div>
+          <div :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'">已禁用</div>
+        </div>
+        <div class="roomnumlist_data_g">
+          <div class="roomnumlist_data_g_a">详情</div>
+          <div class="roomnumlist_data_g_a">
+            <div :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'">启用</div>
+            <div :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'">禁用</div>
+          </div>
+          <div class="roomnumlist_data_g_a">删除</div>
+        </div>
       </div>
     </div>
   </div>
@@ -66,6 +79,11 @@ export default {
     isShow: {
       type: Boolean,
       default: false
+    }
+  },
+  methods: {
+    returnMains: function() {
+      this.$emit("returnMains");
     }
   },
   watch: {
