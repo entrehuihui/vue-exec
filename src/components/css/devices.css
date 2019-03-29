@@ -1,0 +1,70 @@
+
+.devices_model{
+    float: left;
+    width: 219px;
+    height: 220px;
+    background: rgb(255, 255, 255);
+    border:1px solid rgb(153, 155, 153);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin :5px;
+    cursor:pointer;
+}
+
+
+#devices_title{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 20%;
+    width: 100%;
+    text-align:center;
+    line-height: 50px;
+    font-size:20px;
+    
+    word-break:keep-all;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis; 
+}
+#devices_img{
+    height: 60%;
+    width: 100%;
+    text-align:center;
+}
+
+#devices_img img{
+    position: relative; 
+    width:auto;
+    height:100%;
+}
+
+#devices_status{
+    height: 20%;
+    width: 100%;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    float: left;
+}
+
+#devices_status div{
+    float: left;
+    height: 100%;
+    text-align:center;
+    line-height:44px
+}
+#devices_heart0{
+    width: 40%;
+    border-bottom-left-radius: 20px;
+    color: rgb(212, 23, 23);
+}
+#devices_heart1{
+    width: 40%;
+    border-bottom-left-radius: 20px;
+    color: rgb(8, 8, 8);
+}
+#devices_type{
+    width: 60%;
+    border-bottom-right-radius: 20px;
+}

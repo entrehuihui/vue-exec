@@ -1,0 +1,95 @@
+#index {
+   height: 100%; 
+    position: absolute; 
+    top: 0 ; 
+    left: 0 ; 
+    width: 100%;
+    background-image: url("/static/img/bg.png");
+     background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+}
+
+#login{
+    position:relative;
+    left:45%;
+    top: 30%;
+    width: 800px;
+    height: auto;
+}
+#login img {
+    width: 100%;
+    height: auto;
+}
+#login_fork{
+    position: absolute;
+    top: 0%;
+    left: 55%;
+    width: 45%;
+    height: 83%;
+}
+
+#login_position{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+
+.login_stype{
+    color: #333;
+    font-size: 28px;
+}
+
+.login_stype input{
+    padding-left:5%;
+    height: 40px;
+    width: 80%;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    position: relative;
+}
+
+#login_remember{
+    margin-top: 10px;
+    position:relative;
+    height: 10%;
+    width: 100%;
+    font-size: 7px;
+}
+#login_remember div{
+    display:inline-block;
+}
+#login_remember img{
+    width: auto;
+    height: auto;
+}
+
+#login_button{
+    font-size: 28px;
+    background: rgb(51, 112, 224);
+    text-align:center;
+    margin-top: 5%;
+    border-radius: 4px;
+    width: 85%;
+    height: 40px;
+}
+
+
+#account{
+ border: 1px solid #58b195;
+}
+
+#password{
+ border: 1px solid #58b195;
+}
+#accountNO{
+  border: 1px solid #f01708;
+}
+
+#passwordNO{
+ border: 1px solid #f01708;
+}
+
+#login_warn{
+    color: rgb(238, 10, 10);
+}

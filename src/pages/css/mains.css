@@ -1,0 +1,212 @@
+#mains{
+    height: 100%;
+    position: absolute; 
+    top: 0 ; 
+    left: 0 ; 
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    background: #edf5f6;
+}
+
+#mains_left{
+    position: fixed;
+    height: 100%;
+    width: 13%;
+    background: rgb(37, 36, 36);
+}
+
+#mains_left div{
+    position: relative; 
+    width:auto;
+    height:auto;
+    max-width:90%;
+    max-height:90%;
+    top: 3%;
+    color: rgb(255, 255, 255);
+    text-align:center;
+    margin:20% 0;
+}
+#mains_logo img{
+   width:auto;
+   height:auto;
+   max-width:90%;
+   max-height:90%;
+}
+.mains_title{
+    color:rgb(255, 255, 255);
+    cursor:pointer;
+}
+
+.mains_title img{
+    position:relative; 
+    top:5px
+}
+
+#mains_topall{
+    z-index:99;
+    position: fixed;
+    left: 13.5%;
+    width: 86%;
+    height: 220px;
+    color:rgb(255, 255, 255);
+}
+
+
+#mains_top{
+    position: relative; 
+    width: 100%;
+    height: 48px;
+    background: #edf5f6;
+}
+
+#mains_Setting{
+    width: 100%;
+    height: 60%;
+}
+
+#mains_roomNum {
+    position: relative;
+    color:rgb(94, 82, 82);
+    left: 2%;
+    width: 30%;
+    height: 100%;
+    line-height:45px;
+}
+#mains_roomName{
+    width: 90px;
+    height: 35px;
+    position: absolute;
+    top: 35%;
+    font-size:22px;
+}
+
+#mains_roomNum select{
+    position: absolute;
+    left: 95px;
+    top: 45%;
+    border: none;
+    outline: none;
+    width: 150px;
+    height: 36px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-left: 10%;
+    color:rgb(0, 0, 0);
+    font-size:30px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.mains_add_room{
+    position: absolute;
+    top: 45%;
+    left: 260px;
+    height: 36px;
+    width: 85px;
+    font-size:15px;
+    text-align:center;
+    background: rgb(189, 243, 173);
+    text-decoration:none;
+    line-height:30px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    cursor:pointer;
+    border:1px solid rgb(78, 89, 238);
+}
+
+.mains_add_room:hover{
+    background: rgb(62, 230, 11);
+}
+
+#mians_add_room_b{
+    left: 360px;
+}
+
+#mains_room{
+    width: 100%;
+    height: 90px;
+    background: #edf5f6;
+}
+
+.original{
+    position: relative;
+    width: 130px;
+    height: 40px;
+    top: 30px;
+    left: 1%;
+    font-size:25px;
+    text-align:center;
+    display:inline-block;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: rgb(40, 42, 56);
+    border:1px solid rgb(163, 238, 78);
+    margin :3px;
+    cursor:pointer;
+}
+
+.addclss{
+    position: relative;
+    width: 130px;
+    height: 40px;
+    top: 30px;
+    left: 1%;
+    font-size:25px;
+    text-align:center;
+    display:inline-block;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: rgb(40, 42, 56);
+    border:1px solid rgb(163, 238, 78);
+    background: -webkit-linear-gradient(left,#8652ff,#1bd1f5);
+    color: rgb(248, 246, 238);
+    margin :3px;
+    cursor:pointer;
+    /* 1111111111 */
+}
+
+
+
+#mains_room div a{
+    color:rgb(255, 250, 250);
+    text-decoration:none
+}
+
+#mains_info{
+    position: relative; 
+    top: 70px;
+    width: 100%;
+    height: 100px;
+    background: rgb(255, 255, 255);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+#mains_devices{
+    position: relative; 
+    top: 22%;
+    left: 13.5%;
+    width: 86%;
+    z-index:0;
+    height: 100%;
+    background: rgb(248, 248, 248);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    float: left;
+}
