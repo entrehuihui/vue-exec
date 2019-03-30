@@ -84,7 +84,6 @@
 import req from "../global/request.vue";
 import milieu from "../components/milieu.vue";
 import devices from "../components/devices.vue";
-// import addroomnum from "../components/addroomnum.vue";
 import addroom from "../components/addroom.vue";
 import roomnumlist from "../components/roomnumlist.vue";
 export default {
@@ -117,7 +116,6 @@ export default {
   watch: {},
   mounted() {
     this.mains_select();
-    // console.log("1111", milieu.props.temp);
   },
   components: {
     "milieu-info": milieu,

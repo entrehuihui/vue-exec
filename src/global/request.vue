@@ -45,6 +45,41 @@ export default {
         }
       });
     return retData;
+  },
+  put:async function(url, putData){
+    var retData;
+    await Vue.prototype.$axios.put(localhost + url, putData).then(response => {
+        retData = response.data;
+      })
+      .catch(error => {
+        if (error.response == undefined) {
+          retData = {
+            Code: 500,
+            Msg: "net::ERR_CONNECTION_REFUSED"
+          };
+        } else {
+          retData = error.response.data;
+        }
+      });
+    return retData;
+  },
+  del:async function(url, delData){
+    console.log(delData);
+    var retData;
+    await Vue.prototype.$axios.delete(localhost + url, {data:delData}).then(response => {
+        retData = response.data;
+      })
+      .catch(error => {
+        if (error.response == undefined) {
+          retData = {
+            Code: 500,
+            Msg: "net::ERR_CONNECTION_REFUSED"
+          };
+        } else {
+          retData = error.response.data;
+        }
+      });
+    return retData;
   }
 };
 </script>

@@ -30,6 +30,7 @@
         <div>
           <button>确定</button>
         </div>
+        <div class="roomnumnlist_select_b" v-on:click="showAddroom(true)">添加</div>
       </div>
     </div>
     <!-- 数据栏 -->
@@ -55,24 +56,46 @@
         </div>
         <div class="roomnumlist_data_g">
           <div class="roomnumlist_data_g_a">详情</div>
-          <div class="roomnumlist_data_g_a">
+          <div class="roomnumlist_data_g_a" v-on:click="rommStatus(v)">
             <div :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'">启用</div>
             <div :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'">禁用</div>
           </div>
-          <div class="roomnumlist_data_g_a">删除</div>
+          <div class="roomnumlist_data_g_a" v-on:click="roomDel(v.id)">删除</div>
         </div>
       </div>
     </div>
+    <!-- 页码栏 -->
+    <div class="roomnumlist_button">
+      <div :style="'left: '+(1420 - nowPages * 42)+'px'">
+        <div class="roomnumlist_button_a"><<</div>
+        <div class="roomnumlist_button_a"><</div>
+        <div
+          class="roomnumlist_button_a"
+          v-for="(v,k) in nowPages"
+          :key="v"
+          v-on:click="changePages(k)"
+          :id="pages==k ? 'roomnumlist_button_a_show':''"
+        >{{v}}</div>
+        <div class="roomnumlist_button_a">></div>
+        <div class="roomnumlist_button_a">>></div>
+      </div>
+    </div>
+    <addroomnum-buttun :isShow="addroomnumShow" v-on:transparentclose="showAddroom"></addroomnum-buttun>
   </div>
 </template>
 
 <script>
 import req from "../global/request.vue";
+import addroomnum from "../components/addroomnum.vue";
 
 export default {
   data: function() {
     return {
-      dataInfo: []
+      dataInfo: [],
+      addroomnumShow: false,
+      allPages: 1,
+      nowPages: 1,
+      pages: 0
     };
   },
   props: {
@@ -84,18 +107,63 @@ export default {
   methods: {
     returnMains: function() {
       this.$emit("returnMains");
+    },
+    rommStatus: async function(v) {
+      v.status = !v.status;
+      var retData = await req.put("/roomnum", v);
+      if (retData.Code != 200) {
+        alert(retData.Msg);
+        return;
+      }
+      alert("成功");
+      this.getRomlist();
+    },
+    roomDel: async function(id) {
+      var retData = await req.del("/roomnum", {
+        id: id
+      });
+      if (retData.Code != 200) {
+        alert(retData.Msg);
+        return;
+      }
+      alert("删除成功");
+      this.getRomlist();
+    },
+    getRomlist: async function() {
+      var retData = await req.get(
+        "/roomnum?offset=" + this.pages + "&limit=10"
+      );
+      if (retData.Code != 200) {
+        return;
+      }
+      var allPages = Math.ceil(retData.All / 10);
+      if (allPages > 10) {
+        this.nowPages = 10;
+      } else {
+        this.nowPages = allPages;
+        // this.nowPages = 10;
+      }
+      this.dataInfo = retData.Data;
+    },
+    showAddroom: function(mothod, result = false) {
+      this.addroomnumShow = mothod;
+      if (result) {
+        this.getRomlist();
+      }
+    },
+    changePages: function(pages) {
+      this.pages = pages;
     }
   },
   watch: {
     isShow: async function(oldValue, newValue) {
       if (!newValue) {
-        var retData = await req.get("/roomnum");
-        if (retData.Code != 200) {
-          return;
-        }
-        this.dataInfo = retData.Data;
+        this.getRomlist();
       }
     }
+  },
+  components: {
+    "addroomnum-buttun": addroomnum
   }
 };
 </script>

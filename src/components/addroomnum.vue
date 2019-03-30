@@ -76,13 +76,13 @@ export default {
     }
   },
   methods: {
-    transparentclose: function() {
+    transparentclose: function(result = false) {
       this.inputName = "";
       this.inputFloor = null;
       this.inputNum = null;
       this.inputDetails = null;
       this.inputStatus = true;
-      this.$emit("transparentclose");
+      this.$emit("transparentclose", false, result);
     },
     transparentTrue: postData,
     checkName: function() {
@@ -153,7 +153,7 @@ async function postData() {
     alert(retData.Msg);
     return;
   }
-  this.transparentclose(false);
+  this.transparentclose(true);
 }
 </script>
 

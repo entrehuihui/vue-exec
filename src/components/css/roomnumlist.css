@@ -66,11 +66,11 @@
     position: relative; 
     width: 100%;
     height: 60px;
-    border:  2px solid #c9c3c3;
+    border-top:2px solid #c9c3c3;
+    border-bottom:2px solid #c9c3c3;
 }
 #roomnumlist_select div{
     position: relative; 
-    /* top: 3px; */
     float: left;
     display:inline;
     margin:10px;
@@ -78,6 +78,24 @@
 
 .roomnumnlist_select_a{
     font-size:20px;
+}
+
+.roomnumnlist_select_b{
+    left: 930px;
+    height: 70%;
+    width: 100px;
+    font-size:30px;
+    display:inline;
+    cursor:pointer;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border:  2px solid #c9c3c3;
+}
+.roomnumnlist_select_b:hover{
+    background: rgb(112, 236, 9);
+    color: rgb(255, 255, 255);
 }
 
 #roomnumlist_select input{
@@ -210,10 +228,10 @@
     position: relative;
     width: 100px;
     height: 100%;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     cursor:pointer;
 }
 
@@ -227,4 +245,54 @@
 .roomnumlist_data_g_a:hover{
     background: rgb(211, 207, 4);
     color: aliceblue;
+}
+
+.roomnumlist_button{
+    left: 200px;
+    position: relative; 
+    width: 1703px;
+    height: 40px;
+    background: rgb(174, 179, 182);
+    float: left;
+    top: 10px;
+    text-align:center;
+    border-top:2px solid #c9c3c3;
+    border-bottom:2px solid #c9c3c3;
+}
+
+.roomnumlist_button div{
+    position: relative;
+}
+
+.roomnumlist_button_a{
+    position: relative; 
+    width: 40px;
+    height: 40px;
+    /* left: 1000px; */
+    float: left;
+    font-size:20px;
+    overflow:hidden;
+    cursor:pointer;
+    line-height:40px;
+    top: 0;
+    margin:0;
+    padding:0px;
+    border-left:1px solid rgb(0, 0, 0); 
+    border-right:1px solid rgb(0, 0, 0); 
+    color: #ffffff;
+}
+.roomnumlist_button_a:hover{
+    background: rgb(231, 225, 225);
+    border-top:none; 
+    border-left:1px solid rgb(3, 253, 107); 
+    border-right:1px solid rgb(3, 253, 107); 
+    color: black;
+}
+
+#roomnumlist_button_a_show {
+    background: rgb(231, 225, 225);
+    border-top:none; 
+    border-left:1px solid rgb(199, 253, 3); 
+    border-right:1px solid rgb(199, 253, 3); 
+    color: black; 
 }
