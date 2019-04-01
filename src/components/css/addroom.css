@@ -5,9 +5,6 @@
 	height: 100%;
 	position: absolute;
 	z-index: 8800;
-	-webkit-transition: .5s ease-in-out;
-	-moz-transition: .5s ease-in-out;
-	-o-transition: .5s ease-in-out;
     background: rgb(104, 103, 103);
     filter:alpha(Opacity=50);
     -moz-opacity:0.5;

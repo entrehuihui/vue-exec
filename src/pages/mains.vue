@@ -4,21 +4,51 @@
       <div id="mains_logo">
         <img src="/static/img/logo.png" alt>
       </div>
-      <div class="mains_title" v-on:click="mains_getRoomDevices()">
+      <div
+        class="mains_title"
+        :id="devicesType == 99 ? 'mains_title_change':''"
+        v-on:click="mains_getRoomDevices()"
+      >
         <img src="/static/img/hvsetting.png" alt>
-        <a>所有设备</a>
+        <a>
+          <strong>所有设备</strong>
+        </a>
       </div>
-      <div class="mains_title" v-on:click="mains_getRoomDevices(-1, 0)">
+      <div
+        class="mains_title"
+        :id="devicesType == 0 ? 'mains_title_change':''"
+        v-on:click="mains_getRoomDevices(-1, 0)"
+      >
         <img src="/static/img/hvdevice.png" alt>
-        <a>控制设备</a>
+        <a>
+          <strong>控制设备</strong>
+        </a>
       </div>
-      <div class="mains_title" v-on:click="mains_getRoomDevices(-1, 1)">
+      <div
+        class="mains_title"
+        :id="devicesType == 1 ? 'mains_title_change':''"
+        v-on:click="mains_getRoomDevices(-1, 1)"
+      >
         <img src="/static/img/hvanfang.png" alt>
-        <a>安防设备</a>
+        <a>
+          <strong>安防设备</strong>
+        </a>
       </div>
-      <div class="mains_title" v-on:click="mains_getRoomDevices(-1, 2)">
+      <div
+        class="mains_title"
+        :id="devicesType == 2 ? 'mains_title_change':''"
+        v-on:click="mains_getRoomDevices(-1, 2)"
+      >
         <img src="/static/img/hvjiance.png" alt>
-        <a>监测设备</a>
+        <a>
+          <strong>监测设备</strong>
+        </a>
+      </div>
+      <div class="mains_title" id="mains_title_adddevices" v-on:click="mains_showAdddevices(true)">
+        <!-- <img src="/static/img/hvjiance.png" alt> -->
+        <a>
+          <strong>+添加设备</strong>
+        </a>
       </div>
     </div>
     <div id="mains_topall">
@@ -80,6 +110,7 @@
       v-on:returnMains="mains_addRoomNum"
       :roodID="roomData.length ?roomData[roomDataIndex].id : 0"
     ></milieu-roomnumlist>
+    <milieu-adddevices :isShow="adddevicesShow" v-on:close="mains_adddevicesclose"></milieu-adddevices>
   </div>
 </template>
 
@@ -88,6 +119,7 @@ import req from "../global/request.vue";
 import milieu from "../components/milieu.vue";
 import devices from "../components/devices.vue";
 import roomnumlist from "../components/roomnumlist.vue";
+import adddevices from "../components/adddevices.vue";
 export default {
   data: function() {
     return {
@@ -104,6 +136,7 @@ export default {
       roomDevicesInfo: {},
       addroomnumShow: false,
       addroomShow: false,
+      adddevicesShow: false,
       roomnumListShow: false,
       devicesType: 99
     };
@@ -112,7 +145,9 @@ export default {
     mains_select: select,
     mians_getRoomLatyout: getRoomLatyout,
     mains_getRoomDevices: getRoomDevices,
-    mains_addRoomNum: addRoomNumf
+    mains_addRoomNum: addRoomNumf,
+    mains_showAdddevices: showAdddevices,
+    mains_adddevicesclose: adddevicesclose
   },
   watch: {},
   mounted() {
@@ -121,9 +156,18 @@ export default {
   components: {
     "milieu-info": milieu,
     "milieu-devices": devices,
-    "milieu-roomnumlist": roomnumlist
+    "milieu-roomnumlist": roomnumlist,
+    "milieu-adddevices": adddevices
   }
 };
+
+async function adddevicesclose(mothod = false) {
+  this.adddevicesShow = mothod;
+}
+
+async function showAdddevices(mothod = false) {
+  this.adddevicesShow = mothod;
+}
 
 async function addRoomNumf(mothod = false, status = false) {
   this.addroomnumShow = mothod;
