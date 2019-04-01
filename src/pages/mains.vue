@@ -35,11 +35,11 @@
                 id="mians_add_room_a"
                 v-on:click="mains_addRoomNum(true)"
               >户型列表</div>
-              <div
+              <!-- <div
                 class="mains_add_room"
                 id="mians_add_room_b"
                 v-on:click="mians_addRoom(true)"
-              >添加房间</div>
+              >添加房间</div>-->
             </div>
           </div>
           <div id="mains_set">
@@ -75,8 +75,11 @@
         :img="v.Img"
       ></milieu-devices>
     </div>
-    <milieu-roomnumlist :isShow="addroomnumShow" v-on:returnMains="mains_addRoomNum(false)"></milieu-roomnumlist>
-    <milieu-addroom :isShow="addroomShow" v-on:transparentclose="mians_addRoom(false)"></milieu-addroom>
+    <milieu-roomnumlist
+      :isShow="addroomnumShow"
+      v-on:returnMains="mains_addRoomNum"
+      :roodID="roomData.length ?roomData[roomDataIndex].id : 0"
+    ></milieu-roomnumlist>
   </div>
 </template>
 
@@ -84,15 +87,14 @@
 import req from "../global/request.vue";
 import milieu from "../components/milieu.vue";
 import devices from "../components/devices.vue";
-import addroom from "../components/addroom.vue";
 import roomnumlist from "../components/roomnumlist.vue";
 export default {
   data: function() {
     return {
       roomData: [],
-      roomDataIndex: 0,
+      roomDataIndex: 0, //选择的布局index
       roomLayout: [],
-      active: -1,
+      active: -1, //选中的房间
       roomInfoData: {
         temp: "",
         humi: "",
@@ -110,8 +112,7 @@ export default {
     mains_select: select,
     mians_getRoomLatyout: getRoomLatyout,
     mains_getRoomDevices: getRoomDevices,
-    mains_addRoomNum: addRoomNumf,
-    mians_addRoom: addRoomf
+    mains_addRoomNum: addRoomNumf
   },
   watch: {},
   mounted() {
@@ -120,25 +121,25 @@ export default {
   components: {
     "milieu-info": milieu,
     "milieu-devices": devices,
-    "milieu-addroom": addroom,
     "milieu-roomnumlist": roomnumlist
   }
 };
-async function addRoomf(mothod = false) {
-  this.addroomShow = mothod;
-}
 
-async function addRoomNumf(mothod = false) {
+async function addRoomNumf(mothod = false, status = false) {
   this.addroomnumShow = mothod;
+  if (status) {
+    this.$refs.mains_select.selectedIndex = 0;
+    this.mains_select();
+  }
 }
 
 async function select() {
-  var retData = await req.get("/roomnum");
+  var retData = await req.get("/roomnum?status=true");
   if (retData.Code != 200) {
     return;
   }
   this.roomData = retData.Data;
-  // this.roomDataIndex = this.$refs.mains_select.selectedIndex;
+  //判断获取的布局是否为空 或者选中的布局是否改变
   if (
     this.roomData.length != 0 &&
     this.roomDataIndex != this.$refs.mains_select.selectedIndex

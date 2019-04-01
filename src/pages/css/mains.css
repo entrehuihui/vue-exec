@@ -18,16 +18,16 @@
 }
 
 #mains_left div{
-    position: relative; 
-    width:auto;
-    height:auto;
+    width:90%;
     max-width:90%;
     max-height:90%;
-    top: 3%;
-    color: rgb(255, 255, 255);
     text-align:center;
-    margin:20% 0;
 }
+
+#mains_logo{
+    top: 40px;
+}
+
 #mains_logo img{
    width:auto;
    height:auto;
@@ -37,6 +37,12 @@
 .mains_title{
     color:rgb(255, 255, 255);
     cursor:pointer;
+    height: 40px;
+}
+
+.mains_title:hover{
+    background: rgb(255, 255, 255);
+    color: rgb(5, 5, 5);
 }
 
 .mains_title img{
@@ -80,6 +86,7 @@
     position: absolute;
     top: 35%;
     font-size:22px;
+    color:rgb(0, 0, 0);
 }
 
 #mains_roomNum select{
@@ -88,37 +95,40 @@
     top: 45%;
     border: none;
     outline: none;
-    width: 150px;
+    width: 200px;
     height: 36px;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    padding-left: 10%;
+    line-height: 36px;
+    text-align: center;
+    text-align-last: center;
     color:rgb(0, 0, 0);
     font-size:30px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .mains_add_room{
     position: absolute;
     top: 45%;
-    left: 260px;
+    left: 310px;
     height: 36px;
     width: 85px;
-    font-size:15px;
+    font-size:18px;
     text-align:center;
     background: rgb(35, 192, 231);
     text-decoration:none;
-    line-height:30px;
+    line-height: 36px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     cursor:pointer;
     border:1px solid rgb(78, 89, 238);
+    color:rgb(248, 248, 248);
 }
 
 .mains_add_room:hover{
@@ -126,7 +136,7 @@
 }
 
 #mians_add_room_b{
-    left: 360px;
+    left:410px;
 }
 
 #mains_room{

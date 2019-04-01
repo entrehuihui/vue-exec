@@ -20,13 +20,14 @@
             v-model="inputName"
             type="text"
           >
-          <select
+          <!-- <select
             @blur="checkNum"
             :class="num ?'addroominfo_info_d':'addroominfo_info_d_false'"
             v-model="inputNum"
           >
             <option v-for="v in roomInfoData" :key="v.id" :value="v.id">{{v.Name}}</option>
-          </select>
+          </select>-->
+          <input type="text" class="addroominfo_info_d" readonly="readonly" :value="roomNumName">
           <input
             @blur="checkDetails"
             :class="details ?'addroominfo_info_d':'addroominfo_info_d_false'"
@@ -66,10 +67,16 @@ export default {
     isShow: {
       type: Boolean,
       default: false
+    },
+    roomNumName: {
+      default: ""
+    },
+    roomNum: {
+      default: ""
     }
   },
   methods: {
-    transparentclose: function() {
+    transparentclose: function(mothod) {
       this.inputName = null;
       this.inputNum = null;
       this.inputDetails = null;
@@ -77,7 +84,7 @@ export default {
       this.name = true;
       this.num = true;
       this.details = true;
-      this.$emit("transparentclose");
+      this.$emit("transparentclose", false, mothod);
     },
     transparentTrue: postData,
     checkName: function() {
@@ -123,10 +130,10 @@ async function postData() {
     return;
   }
 
-  if (!this.inputNum || this.inputNum <= 0) {
-    this.num = false;
-    return;
-  }
+  // if (!this.inputNum || this.inputNum <= 0) {
+  //   this.num = false;
+  //   return;
+  // }
 
   if (this.inputDetails && this.inputDetails.length > 250) {
     this.details = false;
@@ -136,13 +143,13 @@ async function postData() {
   var retData = await req.post("/room", {
     details: this.inputDetails,
     name: this.inputName,
-    roomNumID: parseInt(this.inputNum),
+    roomNumID: parseInt(this.roomNum),
     status: true
   });
   if (retData.Code != 200) {
     return;
   }
-  this.transparentclose(false);
+  this.transparentclose(true);
 }
 </script>
 
