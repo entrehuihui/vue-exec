@@ -1,0 +1,122 @@
+#devicesinfoaffter{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 8800;
+    background: rgb(104, 103, 103);
+    filter:alpha(Opacity=50);
+    -moz-opacity:0.5;
+    opacity: 0.5;
+}
+
+#devicesinfobefor{
+	position: absolute;
+	z-index: 8801;
+    left: 10%;
+    top: 5%;
+    width: 1200px;
+    height: 700px;
+    background: rgb(255, 255, 255);
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    text-align: center;
+}
+#devicesinfobefort{
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid rgb(180, 178, 178);
+}
+
+#devicesinfobefortop{
+    float: right;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 10px;
+}
+#devicesinfobefortop:hover{
+    background: rgb(180, 178, 178);
+    color: aliceblue;
+}
+
+.devicesinfoleft{
+    position: relative; 
+    top: 1px;
+    left: 10px;
+    width: 300px;
+    height: 310px;
+    /* background: #000; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgb(141, 141, 141);
+    text-align: center;
+}
+
+#devicesinfotitle{
+    height: 50px;
+    width: 100%;
+    line-height: 50px;
+    font-size: 22px;
+    border-bottom: 1px solid rgb(141, 141, 141);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.devicesinfodata{
+    position: relative; 
+    float: left;
+    height: 30px;
+    width:  297px;
+    font-size: 20px;
+    border-bottom: 1px solid rgb(141, 141, 141);
+    margin: 3px;
+}
+
+.devicesinfodataa{
+    position: relative; 
+    float: left;
+    width: 100px;
+    height: 30px;
+    border-right: 1px solid rgb(141, 141, 141);
+}
+
+.devicesinfodataade{
+    position: relative; 
+    float: left;
+    left: 10px;
+    width: 90px;
+    height: 30px;
+    border-right: 1px solid rgb(141, 141, 141);
+    cursor: pointer;
+}
+.devicesinfodataade:hover{
+    background: rgb(190, 65, 65);
+    color: aliceblue;
+}
+#devicesinfodataade{
+    border-left: 1px solid rgb(141, 141, 141);
+}
+#devicesinfodatature{
+    left: 100px;
+    border-left: 1px solid rgb(141, 141, 141);
+}
+.devicesinforight{
+    position: absolute; 
+    top: 51px;
+    height: 50px;
+    left: 315px;
+    width: 870px;
+    height: 620px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgb(141, 141, 141);
+    text-align: center;
+}

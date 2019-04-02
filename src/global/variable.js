@@ -16,9 +16,13 @@ export default {
 const alarm = 9900;
 const pop = 8800;
 const othen = 7700;
+var agreementinfo = {}
+var roominfo = {}
 
 export default {
     alarm,
     pop,
-    othen
+    othen,
+    roominfo,
+    agreementinfo
 }

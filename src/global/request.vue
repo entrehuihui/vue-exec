@@ -85,6 +85,14 @@ export default {
         }
       });
     return retData;
+  },
+  down: async function(devEUI, types, data = []) {
+    var retData = await this.post("/downLinks", {
+      data: data,
+      devEUI: devEUI,
+      type: types
+    });
+    return retData;
   }
 };
 </script>

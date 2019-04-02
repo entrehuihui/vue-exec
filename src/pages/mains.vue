@@ -65,11 +65,6 @@
                 id="mians_add_room_a"
                 v-on:click="mains_addRoomNum(true)"
               >户型列表</div>
-              <!-- <div
-                class="mains_add_room"
-                id="mians_add_room_b"
-                v-on:click="mians_addRoom(true)"
-              >添加房间</div>-->
             </div>
           </div>
           <div id="mains_set">
@@ -99,10 +94,9 @@
       <milieu-devices
         v-for="v in roomDevicesInfo"
         :key="v.ID"
-        :name="v.DevName"
-        :heart="v.Breathe"
-        :statusType="v.Mode"
-        :img="v.Img"
+        :info="v"
+        :roomNUmName="roomData[roomDataIndex].Name"
+        :roomName="roomLayout[active].Name"
       ></milieu-devices>
     </div>
     <milieu-roomnumlist
@@ -151,11 +145,26 @@ export default {
     mians_getRoomLatyout: getRoomLatyout,
     mains_getRoomDevices: getRoomDevices,
     mains_addRoomNum: addRoomNumf,
-    mains_showAdddevices: showAdddevices
+    mains_showAdddevices: showAdddevices,
+    initagreementsinfo: async function() {
+      var retData = await req.get("/room/agreements");
+      if (retData.Code != 200) {
+        return;
+      }
+      for (const v of retData.Data) {
+        this.global.agreementinfo[v.ID] = {
+          Name: v.Name,
+          Heartbeat: v.Heartbeat,
+          Style: v.Style,
+          Switchs: v.Switchs
+        };
+      }
+    }
   },
   watch: {},
   mounted() {
     this.mains_select();
+    this.initagreementsinfo();
   },
   components: {
     "milieu-info": milieu,

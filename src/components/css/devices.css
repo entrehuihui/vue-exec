@@ -1,5 +1,6 @@
 
 .devices_model{
+    position: relative; 
     float: left;
     width: 219px;
     height: 220px;
@@ -67,4 +68,60 @@
 #devices_type{
     width: 60%;
     border-bottom-right-radius: 20px;
+}
+
+#devices_diable{
+    width: 60%;
+    border-bottom-right-radius: 20px;
+    color: rgb(255, 1, 1);
+}
+
+.devices_switch{
+    position: absolute; 
+    width: 40px;
+    background: rgb(1, 245, 13);
+    top: 15px;
+    left: 175px;
+    height: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#devices_switch_a{
+    position: relative; 
+    width: 20px;
+    height: 20px;
+    float: left;
+    left: 20px;
+    background: rgb(253, 253, 253);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.devices_switchb{
+    position: absolute; 
+    width: 40px;
+    background: rgb(35, 36, 35);
+    top: 15px;
+    left: 175px;
+    height: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#devices_switch_b{
+    position: relative; 
+    width: 20px;
+    height: 20px;
+    float: left;
+    background: rgb(253, 253, 253);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
