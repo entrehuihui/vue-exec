@@ -3,7 +3,7 @@
     <div id="devicesinfoaffter"></div>
     <div id="devicesinfobefor">
       <div id="devicesinfobefort">
-        <div id="devicesinfobefortop">X</div>
+        <div id="devicesinfobefortop" v-on:click="close(false)">X</div>
       </div>
       <div class="devicesinfoleft">
         <div id="devicesinfotitle">
@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import req from "../global/request.vue";
 export default {
   data: function() {
     return {
@@ -97,11 +98,15 @@ export default {
         return;
       }
       alert("删除成功!");
+      this.close(false, true);
     },
     change: async function(mothed = false) {
       this.changeStatus = mothed;
     },
-    statusChange: async function(mothed = true) {}
+    statusChange: async function(mothed = true) {},
+    close: function(mothod = false, status = false) {
+      this.$emit("close", false, status);
+    }
   },
   watch: {
     isShow: function(newValue) {

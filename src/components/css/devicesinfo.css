@@ -2,8 +2,9 @@
 	width: 100%;
 	height: 100%;
 	position: absolute;
-	z-index: 8800;
-    background: rgb(104, 103, 103);
+	z-index: 8860;
+    /* background: rgb(104, 103, 103); */
+    background: #000;
     filter:alpha(Opacity=50);
     -moz-opacity:0.5;
     opacity: 0.5;
@@ -16,6 +17,7 @@
     top: 5%;
     width: 1200px;
     height: 700px;
+    z-index: 8861;
     background: rgb(255, 255, 255);
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;

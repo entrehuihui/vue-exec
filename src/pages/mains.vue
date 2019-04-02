@@ -97,6 +97,7 @@
         :info="v"
         :roomNUmName="roomData[roomDataIndex].Name"
         :roomName="roomLayout[active].Name"
+        v-on:close="mians_getRoomLatyout"
       ></milieu-devices>
     </div>
     <milieu-roomnumlist

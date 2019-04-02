@@ -1,6 +1,6 @@
 <template>
-  <div id="devices" v-on:click="clickhere">
-    <div class="devices_model">
+  <div id="devices">
+    <div class="devices_model" v-on:click="clickhere(true, false)">
       <div id="devices_title">{{info.DevName}}</div>
       <div v-on:click="closeDevice" v-show="info.Switchs && info.Mode" class="devices_switch">
         <div ref="deviceopen" id="devices_switch_a"></div>
@@ -23,6 +23,7 @@
       :info="info"
       :roomNUmName="roomNUmName"
       :roomName="roomName"
+      v-on:close="clickhere"
     ></devicesinfo>
   </div>
 </template>
@@ -63,8 +64,10 @@ export default {
     };
   },
   methods: {
-    close: async function(mothod = false, status = false) {
-      this.$emit("close", false, status);
+    close: async function(status = false) {
+      if (status) {
+        this.$emit("close", status);
+      }
     },
     closeDevice: async function() {
       var retData = await req.down(this.info.DevEUI, 1);
@@ -82,8 +85,9 @@ export default {
       }
       this.$refs.deviceclose.style.left = "10px";
     },
-    clickhere: async function() {
-      this.devicesinfoShow = true;
+    clickhere: async function(mothed = false, status = false) {
+      this.devicesinfoShow = mothed;
+      this.close(status);
     }
   },
   components: {
