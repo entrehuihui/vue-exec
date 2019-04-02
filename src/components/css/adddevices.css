@@ -52,7 +52,7 @@
 #adddevices_body_top_a_close:hover{
     background: rgb(0, 0, 0);
     border-bottom:1px solid rgb(110, 109, 109); 
-    color: aliceblue;
+    color: rgb(255, 255, 255);
 }
 
 .adddevices_body_title{
@@ -78,11 +78,11 @@
 
 .adddevices_body_title_a:hover{
     background: #18d1ff;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
 }
 #adddevices_body_title_a_click{
     background: #18d1ff;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
 }
 .adddevices_body_devices{
     width: 1000px;
@@ -155,5 +155,196 @@
 
 .adddevices_body_devices_b:hover{
     background: #18d1ff;
-    color: aliceblue;
+    color: rgb(255, 255, 255);
+}
+
+.adddevices_next{
+    position:absolute;
+    width: 1000px;
+    height: 569px;
+    z-index: 8831;
+    top: 51px;
+    background: rgb(255, 255, 255);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.adddevices_info{
+    height: 495px;
+    width: 1000px;
+}
+
+.adddevices_inforight{
+    position: relative;
+    float: left;
+    height: 475px;
+    width: 380px;
+    left: 10px;
+    top: 10px;
+    text-align: center;
+}
+
+.adddevices_inforight_a{
+    height: 30px;
+}
+
+.adddevices_inforight_atext{
+    position: relative;
+    height: 15px;
+    font-size: 22px;
+    float: left;
+    left: 10px;
+    width: 50px;
+}
+
+.adddevices_inforight_ainput{
+    position: relative;
+    height: 20px;
+    float: left;
+    left: 30px;
+    width: 240px;
+}
+
+.adddevices_inforight_asure{
+    position: relative;
+    height: 23px;
+    width: 40px;
+    left: 35px;
+    float: left;
+    line-height: 23px;
+    /* font-size: 18px; */
+    border: 1px solid #000;
+    cursor: pointer;
+}
+.adddevices_inforight_asure:hover{
+    background: rgb(3, 152, 197);
+    color: aliceblue
+}
+
+.adddevices_inforight_b{
+    position: relative;
+    left: 10px;
+    height: 425px;
+    width: 360px;
+    border :2px solid rgb(110, 109, 109); 
+    background: rgb(255, 255, 255);
+    overflow: scroll;
+}
+
+.adddevices_infodev{
+    position: relative;
+    float: left;
+    width: 334px;
+    height: 28px;
+    border :1px solid rgb(15, 15, 15);
+    margin: 2px; 
+    cursor: pointer;
+    line-height: 28px;
+}
+.adddevices_infodev:hover{
+    background: rgb(114, 113, 113);
+    color:  rgb(255, 255, 255);
+}
+
+#adddevices_inforight_index{
+    background: #000;
+    color:  rgb(255, 255, 255);
+}
+
+.adddevices_inforight_bn{
+    position: relative;
+    float: left;
+    height: 20px;
+    width: 361px;
+    left: 10px;
+    border :1px solid rgb(15, 15, 15);
+}
+.adddevices_inforight_bnn{
+    position: relative;
+    float: left;
+    width: 166px;
+}
+#adddevices_inforight_bnneui{
+    width: 168px;
+    border-left :1px solid rgb(15, 15, 15);
+}
+
+.adddevices_infodevname{
+    position: relative;
+    float: left;
+    height: 28px;
+    width: 160px;
+    overflow: hidden;
+    border-right :1px solid rgb(110, 109, 109);
+}
+
+.adddevices_infodeveui{
+    top: 0px;
+    position: relative;
+    left: 4px;
+    float: left;
+    height: 28px;
+    width: 167px;
+    overflow: hidden;
+    text-align:center;
+    border-left :1px solid rgb(110, 109, 109);
+} 
+
+.adddevices_infoleft{
+    float: left;
+    height: 475px;
+    width: 580px;
+    /* background: rgb(206, 196, 196); */
+    margin: 10px;
+}
+
+.adddevices_infoleftimg{
+    height: 230px;
+    width: 580px;
+    /* background: rgb(196, 187, 187); */
+    text-align: center;
+    font-size: 25px;
+}
+.adddevices_infoleftimg img{
+   height: 180px;
+}
+.adddevices_infoleftdata{
+    position: relative;
+    height: 230px;
+    width: 500px;
+    left: 100px;
+}
+
+.adddevices_infoleftdata_a{
+    width: 400px;
+    height: 35px;
+    margin: 5px;
+    position: relative;
+    float: left;
+}
+
+.adddevices_infoleftdata_aa{
+    position: relative;
+    float: left;
+    width: 120px;
+    height: 35px;
+    text-align:center;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.adddevices_infoleftdata_a input{
+    position: relative;
+    float: left;
+    width: 270px;
+    height: 30px;
+    border: 1px solid rgb(15, 15, 15);
+}
+
+.adddevices_infoleftdata_a select{
+    position: relative;
+    float: left;
+    width: 270px;
+    height: 30px;
+    border: 1px solid rgb(15, 15, 15);
+    color: black;
 }

@@ -110,7 +110,12 @@
       v-on:returnMains="mains_addRoomNum"
       :roodID="roomData.length ?roomData[roomDataIndex].id : 0"
     ></milieu-roomnumlist>
-    <milieu-adddevices :isShow="adddevicesShow" v-on:close="mains_adddevicesclose"></milieu-adddevices>
+    <milieu-adddevices
+      :isShow="adddevicesShow"
+      v-on:close="mains_showAdddevices"
+      :roomData="roomLayout"
+      :roomDataIndex="active"
+    ></milieu-adddevices>
   </div>
 </template>
 
@@ -146,8 +151,7 @@ export default {
     mians_getRoomLatyout: getRoomLatyout,
     mains_getRoomDevices: getRoomDevices,
     mains_addRoomNum: addRoomNumf,
-    mains_showAdddevices: showAdddevices,
-    mains_adddevicesclose: adddevicesclose
+    mains_showAdddevices: showAdddevices
   },
   watch: {},
   mounted() {
@@ -160,13 +164,11 @@ export default {
     "milieu-adddevices": adddevices
   }
 };
-
-async function adddevicesclose(mothod = false) {
+async function showAdddevices(mothod = false, status = false) {
   this.adddevicesShow = mothod;
-}
-
-async function showAdddevices(mothod = false) {
-  this.adddevicesShow = mothod;
+  if (status) {
+    this.mains_getRoomDevices(this.active, this.devicesType);
+  }
 }
 
 async function addRoomNumf(mothod = false, status = false) {
