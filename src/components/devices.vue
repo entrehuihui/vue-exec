@@ -1,6 +1,6 @@
 <template>
   <div id="devices">
-    <div class="devices_model" v-on:click="clickhere(true, false)">
+    <div class="devices_model">
       <div id="devices_title">{{info.DevName}}</div>
       <div v-on:click="closeDevice" v-show="info.Switchs && info.Mode" class="devices_switch">
         <div ref="deviceopen" id="devices_switch_a"></div>
@@ -8,7 +8,7 @@
       <div v-on:click="openDevice" v-show="info.Switchs && !info.Mode" class="devices_switchb">
         <div ref="deviceclose" id="devices_switch_b"></div>
       </div>
-      <div id="devices_img">
+      <div id="devices_img" v-on:click="clickhere(true, false)">
         <img :src="info.Img" alt>
       </div>
       <div id="devices_status">
