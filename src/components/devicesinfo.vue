@@ -148,7 +148,7 @@
         </div>
       </div>
       <div class="devicesinforight">
-        <linedata v-for="(v, i) in datashow.line" :key="i" :xdata="v.xdata" :ydata="v.ydata"></linedata>
+        <linedata v-for="(v, i) in line" :key="i" :datainfo="v"></linedata>
       </div>
     </div>
   </div>
@@ -172,7 +172,8 @@ export default {
       linkID: {},
       info2: {},
       infos: {},
-      datashow: {}
+      datashow: {},
+      line: []
     };
   },
   props: {
@@ -199,6 +200,7 @@ export default {
       } else {
         alert("删除成功!");
       }
+      this.changeData = true;
       this.close(false);
     },
     change: async function(mothed = false, mothed2 = false) {
@@ -290,6 +292,7 @@ export default {
         this.info.AgreementID
       ].Name;
       if (newValue) {
+        this.decideDatashow(this.info);
         this.getInfo2();
         this.changeStatus = false;
         this.infos = this.info;
@@ -297,7 +300,6 @@ export default {
         this.linkspoint = "点击关联设备";
         this.showAddLink = false;
         this.datashow = {};
-        this.decideDatashow(this.info);
       }
     }
   }
@@ -306,16 +308,22 @@ export default {
 async function decideDatashow(v) {
   switch (v.AgreementID) {
     case 1:
-      this.datashow.line = new Array();
-      this.datashow.line[0] = {
-        xdata: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        ydata: [[820, 932, 901, 934, 1290, 1330, 1320]]
-      };
+      var data = await getData(v.ID);
+      if (data) {
+        this.line = data;
+      }
       break;
-
     default:
       break;
   }
+}
+
+async function getData(id) {
+  var retData = await req.get("/room/devicesData?deviceID=" + id);
+  if (retData.Code != 200) {
+    return null;
+  }
+  return retData.Data;
 }
 </script>
 

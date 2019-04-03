@@ -13,47 +13,83 @@ export default {
     };
   },
   props: {
-    xdata: {
-      default: []
-    },
-    ydata: {
+    datainfo: {
       default: []
     }
   },
   methods: {
     init: function() {
-      var xdata = this.xdata;
-      var ydata = this.ydata;
-      for (const key in ydata) {
-        ydata[key] = {
-          data: ydata[key],
-          type: "line",
-          smooth: true
-        };
+      for (const key in this.datainfo.Time) {
+        this.datainfo.Time[key] = new Date(
+          this.datainfo.Time[key] * 1000
+        ).toLocaleString();
       }
+      var series = new Array();
+      for (const key in this.datainfo.DataType) {
+        series.push({
+          name: this.datainfo.DataType[key],
+          type: "line",
+          data: this.datainfo.Data[key]
+        });
+      }
+
       this.chart = echarts.init(document.getElementById("chartlinedata"));
       this.chart.setOption({
-        xAxis: {
-          type: "category",
-          data: xdata
+        title: {
+          text: "未来一周气温变化",
+          subtext: "纯属虚构"
         },
         tooltip: {
           trigger: "axis"
         },
-        yAxis: {
-          type: "value"
+        legend: {
+          data: this.datainfo.DataType
         },
-        series: ydata
+        toolbox: {
+          show: true,
+          feature: {
+            dataZoom: {
+              yAxisIndex: "none"
+            },
+            dataView: { readOnly: false },
+            magicType: { type: ["line", "bar"] },
+            restore: {},
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          splitNumber: 3,
+          data: this.datainfo.Time
+        },
+        yAxis: {
+          type: "value",
+          axisLabel: {
+            formatter: "{value} °C"
+          }
+        },
+        series: series
       });
     }
   },
-  mounted() {},
+  mounted() {
+    this.init();
+  },
   watch: {
-    xdata: function() {
+    datainfo: function() {
       this.init();
     }
   }
 };
+
+function createValue(times, data) {
+  var retData = new Array();
+  for (const key in times) {
+    retData.push({
+      value: [new Date(times[key] * 1000).toLocaleString(), data[key]]
+    });
+  }
+  return retData;
+}
 </script>
 
 <style scoped>

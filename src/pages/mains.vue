@@ -98,7 +98,7 @@
         :info="v"
         :roomNUmName="roomData[roomDataIndex].Name"
         :roomName="roomLayout[active].Name"
-        v-on:close="mians_getRoomLatyout"
+        v-on:close="mains_getRoomDevicesStatus"
         :roomStatus="roomLayout[active].status"
       ></milieu-devices>
     </div>
@@ -147,6 +147,11 @@ export default {
     mains_select: select,
     mians_getRoomLatyout: getRoomLatyout,
     mains_getRoomDevices: getRoomDevices,
+    mains_getRoomDevicesStatus: function(mothed = false) {
+      if (mothed) {
+        this.mains_getRoomDevices();
+      }
+    },
     mains_addRoomNum: addRoomNumf,
     mains_showAdddevices: showAdddevices,
     initagreementsinfo: async function() {
@@ -240,8 +245,7 @@ async function getRoomDevices(index = -1, types = 99) {
   } else {
     this.active = index;
   }
-
-  var id = this.roomLayout[index].id;
+  var id = this.roomLayout[this.active].id;
   this.roomInfoData = {
     temp: "",
     humi: "",
