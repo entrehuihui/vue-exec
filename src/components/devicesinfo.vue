@@ -148,7 +148,9 @@
         </div>
       </div>
       <div class="devicesinforight">
-        <linedata v-for="(v, i) in line" :key="i" :datainfo="v"></linedata>
+        <div class="devicesinforighta" v-for="(v, i) in line" :key="i">
+          <linedata :options="v" :keys="i"></linedata>
+        </div>
       </div>
     </div>
   </div>
@@ -157,6 +159,7 @@
 <script>
 // import echarts from 'echarts'
 import req from "../global/request.vue";
+import mychart from "../global/echart.js";
 import linedata from "../components/echart/linedata.vue";
 // import { fail } from "assert";
 export default {
@@ -292,7 +295,7 @@ export default {
         this.info.AgreementID
       ].Name;
       if (newValue) {
-        this.decideDatashow(this.info);
+        this.decideDatashow(this.info, this.info2);
         this.getInfo2();
         this.changeStatus = false;
         this.infos = this.info;
@@ -306,15 +309,9 @@ export default {
 };
 
 async function decideDatashow(v) {
-  switch (v.AgreementID) {
-    case 1:
-      var data = await getData(v.ID);
-      if (data) {
-        this.line = data;
-      }
-      break;
-    default:
-      break;
+  var data = await getData(v.ID);
+  if (data) {
+    this.line = mychart.line(data);
   }
 }
 

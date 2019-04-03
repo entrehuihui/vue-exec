@@ -165,10 +165,7 @@
     height: 260px;
     width: 290px;
     margin: 2px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
 }
 .linkDataa1{
     position: relative; 
@@ -230,10 +227,7 @@
     width: 140px;
     margin: 2px;
     background: rgb(212, 211, 211);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
     cursor: pointer;
 }
 .linkDatatruea:hover{
@@ -255,4 +249,14 @@
     border: 1px solid rgb(141, 141, 141);
     text-align: center;
     overflow: auto;
+}
+
+.devicesinforighta{
+    position: relative; 
+    float: left;
+    height:  300px;
+    width: 840px;
+    margin: 2px;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(141, 141, 141);
 }
