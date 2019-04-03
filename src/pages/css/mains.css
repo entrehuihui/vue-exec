@@ -235,5 +235,5 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     float: left;
-    overflow:auto;
+    overflow:visible;
 }

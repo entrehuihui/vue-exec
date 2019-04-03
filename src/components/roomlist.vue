@@ -100,7 +100,7 @@ export default {
       allPages: 1,
       nowPages: 1,
       pages: 0,
-      status: false,
+      changeStatus: 0,
       inputNum: "", //检索房间号
       inputFloor: "" // 检索楼层
     };
@@ -119,7 +119,7 @@ export default {
   },
   methods: {
     returnMains: function() {
-      this.$emit("returnMains", false);
+      this.$emit("returnMains", false, this.changeStatus);
     },
     rommStatus: async function(v) {
       v.status = !v.status;
@@ -128,7 +128,8 @@ export default {
         alert(retData.Msg);
         return;
       }
-      alert("成功");
+      alert("更改成功");
+      this.changeStatus = this.roomNum;
       this.getRomlist();
     },
     roomDel: async function(id) {
@@ -140,6 +141,7 @@ export default {
         return;
       }
       alert("删除成功");
+      this.changeStatus = this.roomNum;
       this.getRomlist();
     },
     getRomlist: async function() {
@@ -166,6 +168,7 @@ export default {
     showAddroom: function(mothod, result = false) {
       this.addroomShow = mothod;
       if (result) {
+        this.changeStatus = this.roomNum;
         this.getRomlist();
       }
     },

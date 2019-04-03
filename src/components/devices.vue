@@ -14,8 +14,8 @@
       <div id="devices_status">
         <div v-show="info.Breathe ? false:true" id="devices_heart0">离线</div>
         <div v-show="info.Breathe ? true: false" id="devices_heart1">在线</div>
-        <div v-show="info.Status" id="devices_type">{{info.Mode}}</div>
-        <div v-show="!info.Status" id="devices_diable">禁用</div>
+        <div v-show="roomStatus && info.Status" id="devices_type">{{info.Mode}}</div>
+        <div v-show="!roomStatus || !info.Status" id="devices_diable">禁用</div>
       </div>
     </div>
     <devicesinfo
@@ -56,6 +56,9 @@ export default {
     },
     roomName: {
       default: ""
+    },
+    roomStatus: {
+      default: false
     }
   },
   data: function() {

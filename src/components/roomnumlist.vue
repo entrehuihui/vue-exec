@@ -195,6 +195,11 @@ export default {
       this.changePages(0);
     },
     showRoomlist: function(mothod = false, id = 0, name = "") {
+      if (!mothod) {
+        if (id == this.roodID) {
+          this.status = true;
+        }
+      }
       this.selectRoomNumName = name;
       this.selectRoomNum = id;
       this.roomlistShow = mothod;

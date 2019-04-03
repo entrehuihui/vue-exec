@@ -1,23 +1,12 @@
 #devicesinfo{
-    overflow: scroll;
-}
-#devicesinfoaffter{
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	z-index: 8860;
-    /* background: rgb(104, 103, 103); */
-    background: #000;
-    filter:alpha(Opacity=50);
-    -moz-opacity:0.5;
-    opacity: 0.5;
+    overflow: visible;
 }
 
 #devicesinfobefor{
 	position: absolute;
 	z-index: 8801;
-    left: 10%;
-    top: 5%;
+    left: 50px;
+    top: 15px;
     width: 1200px;
     height: 700px;
     z-index: 8861;
@@ -27,6 +16,7 @@
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
     text-align: center;
+    border: 1px solid rgb(180, 178, 178);
 }
 #devicesinfobefort{
     height: 50px;

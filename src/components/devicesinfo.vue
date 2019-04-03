@@ -1,6 +1,5 @@
 <template>
   <div id="devicesinfo" v-show="isShow">
-    <div id="devicesinfoaffter"></div>
     <div id="devicesinfobefor">
       <div id="devicesinfobefort">
         <div id="devicesinfobefortop" v-on:click="close(false)">X</div>
@@ -148,14 +147,18 @@
           <div class="linkDatatruea" v-on:click="selectLink(true)">确定</div>
         </div>
       </div>
-      <div class="devicesinforight"></div>
+      <div class="devicesinforight">
+        <linedata v-for="(v, i) in datashow.line" :key="i" :xdata="v.xdata" :ydata="v.ydata"></linedata>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+// import echarts from 'echarts'
 import req from "../global/request.vue";
-import { fail } from "assert";
+import linedata from "../components/echart/linedata.vue";
+// import { fail } from "assert";
 export default {
   data: function() {
     return {
@@ -168,7 +171,8 @@ export default {
       linkData: [],
       linkID: {},
       info2: {},
-      infos: {}
+      infos: {},
+      datashow: {}
     };
   },
   props: {
@@ -192,9 +196,9 @@ export default {
       });
       if (retData.Code != 200) {
         alert("删除失败!");
-        return;
+      } else {
+        alert("删除成功!");
       }
-      alert("删除成功!");
       this.close(false);
     },
     change: async function(mothed = false, mothed2 = false) {
@@ -225,11 +229,12 @@ export default {
         "/room/devices/GetDevicesLinkstrue?roomID=" + this.info.RoomID
       );
       if (retData.Code != 200) {
-        this.linkspoint = "获取关联设备出错!";
+        this.linkspoint = "获取出错!";
         return;
       }
-      if (retData.Data.length == 0) {
-        this.linkspoint = "没有可关联的设备!";
+      if (retData.Data.length < 2) {
+        this.linkspoint = "没有其他设备!";
+        return;
       }
       this.showAddLink = true;
       this.linkData = retData.Data;
@@ -273,7 +278,11 @@ export default {
       }
       this.info2 = {};
       alert("解除成功!");
-    }
+    },
+    decideDatashow: decideDatashow
+  },
+  components: {
+    linedata
   },
   watch: {
     isShow: function(newValue) {
@@ -287,10 +296,27 @@ export default {
         this.changeData = false;
         this.linkspoint = "点击关联设备";
         this.showAddLink = false;
+        this.datashow = {};
+        this.decideDatashow(this.info);
       }
     }
   }
 };
+
+async function decideDatashow(v) {
+  switch (v.AgreementID) {
+    case 1:
+      this.datashow.line = new Array();
+      this.datashow.line[0] = {
+        xdata: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        ydata: [[820, 932, 901, 934, 1290, 1330, 1320]]
+      };
+      break;
+
+    default:
+      break;
+  }
+}
 </script>
 
 <style scoped>

@@ -57,7 +57,7 @@
           <div id="mains_roomNum">
             <div id="mains_roomName">户型名称</div>
             <select v-on:click="mains_select()" ref="mains_select">
-              <option v-for="v in roomData">{{v.Name}}</option>
+              <option v-for="(v,i) in roomData" :key="i">{{v.Name}}</option>
             </select>
             <div id="mains_roomadd">
               <div
@@ -78,6 +78,7 @@
             v-for="(v, index) in roomLayout"
             :class="active == index ? 'addclss':'original'"
             v-on:click="mains_getRoomDevices(index)"
+            :key="index"
           >{{v.Name}}</div>
         </div>
       </div>
@@ -98,6 +99,7 @@
         :roomNUmName="roomData[roomDataIndex].Name"
         :roomName="roomLayout[active].Name"
         v-on:close="mians_getRoomLatyout"
+        :roomStatus="roomLayout[active].status"
       ></milieu-devices>
     </div>
     <milieu-roomnumlist
@@ -185,11 +187,11 @@ async function addRoomNumf(mothod = false, status = false) {
   this.addroomnumShow = mothod;
   if (status) {
     this.$refs.mains_select.selectedIndex = 0;
-    this.mains_select();
+    this.mains_select(true);
   }
 }
 
-async function select() {
+async function select(status = false) {
   var retData = await req.get("/roomnum?status=true");
   if (retData.Code != 200) {
     return;
@@ -203,6 +205,8 @@ async function select() {
     this.roomDevicesInfo = {};
     this.roomDataIndex = this.$refs.mains_select.selectedIndex;
     this.mians_getRoomLatyout();
+  } else if (status) {
+    this.mians_getRoomLatyout();
   }
 }
 
@@ -212,7 +216,7 @@ async function getRoomLatyout() {
     this.roomDataIndex = 0;
   }
   var retData = await req.get(
-    "/room?RoomNum=" + this.roomData[this.roomDataIndex].id
+    "/room?status=true&RoomNum=" + this.roomData[this.roomDataIndex].id
   );
   if (retData.Code != 200) {
     return;
