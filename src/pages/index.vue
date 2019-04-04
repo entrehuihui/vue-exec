@@ -92,9 +92,13 @@ export default {
         user: account,
         password: md5(password)
       });
-      // console.log(retData);
       if (retData.Code == 200) {
-        console.log(retData);
+        this.global.userinfo = {
+          cookie: retData.Data.cookie,
+          ID: retData.Data.id,
+          permission: retData.Data.permission,
+          name: retData.Data.user
+        };
         this.$router.push("/mains");
       } else {
         this.msg = retData.Msg;

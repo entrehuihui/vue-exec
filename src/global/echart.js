@@ -1,7 +1,8 @@
-
+import global from '@/global/variable.js'
 export default {
     line
 }
+
 
 function line(datainfos) {
     var opt = new Array;
@@ -21,7 +22,7 @@ function line(datainfos) {
         }
         opt.push({
             title: {
-                text: getText(datainfo.AgreementID),
+                text: global.agreementinfo[datainfo.AgreementID].Name,
                 subtext: "纯属虚构"
             },
             tooltip: {
@@ -66,14 +67,4 @@ function createValue(times, data) {
         });
     }
     return retData;
-}
-
-function getText(AgreementID) {
-    switch (AgreementID) {
-        case 1:
-            return "HTL5200温湿度表"
-        default:
-            break;
-    }
-    return "11111111"
 }

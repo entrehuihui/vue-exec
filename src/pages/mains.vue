@@ -113,6 +113,7 @@
       :roomData="roomLayout"
       :roomDataIndex="active"
     ></milieu-adddevices>
+    <websocket :roomid="roomid"></websocket>
   </div>
 </template>
 
@@ -122,6 +123,7 @@ import milieu from "../components/milieu.vue";
 import devices from "../components/devices.vue";
 import roomnumlist from "../components/roomnumlist.vue";
 import adddevices from "../components/adddevices.vue";
+import websocket from "../pages/websocket.vue";
 export default {
   data: function() {
     return {
@@ -129,6 +131,7 @@ export default {
       roomDataIndex: 0, //选择的布局index
       roomLayout: [],
       active: -1, //选中的房间
+      roomid: 0,
       roomInfoData: {
         temp: "",
         humi: "",
@@ -178,7 +181,8 @@ export default {
     "milieu-info": milieu,
     "milieu-devices": devices,
     "milieu-roomnumlist": roomnumlist,
-    "milieu-adddevices": adddevices
+    "milieu-adddevices": adddevices,
+    websocket
   }
 };
 async function showAdddevices(mothod = false, status = false) {
@@ -246,6 +250,7 @@ async function getRoomDevices(index = -1, types = 99) {
     this.active = index;
   }
   var id = this.roomLayout[this.active].id;
+  this.roomid = id;
   this.roomInfoData = {
     temp: "",
     humi: "",

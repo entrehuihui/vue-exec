@@ -5,8 +5,8 @@ import VueAxios from "vue-axios";
 import { error } from "util";
 
 Vue.prototype.$axios = axios;
-const localhost = "http://120.78.76.139:8999";
-// const localhost = "http://127.0.0.1:8999";
+const localhost = "http://120.78.76.139:8999"; //调试地址
+// const localhost = ""; //正式
 
 export default {
   post: async function(url, postData) {
