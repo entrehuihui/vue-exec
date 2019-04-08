@@ -7,7 +7,8 @@ export default {
     return {
       websock: null,
       oldwebsocket: null,
-      url: ""
+      url: "",
+      wsuri: ""
     };
   },
   props: {
@@ -16,18 +17,21 @@ export default {
     }
   },
   methods: {
+    retdata: function(data) {
+      this.$emit("retdata", data);
+    },
     initWebpack() {
       // 正式地址
-      //   var wsuri =
+      //   this.wsuri =
       // this.url + this.global.userinfo.cookie + "&roomID=" + this.roomid;
       //初始化websocket 调试用
-      var wsuri =
+      this.wsuri =
         "ws://120.78.76.139:8999/ws?maxiiot_user=" +
         this.global.userinfo.cookie +
         "&roomID=" +
         this.roomid;
       this.oldwebsocket = this.websock;
-      this.websock = new WebSocket(wsuri); //这里面的this都指向vue
+      this.websock = new WebSocket(this.wsuri); //这里面的this都指向vue
       this.websock.onopen = this.websocketopen;
       this.websock.onmessage = this.websocketonmessage;
       this.websock.onclose = this.websocketclose;
@@ -42,16 +46,19 @@ export default {
     },
     websocketonmessage(e) {
       //数据接收
-      console.log(e.data);
+      // console.log(e.data);
       //   this.productinfos = JSON.parse(e.data);
+      this.retdata(e.data);
     },
-    websocketclose() {
+    websocketclose(e) {
       //关闭
       console.log("WebSocket关闭");
+      if (e.target.url == this.wsuri) {
+        this.$router.push("/");
+      }
     },
     websocketerror() {
       //失败
-      alert("WebSocket连接失败, 请重新登陆");
       this.$router.push("/");
     }
   },

@@ -1,0 +1,213 @@
+.message{
+    position: absolute;
+    z-index: 8900;
+    height: 100%;
+    width: 100%;
+    background: rgb(94, 93, 93);
+    filter:alpha(Opacity=80);
+    -moz-opacity:0.5;
+    opacity: 0.5;
+}
+
+.messageinfo{
+    position: absolute;
+    left: 400px;
+    top: 150px;
+    z-index: 8901;
+    height: 780px;
+    width: 1200px;
+    background: rgb(252, 252, 252);
+    border-radius: 10px;
+}
+
+.messageinfotitle{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background: rgb(236, 236, 236);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    line-height: 40px;
+    text-align:center;
+    border-bottom:1px solid rgb(2, 2, 2);
+    margin: 0px;
+    border: 0px;
+    font-size: 24px;
+}
+.messageinfoclose{
+    position: relative;
+    float: right;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.messageinfoclose:hover{
+    color: #edf5f6;
+    background: rgb(238, 117, 117);
+}
+
+.messageinfoselect{
+    position: relative;
+    left: 15px;
+    width: 1170px;
+    height: 45px;
+    border-bottom: 1px solid rgb(223, 221, 221);
+}
+.messageinfoselectstatus{
+    position: relative;
+    left: 10px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+}
+.messageinfoselectstatus select{
+    height:30px;
+    width: 80px;
+}
+
+.messageinfost{
+    position: relative;
+    left: 15px;
+    width: 1170px;
+    height: 625px;
+    border-bottom:1px solid rgb(2, 2, 2);
+    overflow: auto;
+}
+.messageinfosta{
+    position: relative;
+    width: 1170px;
+    height: 35px;
+    margin-top: 3px;
+    text-align:center;
+    line-height: 35px;
+    font-size: 20px;
+    border-bottom:1px solid rgb(168, 167, 167);
+}
+.messageinfosnumber{
+    position: relative;
+    float: left;
+    width: 30px;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid rgb(223, 221, 221);
+    margin-right: 3px;
+}
+.messageinfosdepict{
+    position: relative;
+    float: left;
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid rgb(223, 221, 221);
+    margin-right: 3px;
+}
+.messageinfostime{
+    position: relative;
+    float: left;
+    width: 230px;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid rgb(223, 221, 221);
+    margin-right: 3px;
+}
+.messageinfosrooma{
+    position: relative;
+    float: left;
+    width: 220px;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid rgb(223, 221, 221);
+    margin-right: 3px;
+}
+.messageinfosroomb{
+     position: relative;
+    float: left;
+    width: 250px;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid rgb(223, 221, 221);
+    margin-right: 3px;
+}
+.messageinfosroomc{
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 100%;
+    overflow: hidden;
+    margin-right: 3px;
+}
+.messageinfosroomcc{
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 100%;
+    overflow: hidden;
+    color: #050505;
+    cursor: pointer;
+}
+.messageinfosroomcc:hover{
+    color: #edf5f6;
+    background: rgb(4, 92, 223);
+}
+
+.messageinfosroomccc{
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 100%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+
+.roomlist_button{
+    left: 850px;
+    position: relative; 
+    width:  800px;
+    height: 30px;
+    /* background: rgb(174, 179, 182); */
+    float: left;
+    text-align:center;
+    /* border-top:2px solid #c9c3c3;
+    border-bottom:2px solid #c9c3c3; */
+    color: #050505;
+}
+
+.roomlist_button div{
+    position: relative;
+}
+
+.roomlist_button_a{
+    position: relative; 
+    width: 40px;
+    height: 30px;
+    /* left: 1000px; */
+    float: left;
+    font-size:20px;
+    overflow:hidden;
+    cursor:pointer;
+    line-height:30px;
+    top: 0;
+    margin:0;
+    padding:0px;
+    border-left:1px solid rgb(0, 0, 0); 
+    border-right:1px solid rgb(0, 0, 0); 
+    /* color: #ffffff; */
+    color: #050505;
+}
+.roomlist_button_a:hover{
+    background: rgb(124, 123, 123);
+    border-top:none; 
+    border-left:1px solid rgb(3, 253, 107); 
+    border-right:1px solid rgb(3, 253, 107); 
+    color: rgb(255, 255, 255);
+}
+
+#roomlist_button_a_show {
+    background: rgb(29, 29, 29);
+    border-top:none; 
+    border-left:1px solid rgb(199, 253, 3); 
+    border-right:1px solid rgb(199, 253, 3); 
+    color: rgb(255, 255, 255); 
+}

@@ -1,6 +1,6 @@
 <template>
   <div id="milieu">
-    <div id="temp" class="milieu_info" ref="temp">
+    <div id="temp" class="milieu_info" ref="temp" v-show="temp || temp===0">
       <div>
         <img src="/static/img/1_0.png">
       </div>
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div id="elec" class="milieu_info" ref="elec">
+    <div id="elec" class="milieu_info" ref="elec" v-show="elec || elec===0">
       <div>
         <img src="/static/img/1_0.png">
       </div>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div id="PM25" class="milieu_info" ref="PM25">
+    <div id="PM25" class="milieu_info" ref="PM25" v-show="PM25 || PM25===0">
       <div>
         <img src="/static/img/13_0.png">
       </div>

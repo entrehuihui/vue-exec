@@ -74,9 +74,9 @@
           class="roomnumlist_button_a"
           v-for="(v,k) in nowPages"
           :key="v"
-          v-on:click="changePages(k)"
-          :id="pages==k ? 'roomnumlist_button_a_show':''"
-        >{{v}}</div>
+          v-on:click="changePages(k+pagesOffset)"
+          :id="pages==k+pagesOffset ? 'roomnumlist_button_a_show':''"
+        >{{v+pagesOffset}}</div>
         <div class="roomnumlist_button_a" v-on:click="changePages(pages +1)">></div>
         <div class="roomnumlist_button_a" v-on:click="changePages(allPages)">>></div>
       </div>
@@ -105,6 +105,7 @@ export default {
       allPages: 1,
       nowPages: 1,
       pages: 0,
+      pagesOffset: 0,
       status: false,
       inputNum: "",
       inputFloor: "",
@@ -170,6 +171,18 @@ export default {
       } else {
         this.nowPages = this.allPages;
       }
+
+      //   页面点击效果图
+      if (this.allPages < 12) {
+        this.pagesOffset = 0;
+      } else if (this.pages > this.allPages - 5) {
+        this.pagesOffset = this.allPages - 10;
+      } else if (this.pages > 5) {
+        this.pagesOffset = this.pages - 5;
+      } else {
+        this.pagesOffset = 0;
+      }
+
       this.dataInfo = retData.Data;
       this.allPages -= 1;
     },

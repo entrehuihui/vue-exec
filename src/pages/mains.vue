@@ -68,9 +68,15 @@
             </div>
           </div>
           <div id="mains_set">
-            <div class="mains_set_right" id="mains_alarm"></div>
-            <div class="mains_set_right" id="mains_user"></div>
-            <div class="mains_set_right" id="mains_qiuit"></div>
+            <div class="mains_set_right" id="mains_alarm" v-on:click="messageClose(true)">
+              <img src="/static/img/message_top.png" alt>
+              <div id="mains_alarmnum" v-show="aralmNum">{{aralmNum}}</div>
+            </div>
+            <div class="mains_set_right" id="mains_user">
+              <img src="/static/img/topimg.png" alt x>
+              <div>{{global.userinfo.name}}</div>
+            </div>
+            <div class="mains_set_right" id="mains_qiuit" v-on:click="signout">EXIT</div>
           </div>
         </div>
         <div id="mains_room">
@@ -113,7 +119,39 @@
       :roomData="roomLayout"
       :roomDataIndex="active"
     ></milieu-adddevices>
-    <websocket :roomid="roomid"></websocket>
+    <message :isShow="messageShow" v-on:close="messageClose"></message>
+    <websocket :roomid="roomid" v-on:retdata="mysocketdata"></websocket>
+    <!-- 报警弹窗 -->
+    <div v-show="alarmdata.length">
+      <div class="devicesalarm"></div>
+      <div class="devicesalarminfo">
+        <div class="devicesalarminfotitle">
+          实时报警数据
+          <div class="devicesalarminfoclose" v-on:click="mysocketdataClose">X</div>
+        </div>
+        <div class="devicesalarminfost">
+          <div class="devicesalarminfosta">
+            <div class="devicesalarminfosdepict">描述</div>
+            <div class="devicesalarminfostime">时间</div>
+            <div class="devicesalarminfosrooma">地点</div>
+            <div class="devicesalarminfosroomb">设备</div>
+            <div class="devicesalarminfosroomc">操作</div>
+          </div>
+          <div
+            v-for="(v, i) in alarmdata"
+            :key="i"
+            class="devicesalarminfosta"
+            style="color:rgb(250, 3, 3)"
+          >
+            <div class="devicesalarminfosdepict">{{v.alarm}}</div>
+            <div class="devicesalarminfostime">{{v.time}}</div>
+            <div class="devicesalarminfosrooma">{{v.roomNum}}-{{v.room}}</div>
+            <div class="devicesalarminfosroomb">{{v.name}}</div>
+            <div class="devicesalarminfosroomcc" v-on:click="mysocketdatapull(v.id)">处理</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -124,12 +162,13 @@ import devices from "../components/devices.vue";
 import roomnumlist from "../components/roomnumlist.vue";
 import adddevices from "../components/adddevices.vue";
 import websocket from "../pages/websocket.vue";
+import message from "../components/message.vue";
 export default {
   data: function() {
     return {
       roomData: [],
       roomDataIndex: 0, //选择的布局index
-      roomLayout: [],
+      roomLayout: [], //房间
       active: -1, //选中的房间
       roomid: 0,
       roomInfoData: {
@@ -143,7 +182,10 @@ export default {
       addroomShow: false,
       adddevicesShow: false,
       roomnumListShow: false,
-      devicesType: 99
+      devicesType: 99,
+      alarmdata: [],
+      messageShow: false,
+      aralmNum: 0
     };
   },
   methods: {
@@ -170,19 +212,101 @@ export default {
           Switchs: v.Switchs
         };
       }
+    },
+    mysocketdata: function(data) {
+      data = JSON.parse(data);
+      console.log(data);
+      // 数据类型判断
+      switch (data.types) {
+        case 0: //心跳
+          for (const key in this.roomDevicesInfo) {
+            if (this.roomDevicesInfo[key].ID == data.id) {
+              this.roomDevicesInfo[key].Breathe = true;
+            }
+          }
+          break;
+        case 1: //数据
+          for (const key in this.roomDevicesInfo) {
+            if (this.roomDevicesInfo[key].ID == data.id) {
+              this.roomDevicesInfo[key].Breathe = true;
+            }
+          }
+          break;
+        case 2: //报警
+          var alarm = {};
+          alarm.id = data.id;
+          alarm.room = data.data[1];
+          alarm.alarm = data.data[2];
+          alarm.time = new Date(data.times * 1000).toLocaleString();
+          alarm.name = data.name;
+          var roomnumID = data.data[0];
+          for (const key in this.roomData) {
+            if (this.roomData[key].id == roomnumID) {
+              alarm.roomNum = this.roomData[key].Name;
+            }
+          }
+          this.alarmdata.push(alarm);
+          break;
+        case 3: //状态
+          for (const key in this.roomDevicesInfo) {
+            if (this.roomDevicesInfo[key].ID == data.id) {
+              this.roomDevicesInfo[key].Mode = data.data;
+            }
+          }
+          break;
+        default:
+          return;
+      }
+    },
+    mysocketdataClose: async function() {
+      this.alarmdata = [];
+    },
+    mysocketdatapull: async function(id) {
+      var retData = await req.put("/alarmdata", {
+        ids: [id]
+      });
+      if (retData.Code != 200) {
+        alert("处理失败");
+        return;
+      }
+      for (const key in this.alarmdata) {
+        if (this.alarmdata[key].id == id) {
+          this.alarmdata.splice(key, 1);
+          break;
+        }
+      }
+    },
+    messageClose: function(mothed = false) {
+      this.messageShow = mothed;
+    },
+    signout: function() {
+      this.global.userinfo = {};
+      this.$router.push("/");
+    },
+    getalarmnum: async function() {
+      var retData = await req.get("/alarmdata?limit=1&status=0");
+      if (retData.Code != 200) {
+        return;
+      }
+      this.aralmNum = retData.All;
+      if (this.aralmNum > 999) {
+        this.aralmNum = "999+";
+      }
     }
   },
   watch: {},
   mounted() {
     this.mains_select();
     this.initagreementsinfo();
+    this.getalarmnum();
   },
   components: {
     "milieu-info": milieu,
     "milieu-devices": devices,
     "milieu-roomnumlist": roomnumlist,
     "milieu-adddevices": adddevices,
-    websocket
+    websocket,
+    message
   }
 };
 async function showAdddevices(mothod = false, status = false) {
