@@ -25,8 +25,13 @@ export default {
       //   this.wsuri =
       // this.url + this.global.userinfo.cookie + "&roomID=" + this.roomid;
       //初始化websocket 调试用
+      // this.wsuri =
+      //   "ws://120.78.76.139:8999/ws?maxiiot_user=" +
+      //   this.global.userinfo.cookie +
+      //   "&roomID=" +
+      //   this.roomid;
       this.wsuri =
-        "ws://120.78.76.139:8999/ws?maxiiot_user=" +
+        "ws://127.0.0.1:8999/ws?maxiiot_user=" +
         this.global.userinfo.cookie +
         "&roomID=" +
         this.roomid;

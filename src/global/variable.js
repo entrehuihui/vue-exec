@@ -22,7 +22,8 @@ var userinfo = {
     cookie: "",
     ID: 0,
     permission: 2,
-    name: ""
+    name: "",
+    mobile: ""
 }
 var localhost = "http://120.78.76.139:8999"
 

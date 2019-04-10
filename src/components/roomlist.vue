@@ -168,7 +168,7 @@ export default {
       if (this.allPages < 12) {
         this.pagesOffset = 0;
       } else if (this.pages > this.allPages - 5) {
-        this.pagesOffset = this.allPages - 10;
+        this.pagesOffset = this.allPages - 11;
       } else if (this.pages > 5) {
         this.pagesOffset = this.pages - 5;
       } else {

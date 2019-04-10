@@ -72,7 +72,7 @@
               <img src="/static/img/message_top.png" alt>
               <div id="mains_alarmnum" v-show="aralmNum">{{aralmNum}}</div>
             </div>
-            <div class="mains_set_right" id="mains_user">
+            <div class="mains_set_right" id="mains_user" v-on:click="userClose(true)">
               <img src="/static/img/topimg.png" alt x>
               <div>{{global.userinfo.name}}</div>
             </div>
@@ -119,7 +119,8 @@
       :roomData="roomLayout"
       :roomDataIndex="active"
     ></milieu-adddevices>
-    <message :isShow="messageShow" v-on:close="messageClose"></message>
+    <message :isShow="messageShow" v-on:close="messageClose" v-on:aralmnum="dealAralmNum"></message>
+    <user :isShow="userShow" v-on:close="userClose"></user>
     <websocket :roomid="roomid" v-on:retdata="mysocketdata"></websocket>
     <!-- 报警弹窗 -->
     <div v-show="alarmdata.length">
@@ -163,6 +164,7 @@ import roomnumlist from "../components/roomnumlist.vue";
 import adddevices from "../components/adddevices.vue";
 import websocket from "../pages/websocket.vue";
 import message from "../components/message.vue";
+import user from "../components/user.vue";
 export default {
   data: function() {
     return {
@@ -185,6 +187,7 @@ export default {
       devicesType: 99,
       alarmdata: [],
       messageShow: false,
+      userShow: false,
       aralmNum: 0
     };
   },
@@ -200,7 +203,7 @@ export default {
     mains_addRoomNum: addRoomNumf,
     mains_showAdddevices: showAdddevices,
     initagreementsinfo: async function() {
-      var retData = await req.get("/room/agreements");
+      var retData = await req.get("/room/agreements?a=1");
       if (retData.Code != 200) {
         return;
       }
@@ -215,15 +218,9 @@ export default {
     },
     mysocketdata: function(data) {
       data = JSON.parse(data);
-      console.log(data);
       // 数据类型判断
       switch (data.types) {
         case 0: //心跳
-          for (const key in this.roomDevicesInfo) {
-            if (this.roomDevicesInfo[key].ID == data.id) {
-              this.roomDevicesInfo[key].Breathe = true;
-            }
-          }
           break;
         case 1: //数据
           for (const key in this.roomDevicesInfo) {
@@ -245,7 +242,8 @@ export default {
               alarm.roomNum = this.roomData[key].Name;
             }
           }
-          this.alarmdata.push(alarm);
+          this.alarmdata.unshift(alarm);
+          this.dealAralmNum(1);
           break;
         case 3: //状态
           for (const key in this.roomDevicesInfo) {
@@ -254,8 +252,11 @@ export default {
             }
           }
           break;
-        default:
-          return;
+      }
+      for (const key in this.roomDevicesInfo) {
+        if (this.roomDevicesInfo[key].ID == data.id) {
+          this.roomDevicesInfo[key].Breathe = true;
+        }
       }
     },
     mysocketdataClose: async function() {
@@ -275,11 +276,19 @@ export default {
           break;
         }
       }
+      this.dealAralmNum(-1);
     },
     messageClose: function(mothed = false) {
       this.messageShow = mothed;
+      if (!mothed) {
+        this.getalarmnum();
+      }
+    },
+    userClose: function(mothed = false) {
+      this.userShow = mothed;
     },
     signout: function() {
+      req.del("/login");
       this.global.userinfo = {};
       this.$router.push("/");
     },
@@ -289,13 +298,16 @@ export default {
         return;
       }
       this.aralmNum = retData.All;
-      if (this.aralmNum > 999) {
-        this.aralmNum = "999+";
-      }
+    },
+    dealAralmNum: function(num = 1) {
+      this.aralmNum = this.aralmNum + num;
     }
   },
   watch: {},
   mounted() {
+    if (!this.global.userinfo.cookie) {
+      this.$router.push("/");
+    }
     this.mains_select();
     this.initagreementsinfo();
     this.getalarmnum();
@@ -306,7 +318,8 @@ export default {
     "milieu-roomnumlist": roomnumlist,
     "milieu-adddevices": adddevices,
     websocket,
-    message
+    message,
+    user
   }
 };
 async function showAdddevices(mothod = false, status = false) {

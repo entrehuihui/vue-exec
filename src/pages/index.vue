@@ -97,7 +97,8 @@ export default {
           cookie: retData.Data.cookie,
           ID: retData.Data.id,
           permission: retData.Data.permission,
-          name: retData.Data.user
+          name: retData.Data.user,
+          mobile: retData.Data.mobile
         };
         this.$router.push("/mains");
       } else {

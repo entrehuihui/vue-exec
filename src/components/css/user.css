@@ -1,4 +1,4 @@
-.message{
+.user{
     position: absolute;
     z-index: 8900;
     height: 100%;
@@ -9,7 +9,7 @@
     opacity: 0.5;
 }
 
-.messageinfo{
+.userinfo{
     position: absolute;
     left: 400px;
     top: 150px;
@@ -20,11 +20,10 @@
     border-radius: 10px;
 }
 
-.messageinfotitle{
+.userinfotitle{
     position: relative;
     width: 100%;
     height: 40px;
-    background: rgb(236, 236, 236);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     line-height: 40px;
@@ -34,7 +33,7 @@
     border: 0px;
     font-size: 24px;
 }
-.messageinfoclose{
+.userinfoclose{
     position: relative;
     float: right;
     height: 40px;
@@ -42,49 +41,130 @@
     border-radius: 10px;
     cursor: pointer;
 }
-.messageinfoclose:hover{
+.userinfoclose:hover{
     color: #edf5f6;
     background: rgb(238, 117, 117);
 }
 
-.messageinfoselect{
+.userinfoselect{
     position: relative;
     left: 15px;
     width: 1170px;
     height: 45px;
     border-bottom: 1px solid rgb(223, 221, 221);
 }
-.messageinfoselectstatus{
+.userinfoselectstatus{
     position: relative;
     left: 10px;
     height: 40px;
     line-height: 40px;
     font-size: 20px;
 }
-.messageinfoselectstatus select{
+.userinfoselectstatus select{
     height:30px;
     width: 80px;
 }
-
-.messageinfost{
+.userinfosts{
     position: relative;
     left: 15px;
     width: 1170px;
-    height: 625px;
+    height: 145px;
+    border:1px solid rgb(2, 2, 2);
+    overflow: auto;
+    border-radius: 10px;
+}
+.userinfostssa{
+    position: relative;
+    float: left;
+    left: 100px;
+    height: 120px;
+    width: 200px;
+    margin: 10px;
+}
+.userinfostssb{
+    position: relative;
+    float: right;
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+    text-align: right;
+    line-height: 30px;
+}
+.userinfostssc{
+    position: relative;
+    float: left;
+    width: 190px;
+    height: 30px;
+    margin: 5px;
+    text-align: left;
+    line-height: 30px;
+}
+.userinfostssc input{
+    width: 190px;
+    height: 25px;
+}
+.userupdate{
+    position: absolute;
+    height: 25px;
+    width: 38px;
+    line-height: 25px;
+    left: 550px;
+    color: #050505;
+    top: 105px;
+    background: rgb(179, 178, 178);
+    text-align: center;
+    cursor: pointer;
+}
+.userupdate:hover{
+    color: #edf5f6
+}
+#userupdatecancel{
+    left: 593px;
+}
+
+.userinfostselect{
+    position: relative;
+    left: 15px;
+    width: 1170px;
+    height: 40px;
+}
+.userinfostselecta{
+    position: relative;
+    float: left;
+    left: 15px;
+    width: 90px;
+    height: 30px;
+    margin: 5px;
+    text-align: center;
+    line-height: 30px;
+    background: rgb(216, 207, 207);
+}
+.userinfostselecta select{
+    width: 90px;
+    height: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.userinfost{
+    position: relative;
+    left: 15px;
+    width: 1170px;
+    height: 470px;
     border-bottom:1px solid rgb(2, 2, 2);
     overflow: auto;
 }
-.messageinfosta{
+.userinfosta{
     position: relative;
     width: 1170px;
     height: 35px;
     margin-top: 3px;
     text-align:center;
     line-height: 35px;
-    font-size: 20px;
+    font-size: 18px;
     border-bottom:1px solid rgb(168, 167, 167);
 }
-.messageinfosnumber{
+.userinfosnumber{
     position: relative;
     float: left;
     width: 30px;
@@ -94,7 +174,7 @@
     margin-right: 3px;
     font-size: 15px;
 }
-.messageinfoopt{
+.userinfoopt{
     position: relative;
     top: 7px;
     left: 5px;
@@ -103,7 +183,8 @@
     border: 2px solid rgb(134, 131, 131);
     cursor: pointer;
 }
-.messageinfoopta{
+
+.userinfoopta{
     position: relative;
     width: 13px;
     height: 13px;
@@ -111,16 +192,25 @@
     margin: 1px;
 }
 
-.messageinfosdepict{
+.userinfosdepict{
     position: relative;
     float: left;
-    width: 200px;
+    width: 150px;
     height: 100%;
     overflow: hidden;
     border-right: 1px solid rgb(223, 221, 221);
     margin-right: 3px;
 }
-.messageinfostime{
+.userinfosdepicta{
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 100%;
+    overflow: hidden;
+    margin-right: 3px;
+    border-right: 1px solid rgb(223, 221, 221);
+}
+.userinfostime{
     position: relative;
     float: left;
     width: 230px;
@@ -129,25 +219,25 @@
     border-right: 1px solid rgb(223, 221, 221);
     margin-right: 3px;
 }
-.messageinfosrooma{
+.userinfosrooma{
     position: relative;
     float: left;
-    width: 220px;
+    width: 150px;
     height: 100%;
     overflow: hidden;
     border-right: 1px solid rgb(223, 221, 221);
     margin-right: 3px;
 }
-.messageinfosroomb{
+.userinfosroomb{
      position: relative;
     float: left;
-    width: 250px;
+    width: 200px;
     height: 100%;
     overflow: hidden;
     border-right: 1px solid rgb(223, 221, 221);
     margin-right: 3px;
 }
-.messageinfosroomc{
+.userinfosroomc{
     position: relative;
     float: left;
     width: 80px;
@@ -155,27 +245,27 @@
     overflow: hidden;
     margin-right: 3px;
 }
-.messageinfosroomcc{
+.userinfosroomcc{
     position: relative;
     float: left;
-    width: 80px;
+    width: 60px;
     height: 100%;
     overflow: hidden;
     color: #050505;
     cursor: pointer;
+    border: 1px solid rgb(223, 221, 221);
 }
-.messageinfosroomcc:hover{
+.userinfosroomcc:hover{
     color: #edf5f6;
     background: rgb(4, 92, 223);
 }
 
-.messageinfosroomccc{
+.userinfosroomccc{
     position: relative;
     float: left;
     width: 80px;
     height: 100%;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .roomlist_buttona{
@@ -266,4 +356,121 @@
     border-left:1px solid rgb(199, 253, 3); 
     border-right:1px solid rgb(199, 253, 3); 
     color: rgb(255, 255, 255); 
+}
+
+.userinfoupdate{
+    position: absolute;
+    z-index: 8902;
+    height: 100%;
+    width: 100%;
+    background: rgb(94, 93, 93);
+    filter:alpha(Opacity=80);
+    -moz-opacity:0.5;
+    opacity: 0.5;
+}
+.userinfoupdatea{
+    position: absolute;
+    z-index: 8903;
+    height: 400px;
+    width: 600px;
+    top: 250px;
+    left: 700px;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(156, 154, 154);
+    border-radius: 15px;
+}
+.userinfoupdateatitle{
+    position: relative;
+    float: left;
+    top: 15px;
+    width: 600px;
+    height: 30px;
+    text-align: center;
+}
+.userinfoupdateatitleclose{
+    position: relative;
+    float: right;
+    top: -30px;
+    width: 30px;
+    cursor: pointer;
+}
+.userinfoupdateatitleclose:hover{
+    color: #ff0000;
+}
+.userinfoupdateaa{
+    position: relative;
+    float: left;
+    height: 230px;
+    width: 100px;
+    margin: 10px;
+    left: 100px;
+    top: 30px;
+}
+#userinfoupdateaacontent{
+    width: 300px;
+}
+.userinfoupdateaat{
+    position: relative;
+    float: right;
+    height: 30px;
+    margin: 5px;
+    width: 90px;
+    text-align: right;
+}
+.userinfoupdateaacontentt{
+    position: relative;
+    float: left;
+    height: 30px;
+    margin: 5px;
+    width: 290px;
+    text-align: left;
+}
+.userinfoupdateaacontentt select{
+    border: 1px solid rgb(0, 0, 0)
+}
+#userinfoupdateaat1{
+    height: 80px;
+    line-height: 80px;
+}
+#userinfoupdateaacontentt1{
+    height: 80px;
+}
+#userinfoupdateaacontentti1{
+    width: 230px;
+    height: 30px;
+    font-size: 15px;
+    border: 1px solid rgb(0, 0, 0)
+}
+#userinfoupdateaacontentti2{
+     border: 1px solid rgb(0, 0, 0)
+}
+.userinfoupdateaacontentt select{
+     width: 230px;
+    height: 30px;
+}
+.userinfoupdateab{
+    position: relative;
+    float: left;
+    width: 400PX;
+    height: 50px;
+    top: 15px;
+    left: 140px;
+}
+.userinfoupdateaba{
+    position: relative;
+    float: left;
+    width: 60px;
+    height: 40px;
+    margin: 5px;
+    left: 130px;
+    line-height: 40px;
+    text-align: center;
+    background: rgb(240, 239, 239);
+    border: 1px solid rgb(156, 154, 154);
+    border-radius: 10px;
+    cursor: pointer;
+}
+.userinfoupdateaba:hover{
+    color: #edf5f6;
+    background: rgb(85, 85, 85);
 }

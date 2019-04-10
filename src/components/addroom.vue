@@ -96,7 +96,7 @@ export default {
     },
     checkNum: async function() {
       if (this.roomInfoData == null || this.roomInfoData.length == 0) {
-        var retData = await req.get("/roomnum");
+        var retData = await req.get("/roomnum?a=1");
         if (retData.Code != 200) {
           return;
         }
@@ -114,7 +114,7 @@ export default {
   watch: {
     isShow: async function(oldValue, newValue) {
       if (!newValue) {
-        var retData = await req.get("/roomnum");
+        var retData = await req.get("/roomnum?a=1");
         if (retData.Code != 200) {
           return;
         }

@@ -32,10 +32,10 @@
     font-size: 30px;
     border-top-right-radius: 40px;
     border-bottom-left-radius: 10px;
+    cursor: pointer;
 }
 #devicesinfobefortop:hover{
-    background: rgb(180, 178, 178);
-    color: aliceblue;
+    color: rgb(255, 17, 0);
 }
 
 .devicesinfoleft{
