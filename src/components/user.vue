@@ -41,7 +41,7 @@
           id="userupdatecancel"
         >取消</div>
       </div>
-      <div class="userinfostselect">
+      <div class="userinfostselect" v-show="global.userinfo.permission<2">
         <div class="userinfostselecta">账户状态:</div>
         <div class="userinfostselecta">
           <select v-model="selectstatus">
@@ -51,7 +51,7 @@
           </select>
         </div>
       </div>
-      <div class="userinfost">
+      <div class="userinfost" v-show="global.userinfo.permission<2">
         <div class="userinfosta">
           <div class="userinfosnumber"></div>
           <div class="userinfosnumber">序号</div>
@@ -82,21 +82,21 @@
           <div class="userinfosroomcc" v-on:click="disablieuser(true, i)" v-show="!v.Able">启用</div>
           <div class="userinfosroomcc" v-on:click="disablieuser(false, i)" v-show="v.Able">禁用</div>
           <div class="userinfosroomcc" v-on:click="infoupdate(true, v)">修改</div>
-          <div class="userinfosroomcc" v-on:click="deluser(v.ID)">删除</div>
+          <div class="userinfosroomcc" v-on:click="deluser([v.ID])">删除</div>
         </div>
       </div>
-      <div>
+      <div v-show="global.userinfo.permission<2">
         <div class="roomlist_buttona">
           <div id="roomlist_buttonaa">
             <div class="userinfoopt" v-on:click="selectopt(0)">
               <div class="userinfoopta" v-show="opt[0]"></div>
             </div>
           </div>
-          <div id="roomlist_buttonab" v-on:click="selecttreat(false)">删除</div>
+          <div id="roomlist_buttonab" v-on:click="selecttreat('del')">删除</div>
           <div id="roomlist_buttonab" v-on:click="selecttreat(false)">禁用</div>
-          <div id="roomlist_buttonac">全部禁用</div>
+          <!-- <div id="roomlist_buttonac">全部禁用</div> -->
           <div id="roomlist_buttonab" v-on:click="selecttreat(true)">启用</div>
-          <div id="roomlist_buttonac">全部启用</div>
+          <!-- <div id="roomlist_buttonac">全部启用</div> -->
         </div>
         <div class="roomlist_button">
           <div :style="'left: '+(130 - nowPages * 42)+'px'">
@@ -133,19 +133,8 @@
         <div class="userinfoupdateaa" id="userinfoupdateaacontent">
           <div class="userinfoupdateaacontentt">{{infoupdates.User}}</div>
           <div class="userinfoupdateaacontentt">
-            <select
-              ref="userpermisson"
-              :value="infoupdates.Permission"
-              v-show="!global.userinfo.permission"
-            >
-              <option value="1">管理员</option>
-              <option value="2">普通用户</option>
-            </select>
-            <select
-              ref="userpermisson"
-              :value="infoupdates.Permission"
-              v-show="global.userinfo.permission"
-            >
+            <select ref="userpermisson" :value="infoupdates.Permission">
+              <option v-show="!global.userinfo.permission" value="1">管理员</option>
               <option value="2">普通用户</option>
             </select>
           </div>
@@ -245,7 +234,7 @@ export default {
       if (retData.Code != 200) {
         return;
       }
-      this.allPages = Math.ceil(retData.All / 15);
+      this.allPages = Math.ceil(retData.All / 11);
       if (this.allPages > 11) {
         this.nowPages = 11;
       } else {
@@ -288,7 +277,7 @@ export default {
       }
       this.$forceUpdate();
     },
-    selecttreat: function() {
+    selecttreat: function(mothed = "") {
       var ids = new Array();
       for (const key in this.opt) {
         if (this.opt.hasOwnProperty(key) && this.opt[key] && key != 0) {
@@ -299,7 +288,14 @@ export default {
       if (ids.length < 1) {
         return;
       }
-      this.datapull(ids);
+      if (mothed == "del") {
+        // 删除
+        this.deluser(ids);
+      } else {
+        alert(11);
+        // 禁用启用
+        this.disablieusers(ids, mothed);
+      }
     },
     disablieuser: async function(mothed = false, index) {
       var v = this.userlist[index];
@@ -345,8 +341,8 @@ export default {
         details: this.$refs.userdetails.value,
         id: this.infoupdates.ID,
         mobile: "",
-        passWord: this.$refs.userdetails.userpassword,
-        permission: this.$refs.userdetails.userpermisson
+        passWord: this.$refs.userpassword.value,
+        permission: parseInt(this.$refs.userpermisson.value)
       });
       if (retData.Code != 200) {
         alert(retData.Msg);
@@ -354,6 +350,14 @@ export default {
       }
       this.getuserlist();
       this.infoupdate();
+    },
+    disablieusers: async function(ids = [], mothed = false) {
+      var retData = await req.put("/users", { id: ids, able: mothed });
+      if (retData.Code != 200) {
+        alert(retData.Msg);
+        return;
+      }
+      this.getuserlist();
     }
   },
   async mounted() {

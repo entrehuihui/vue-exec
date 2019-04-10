@@ -164,6 +164,9 @@
     font-size: 18px;
     border-bottom:1px solid rgb(168, 167, 167);
 }
+.userinfosta:hover{
+    background: rgb(226, 224, 224);
+}
 .userinfosnumber{
     position: relative;
     float: left;

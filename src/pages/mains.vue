@@ -44,7 +44,12 @@
           <strong>监测设备</strong>
         </a>
       </div>
-      <div class="mains_title" id="mains_title_adddevices" v-on:click="mains_showAdddevices(true)">
+      <div
+        class="mains_title"
+        id="mains_title_adddevices"
+        v-on:click="mains_showAdddevices(true)"
+        v-show="global.userinfo.permission<2"
+      >
         <!-- <img src="/static/img/hvjiance.png" alt> -->
         <a>
           <strong>+添加设备</strong>

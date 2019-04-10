@@ -102,6 +102,11 @@
     border-radius: 5px;
     cursor: pointer;
     color: #050505;
+    border:1px solid rgb(194, 194, 196);
+}
+.mains_set_right:hover{
+    color: #edf5f6;
+    background: rgb(180, 180, 180);
 }
 #mains_alarm img{
     position: relative;
@@ -123,7 +128,7 @@
     text-align: center;
 }
 #mains_user{
-    width: 80px;
+    width: 100px;
 }
 #mains_user img{
     position: relative;
@@ -140,6 +145,8 @@
 }
 #mains_qiuit{
     line-height: 30px;
+    width: 40px;
+    text-align: center;
 }
 
 #mains_roomNum {

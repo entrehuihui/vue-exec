@@ -31,7 +31,11 @@
           <button v-on:click="changePages(0)">确定</button>
           <button v-on:click="clearnCondition()">清除</button>
         </div>
-        <div class="roomnumnlist_select_b" v-on:click="showAddroom(true)">添加</div>
+        <div
+          class="roomnumnlist_select_b"
+          v-on:click="showAddroom(true)"
+          v-show="global.userinfo.permission<2"
+        >添加</div>
       </div>
     </div>
     <!-- 数据栏 -->
