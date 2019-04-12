@@ -235,7 +235,7 @@ export default {
     mysocketdata: function(data) {
       data = JSON.parse(data);
       var index = data.id;
-      console.log(data);
+      // console.log(data);
       this.roomDevicesInfo[index].Breathe = true;
       // 数据类型判断
       switch (data.types) {

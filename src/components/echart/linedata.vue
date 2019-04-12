@@ -1,5 +1,5 @@
 <template>
-  <div id="linedata">
+  <div :id="'linedata' + keys">
     <div :id="'chartlinedata'+keys" style="width: 860px;height: 300px;"></div>
   </div>
 </template>
@@ -17,7 +17,6 @@ export default {
   },
   methods: {
     init: function() {
-      this.$refs.linedata;
       var chart = echarts.init(
         document.getElementById("chartlinedata" + this.keys)
       );

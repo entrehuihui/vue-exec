@@ -1,4 +1,5 @@
-import global from '@/global/variable.js'
+
+import global from "@/global/variable.js";
 export default {
     line
 }
@@ -7,6 +8,10 @@ export default {
 function line(datainfos) {
     var opt = new Array;
     for (const datainfo of datainfos) {
+        if (!datainfo.ID) {
+            opt.push({})
+            continue;
+        }
         var series = new Array();
         for (const key in datainfo.Time) {
             datainfo.Time[key] = new Date(
@@ -22,10 +27,10 @@ function line(datainfos) {
         }
         opt.push({
             title: {
-                // text: global.agreementinfo[datainfo.AgreementID].Name + "-" + datainfo.Name,
-                text: datainfo.Name,
+                text: global.agreementinfo[datainfo.AgreementID].Name,
+                // text: datainfo.Name,
             },
-            animation: false,
+            // animation: false,
             tooltip: {
                 trigger: "axis"
             },

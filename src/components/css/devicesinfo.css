@@ -23,13 +23,32 @@
     width: 100%;
     border-bottom: 1px solid rgb(180, 178, 178);
 }
+.devicesinfobefortopa{
+    position: relative;
+    float: left;
+    left: 450px;
+    height: 30px;
+    width: 150px;
+    font-size: 20px;
+    line-height: 30px;
+    cursor: pointer;
+    background: rgb(241, 239, 239);
+    margin-top: 15px;
+    margin-left: 5px;
+}
+.devicesinfobefortopa:hover{
+    background: rgb(245, 199, 199);
+}
+#devicesinfobefortopa1{
+    background: rgb(247, 161, 161);
+}
 
 #devicesinfobefortop{
     float: right;
     height: 50px;
     width: 50px;
     line-height: 50px;
-    font-size: 30px;
+    font-size: 25px;
     border-top-right-radius: 40px;
     border-bottom-left-radius: 10px;
     cursor: pointer;
@@ -211,7 +230,7 @@
     float: left;
     left: 3px;
     height: 26px;
-    width: 150px;
+    width: 130px;
     border-left: 1px solid rgb(141, 141, 141);
     border-right: 1px solid rgb(141, 141, 141);
     overflow: hidden;
@@ -260,8 +279,9 @@
     position: relative; 
     float: left;
     height:  300px;
-    width: 840px;
+    width: 860px;
     margin: 2px;
     border-radius: 5px;
     border-bottom: 1px solid rgb(141, 141, 141);
+    overflow: hidden;
 }

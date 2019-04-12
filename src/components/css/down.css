@@ -1,0 +1,137 @@
+
+.downselect{
+    position: relative;
+    float: left;
+    height: 90px;
+    width: 274px;
+    border-radius: 10px;
+    margin: 5px;
+    overflow: hidden;
+    border: 1px solid rgb(53, 52, 52);
+    background: rgb(233, 233, 233);
+    text-align: center
+}
+.downselecttitle{
+    position: relative;
+    float: left;
+    width: 270px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+.downswitch{
+    position: relative;
+    float: left;
+    height: 40px;
+    width: 120px;
+    margin: 5px;
+    line-height: 40px;
+    border-radius: 10px;
+    font-size: 25px;
+    background: rgb(196, 196, 196);
+    cursor: pointer;
+}
+.downswitch:hover{
+    background: rgb(5, 148, 243);
+    color: aliceblue;
+}
+
+.downupdatetime{
+    position: relative;
+    float: left;
+    height: 40px;
+    width: 125px;
+    margin: 5px;
+    line-height: 40px;
+    border-radius: 10px;
+    font-size: 25px;
+    background: rgb(196, 196, 196);
+    cursor: pointer;
+    left: 70px;
+}
+.downupdatetime:hover{
+    background: rgb(5, 148, 243);
+    color: aliceblue;
+}
+
+.downtemp{
+    position: relative;
+    float: left;
+    height: 55px;
+    width: 100px;
+    margin-left: 5px;
+    border: 1px solid rgb(14, 14, 14)
+}
+.downtempa{
+    position: relative;
+    float: left;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    border-bottom: 1px solid rgb(136, 137, 138);
+}
+.downtempba{
+    position: relative;
+    float: left;
+    line-height: 11px;
+    width: 48px;
+    height: 11px;
+}
+.downtempba input{
+    border: 1px solid rgb(10, 10, 10);
+    color: black;
+}
+.downtempc{
+    position: relative;
+    float: left;
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: rgb(197, 193, 193);
+    left: 5px;
+    top: 25px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.downtempc:hover{
+    background: rgb(5, 148, 243);
+    color: aliceblue;
+}
+
+.downinterval{
+    position: relative;
+    float: left;
+    height: 30px;
+    width: 200px;
+    left: 10px;
+    top: 10px;
+}
+.downintervala{
+    position: relative;
+    float: left;
+    width: 90px;
+    height: 25px;
+    font-size: 18px;
+    line-height: 25px;
+}
+.downintervala input{
+    width: 90px;
+    height: 25px;
+    border: 1px solid rgb(10, 10, 10)
+}
+#downintervalat{
+    top: 10px;
+}
+.downintervala select{
+    width: 90px;
+    height: 25px;
+    border: 1px solid rgb(10, 10, 10)
+}
+#downfrequencyt{
+     top: 10px;
+}
+
+#downheart{
+    top: 10px;
+}

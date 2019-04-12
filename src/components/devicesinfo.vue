@@ -2,6 +2,23 @@
   <div id="devicesinfo" v-show="isShow">
     <div id="devicesinfobefor">
       <div id="devicesinfobefort">
+        <div
+          class="devicesinfobefortopa"
+          id="devicesinfobefortopa1"
+          ref="devicesinfobefortopa1"
+          v-show="!selectindexShow"
+          v-on:click="selectindex(false)"
+        >
+          <strong>数据</strong>
+        </div>
+        <div
+          class="devicesinfobefortopa"
+          id="devicesinfobefortopa2"
+          ref="devicesinfobefortopa2"
+          v-on:click="selectindex(true)"
+        >
+          <strong>下行</strong>
+        </div>
         <div id="devicesinfobefortop" v-on:click="close(false)">X</div>
       </div>
       <div class="devicesinfoleft">
@@ -148,8 +165,23 @@
         </div>
       </div>
       <div class="devicesinforight">
-        <div v-show="line.length" class="devicesinforighta" v-for="(v, i) in line" :key="i+info.ID">
+        <div
+          v-show="line.length && !selectindexValue"
+          class="devicesinforighta"
+          v-for="(v, i) in line"
+          :key="i+info.ID"
+        >
           <linedata :options="v" :keys="info.ID+'echart'+i"></linedata>
+        </div>
+        <div v-show="selectindexValue" class="devicesinforighta">
+          <down v-if="info.ID" :info="info" key="info.ID + '_'+info.ID">{{info.instructionInfos}}</down>
+        </div>
+        <div v-show="selectindexValue" class="devicesinforighta">
+          <down
+            v-if="info2.ID"
+            :info="info2"
+            key="info2.ID + '_'+info.ID"
+          >{{info2.instructionInfos}}</down>
         </div>
       </div>
     </div>
@@ -161,6 +193,7 @@
 import req from "../global/request.vue";
 import mychart from "../global/echart.js";
 import linedata from "../components/echart/linedata.vue";
+import down from "../components/down.vue";
 // import { fail } from "assert";
 export default {
   data: function() {
@@ -178,7 +211,9 @@ export default {
       infos: {},
       datashow: {},
       line: [],
-      timer: null
+      timer: null,
+      selectindexValue: false,
+      selectindexShow: false
     };
   },
   props: {
@@ -253,6 +288,7 @@ export default {
       }
       if (!mothed) {
         this.showAddLink = false;
+        return;
       }
       var retData = await req.post("/room/devices/deviceslinks", {
         id: this.info.ID,
@@ -307,10 +343,14 @@ export default {
         }, 60000);
       }
     },
-    decideDatashow: decideDatashow
+    decideDatashow: decideDatashow,
+    selectindex: function(mothed) {
+      this.selectindexValue = mothed;
+    }
   },
   components: {
-    linedata
+    linedata,
+    down
   },
   watch: {
     isShow: async function(newValue) {
@@ -318,8 +358,8 @@ export default {
       this.timer = null;
       if (newValue) {
         this.setTimer();
-        this.agreementName = "";
-        this.agreementName2 = "";
+        // this.agreementName = "";
+        // this.agreementName2 = "";
         this.changeStatus = false;
         this.changeStatus2 = false;
         this.changeData = false;
@@ -338,16 +378,69 @@ export default {
         this.changeStatus = false;
         this.infos = this.info;
       }
+    },
+    selectindexValue: function(mothed) {
+      clearInterval(this.timer);
+      this.timer = null;
+      if (mothed) {
+        this.$refs.devicesinfobefortopa1.style =
+          "background: rgb(241, 239, 239)";
+        this.$refs.devicesinfobefortopa2.style =
+          "background: rgb(247, 161, 161)";
+        //拉取下行协议
+        req
+          .get("/instructionInfos?AgreementID=" + this.info.AgreementID)
+          .then(retData => {
+            if (retData.Code != 200) {
+              return;
+            }
+            this.info.instructionInfos = retData.Data;
+            if (this.info2.AgreementID == this.info.AgreementID) {
+              this.info2.instructionInfos = retData.Data;
+            }
+            this.$forceUpdate();
+          });
+        if (this.info2.ID) {
+          if (this.info2.AgreementID == this.info.AgreementID) {
+            return;
+          }
+          req
+            .get("/instructionInfos?AgreementID=" + this.info2.AgreementID)
+            .then(retData => {
+              if (retData.Code != 200) {
+                return;
+              }
+              this.info2.instructionInfos = retData.Data;
+              this.$forceUpdate();
+            });
+        }
+      } else {
+        this.$refs.devicesinfobefortopa2.style =
+          "background: rgb(241, 239, 239)";
+        this.$refs.devicesinfobefortopa1.style =
+          "background: rgb(247, 161, 161)";
+        this.setTimer();
+      }
     }
   }
 };
 
 async function decideDatashow() {
-  this.line = "";
+  if (!this.isShow) {
+    return;
+  }
+  this.line = new Array();
   var datalist = await getData(this.info.ID);
-  if (datalist) {
+  if (
+    (datalist.length == 1 && datalist[0].ID != 0) ||
+    (datalist.length == 2 && (datalist[0].ID != 0 || datalist[1].ID != 0))
+  ) {
     this.line = mychart.line(datalist);
-    this.$forceUpdate();
+    this.selectindexValue = false;
+    this.selectindexShow = false;
+  } else {
+    this.selectindexShow = true;
+    this.selectindexValue = true;
   }
 }
 
