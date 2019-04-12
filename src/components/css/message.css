@@ -163,6 +163,8 @@
     overflow: hidden;
     color: #050505;
     cursor: pointer;
+    background: rgb(29, 206, 230);
+    border-radius: 10px;
 }
 .messageinfosroomcc:hover{
     color: #edf5f6;

@@ -8,7 +8,7 @@
         <div id="devicesinfotitle">
           <strong>设备详情</strong>
         </div>
-        <div class="devicesinfodata">
+        <div class="devicesinfodata" id="devicesinfodataEUI">
           <div class="devicesinfodataa">DevEUI</div>
           <div class="devicesinfodatab">{{infos.DevEUI}}</div>
         </div>
@@ -60,7 +60,7 @@
           <strong>关联设备详情</strong>
         </div>
         <div class="devicesinfolinkRelease" v-on:click="linkRelease">解除关联</div>
-        <div class="devicesinfodata">
+        <div class="devicesinfodata" id="devicesinfodataEUI2">
           <div class="devicesinfodataa">DevEUI</div>
           <div class="devicesinfodatab">{{info2.DevEUI}}</div>
         </div>
@@ -70,7 +70,7 @@
         </div>
         <div class="devicesinfodata">
           <div class="devicesinfodataa">设备类型</div>
-          <div class="devicesinfodatab">{{agreementName}}</div>
+          <div class="devicesinfodatab">{{agreementName2}}</div>
         </div>
         <div class="devicesinfodata">
           <div class="devicesinfodataa">所属布局</div>
@@ -148,8 +148,8 @@
         </div>
       </div>
       <div class="devicesinforight">
-        <div class="devicesinforighta" v-for="(v, i) in line" :key="i">
-          <linedata :options="v" :keys="i"></linedata>
+        <div v-show="line.length" class="devicesinforighta" v-for="(v, i) in line" :key="i+info.ID">
+          <linedata :options="v" :keys="info.ID+'echart'+i"></linedata>
         </div>
       </div>
     </div>
@@ -166,6 +166,7 @@ export default {
   data: function() {
     return {
       agreementName: "",
+      agreementName2: "",
       changeStatus: false,
       changeStatus2: false,
       changeData: false,
@@ -176,7 +177,8 @@ export default {
       info2: {},
       infos: {},
       datashow: {},
-      line: []
+      line: [],
+      timer: null
     };
   },
   props: {
@@ -262,7 +264,10 @@ export default {
         return;
       }
       this.info2 = this.linkID;
+      //把关联设备ID返回给父组件
+      this.$emit("retlinkid", [this.info2, this.info]);
       alert("关联成功!");
+      this.decideDatashow();
     },
     getInfo2: async function() {
       var retData = await req.get(
@@ -272,6 +277,13 @@ export default {
         return;
       }
       this.info2 = retData.Data;
+      if (this.info2.ID) {
+        this.agreementName2 = this.global.agreementinfo[
+          this.info2.AgreementID
+        ].Name;
+        //把关联设备ID返回给父组件
+        this.$emit("retlinkid", [this.info2, this.info]);
+      }
     },
     linkRelease: async function() {
       var retData = await req.del("/room/devices/deviceslinks", {
@@ -281,8 +293,19 @@ export default {
         alert("解除失败!");
         return;
       }
+      //把关联设备ID返回给父组件
+      this.$emit("retlinkid", [this.info2, this.info], true);
       this.info2 = {};
+      this.info.info2 = {};
       alert("解除成功!");
+      this.decideDatashow();
+    },
+    setTimer() {
+      if (this.timer == null) {
+        this.timer = setInterval(() => {
+          this.decideDatashow();
+        }, 60000);
+      }
     },
     decideDatashow: decideDatashow
   },
@@ -290,28 +313,41 @@ export default {
     linedata
   },
   watch: {
-    isShow: function(newValue) {
-      this.agreementName = this.global.agreementinfo[
-        this.info.AgreementID
-      ].Name;
+    isShow: async function(newValue) {
+      clearInterval(this.timer);
+      this.timer = null;
       if (newValue) {
-        this.decideDatashow(this.info, this.info2);
-        this.getInfo2();
+        this.setTimer();
+        this.agreementName = "";
+        this.agreementName2 = "";
         this.changeStatus = false;
-        this.infos = this.info;
+        this.changeStatus2 = false;
         this.changeData = false;
         this.linkspoint = "点击关联设备";
         this.showAddLink = false;
+        this.linkData = [];
+        this.linkID = {};
+        this.info2 = {};
+        this.infos = {};
         this.datashow = {};
+        this.agreementName = this.global.agreementinfo[
+          this.info.AgreementID
+        ].Name;
+        await this.getInfo2();
+        this.decideDatashow();
+        this.changeStatus = false;
+        this.infos = this.info;
       }
     }
   }
 };
 
-async function decideDatashow(v) {
-  var data = await getData(v.ID);
-  if (data) {
-    this.line = mychart.line(data);
+async function decideDatashow() {
+  this.line = "";
+  var datalist = await getData(this.info.ID);
+  if (datalist) {
+    this.line = mychart.line(datalist);
+    this.$forceUpdate();
   }
 }
 

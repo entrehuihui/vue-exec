@@ -111,6 +111,7 @@
         :roomName="roomLayout[active].Name"
         v-on:close="mains_getRoomDevicesStatus"
         :roomStatus="roomLayout[active].status"
+        v-on:retlinkid="retlinkid"
       ></milieu-devices>
     </div>
     <milieu-roomnumlist
@@ -153,7 +154,7 @@
             <div class="devicesalarminfostime">{{v.time}}</div>
             <div class="devicesalarminfosrooma">{{v.roomNum}}-{{v.room}}</div>
             <div class="devicesalarminfosroomb">{{v.name}}</div>
-            <div class="devicesalarminfosroomcc" v-on:click="mysocketdatapull(v.id)">处理</div>
+            <div class="devicesalarminfosroomcc" v-on:click="mysocketdatapull(v.id, v.alarmid)">处理</div>
           </div>
         </div>
       </div>
@@ -208,8 +209,11 @@ export default {
     mains_addRoomNum: addRoomNumf,
     mains_showAdddevices: showAdddevices,
     initagreementsinfo: async function() {
+      // 缓存设备协议
       var retData = await req.get("/room/agreements?a=1");
       if (retData.Code != 200) {
+        //缓存不成功 重新登陆
+        this.$router.push("/");
         return;
       }
       for (const v of retData.Data) {
@@ -220,18 +224,49 @@ export default {
           Switchs: v.Switchs
         };
       }
+      var retData = await req.get("/alarmlist?a=1");
+      if (retData.Code != 200) {
+        //缓存不成功 重新登陆
+        this.$router.push("/");
+        return;
+      }
+      this.global.alarmlist = retData.Data;
     },
     mysocketdata: function(data) {
       data = JSON.parse(data);
+      var index = data.id;
+      console.log(data);
+      this.roomDevicesInfo[index].Breathe = true;
       // 数据类型判断
       switch (data.types) {
         case 0: //心跳
+          // 只要有信息都更新心跳
           break;
         case 1: //数据
-          for (const key in this.roomDevicesInfo) {
-            if (this.roomDevicesInfo[key].ID == data.id) {
-              this.roomDevicesInfo[key].Breathe = true;
-            }
+          this.roomDevicesInfo[index].Modedetails = data.data.join("/");
+          switch (this.roomDevicesInfo[index].AgreementID) {
+            case 1:
+              this.roomInfoData.temp = data.data[0];
+              this.roomInfoData.humi = data.data[1];
+              break;
+            case 13:
+              this.roomInfoData.pm25 = data.data[0];
+              break;
+            case 2:
+              if (data[3] == 3) {
+                this.roomDevicesInfo[index].Modedetails = "离床";
+              } else {
+                this.roomDevicesInfo[index].Modedetails = data.data
+                  .splice(3, 1)
+                  .join("/");
+              }
+              break;
+            case 22:
+              this.roomDevicesInfo[index].Img = changeImg(
+                22,
+                data.data.charAt(data.data.length - 1)
+              );
+              break;
           }
           break;
         case 2: //报警
@@ -239,37 +274,47 @@ export default {
           alarm.id = data.id;
           alarm.room = data.data[1];
           alarm.alarm = data.data[2];
+          alarm.alarmid = data.data[3];
           alarm.time = new Date(data.times * 1000).toLocaleString();
           alarm.name = data.name;
           var roomnumID = data.data[0];
+          //获取报警房间名称
           for (const key in this.roomData) {
             if (this.roomData[key].id == roomnumID) {
               alarm.roomNum = this.roomData[key].Name;
             }
           }
           this.alarmdata.unshift(alarm);
+          // 报警数加1
           this.dealAralmNum(1);
+          //获取状态改变信息
+          this.roomDevicesInfo[index].Modedetails = data.data[2];
+          //改变状态图片
+          this.roomDevicesInfo[index].Img = changeImg(
+            this.roomDevicesInfo[index].AgreementID,
+            1
+          );
           break;
         case 3: //状态
-          for (const key in this.roomDevicesInfo) {
-            if (this.roomDevicesInfo[key].ID == data.id) {
-              this.roomDevicesInfo[key].Mode = data.data;
-            }
-          }
+          this.roomDevicesInfo[index].Mode = data.data;
+          this.roomDevicesInfo[index].Modedetails = req.getMode(
+            this.roomDevicesInfo[index].AgreementID,
+            data.data
+          );
+          //改变状态图片
+          this.roomDevicesInfo[index].Img = changeImg(
+            this.roomDevicesInfo[index].AgreementID,
+            data.data
+          );
           break;
-      }
-      for (const key in this.roomDevicesInfo) {
-        if (this.roomDevicesInfo[key].ID == data.id) {
-          this.roomDevicesInfo[key].Breathe = true;
-        }
       }
     },
     mysocketdataClose: async function() {
       this.alarmdata = [];
     },
-    mysocketdatapull: async function(id) {
+    mysocketdatapull: async function(id, alarmid) {
       var retData = await req.put("/alarmdata", {
-        ids: [id]
+        ids: [alarmid]
       });
       if (retData.Code != 200) {
         alert("处理失败");
@@ -306,15 +351,25 @@ export default {
     },
     dealAralmNum: function(num = 1) {
       this.aralmNum = this.aralmNum + num;
+    },
+    retlinkid: function(linkid = [], modes = false) {
+      if (modes) {
+        this.roomDevicesInfo[linkid[0].ID].info2 = "";
+        this.roomDevicesInfo[linkid[1].ID].info2 = "";
+        return;
+      }
+      this.roomDevicesInfo[linkid[0].ID].info2 = linkid[1];
+      this.roomDevicesInfo[linkid[1].ID].info2 = linkid[0];
+      return;
     }
   },
   watch: {},
-  mounted() {
+  async mounted() {
     if (!this.global.userinfo.cookie) {
       this.$router.push("/");
     }
+    await this.initagreementsinfo();
     this.mains_select();
-    this.initagreementsinfo();
     this.getalarmnum();
   },
   components: {
@@ -424,18 +479,21 @@ async function getRoomDevices(index = -1, types = 99) {
 function getDevicesInfo(data) {
   var retData = {};
   for (const v of data) {
-    v.Img = "/static/img/" + v.AgreementID + "_0.png";
-    switch (v.AgreementID) {
-      case 1:
-        break;
-
-      default:
-        break;
-    }
+    v.Img = changeImg(v.AgreementID, v.Mode);
     retData[v.ID] = v;
+    v.Modedetails = req.getMode(v.AgreementID, v.Mode);
   }
-
   return retData;
+}
+function changeImg(AgreementID, modes) {
+  if (modes) {
+    if (AgreementID == 22) {
+      return "/static/img/" + AgreementID + "_" + modes + ".png";
+    }
+    return "/static/img/" + AgreementID + "_1.png";
+  } else {
+    return "/static/img/" + AgreementID + "_0.png";
+  }
 }
 </script>
 

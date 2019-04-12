@@ -270,6 +270,7 @@ export default {
   watch: {
     isShow: function(newValue) {
       if (newValue) {
+        this.searchValue = "";
         this.selectIndexValue(this.selelctIndex);
       } else {
         this.addNextShow = false;

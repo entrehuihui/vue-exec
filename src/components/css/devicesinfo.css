@@ -81,7 +81,6 @@
     width: 200px;
     line-height: 50px;
     font-size: 22px;
-    border-bottom: 1px solid rgb(141, 141, 141);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
@@ -109,7 +108,12 @@
     border-bottom: 1px solid rgb(141, 141, 141);
     margin: 3px;
 }
-
+#devicesinfodataEUI{
+    border-top: 1px solid rgb(141, 141, 141);
+}
+#devicesinfodataEUI2{
+    border-top: 1px solid rgb(141, 141, 141);
+}
 .devicesinfodataa{
     position: relative; 
     float: left;
@@ -166,11 +170,12 @@
     width: 290px;
     margin: 2px;
     border-radius: 5px;
+    overflow: auto;
 }
 .linkDataa1{
     position: relative; 
     float: left;
-    width: 284px;
+    width: 264px;
     margin: 3px;
     height: 25px;
 }
@@ -197,7 +202,7 @@
     position: relative; 
     float: left;
     height: 25px;
-    width: 140px;
+    width: 130px;
     border-left: 1px solid rgb(141, 141, 141);
     overflow: hidden;
 }
@@ -206,7 +211,7 @@
     float: left;
     left: 3px;
     height: 26px;
-    width: 140px;
+    width: 150px;
     border-left: 1px solid rgb(141, 141, 141);
     border-right: 1px solid rgb(141, 141, 141);
     overflow: hidden;

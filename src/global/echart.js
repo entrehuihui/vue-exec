@@ -22,9 +22,10 @@ function line(datainfos) {
         }
         opt.push({
             title: {
-                text: global.agreementinfo[datainfo.AgreementID].Name,
-                subtext: "纯属虚构"
+                // text: global.agreementinfo[datainfo.AgreementID].Name + "-" + datainfo.Name,
+                text: datainfo.Name,
             },
+            animation: false,
             tooltip: {
                 trigger: "axis"
             },
@@ -50,21 +51,11 @@ function line(datainfos) {
             yAxis: {
                 type: "value",
                 axisLabel: {
-                    formatter: "{value} °C"
+                    formatter: "{value}"
                 }
             },
             series: series
         })
     }
     return opt;
-}
-
-function createValue(times, data) {
-    var retData = new Array();
-    for (const key in times) {
-        retData.push({
-            value: [new Date(times[key] * 1000).toLocaleString(), data[key]]
-        });
-    }
-    return retData;
 }

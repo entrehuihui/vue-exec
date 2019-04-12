@@ -50,6 +50,7 @@
             <option value="false">禁用</option>
           </select>
         </div>
+        <div class="userinfostselecta" id="userinfoadd" v-on:click="addclose(true)">添加用户</div>
       </div>
       <div class="userinfost" v-show="global.userinfo.permission<2">
         <div class="userinfosta">
@@ -69,7 +70,7 @@
               <div class="userinfoopta" v-show="opt[v.ID]"></div>
             </div>
           </div>
-          <div class="userinfosnumber">{{pages*15+i+1}}</div>
+          <div class="userinfosnumber">{{pages*11+i+1}}</div>
           <div class="userinfosdepict">{{v.User}}</div>
           <div class="userinfosdepicta" v-show="v.Permission==0?true:false">管理员</div>
           <div class="userinfosdepicta" v-show="v.Permission==1?true:false">管理员</div>
@@ -142,7 +143,7 @@
             <input
               placeholder="不修改不填"
               ref="userpassword"
-              id="userinfoupdateaacontentti1"
+              class="userinfoupdateaacontentti1"
               type="password"
             >
           </div>
@@ -159,6 +160,72 @@
         <div class="userinfoupdateab">
           <div class="userinfoupdateaba" v-on:click="infoupdate(false)">取消</div>
           <div class="userinfoupdateaba" v-on:click="infoupdatesput()">确定</div>
+        </div>
+      </div>
+    </div>
+    <div v-show="addShow">
+      <div class="userinfoupdate"></div>
+      <div class="userinfoupdatea">
+        <div class="userinfoupdateatitle" id="userinfoupdateatitleadd">
+          <div>
+            <strong>添加用户</strong>
+          </div>
+          <div class="userinfoupdateatitleclose" v-on:click="addclose(false)">X</div>
+        </div>
+        <div class="userinfoupdateaa">
+          <div class="userinfoupdateaat">用户名:</div>
+          <div class="userinfoupdateaat">权限:</div>
+          <div class="userinfoupdateaat">密码:</div>
+          <div class="userinfoupdateaat">手机号:</div>
+          <div class="userinfoupdateaat">状态:</div>
+          <div class="userinfoupdateaat" id="userinfoupdateaat1">备注:</div>
+        </div>
+        <div class="userinfoupdateaa" id="userinfoupdateaacontent">
+          <div class="userinfoupdateaacontentt">
+            <input placeholder="账号名" ref="addname" class="userinfoupdateaacontentti1" type="text">
+          </div>
+          <div class="userinfoupdateaacontentt">
+            <select ref="addpermisson" :value="2">
+              <option v-show="!global.userinfo.permission" value="1">管理员</option>
+              <option value="2">普通用户</option>
+            </select>
+          </div>
+          <div class="userinfoupdateaacontentt">
+            <input
+              placeholder="密码"
+              ref="addpassword"
+              class="userinfoupdateaacontentti1"
+              type="password"
+            >
+          </div>
+          <div class="userinfoupdateaacontentt">
+            <input
+              v-on:keyup="checkmobile()"
+              placeholder="手机号"
+              ref="addmobile"
+              class="userinfoupdateaacontentti1"
+              type="number"
+            >
+          </div>
+          <div class="userinfoupdateaacontentt">
+            <select ref="addable" :value="false">
+              <option value="false">禁用</option>
+              <option value="true">启用</option>
+            </select>
+          </div>
+          <div class="userinfoupdateaacontentt" id="userinfoupdateaacontentt11">
+            <textarea
+              placeholder="详情,可为空"
+              ref="adddetails"
+              id="userinfoupdateaacontentti2"
+              cols="30"
+              rows="5"
+            ></textarea>
+          </div>
+        </div>
+        <div class="userinfoupdateab" id="userinfoupdateabadd">
+          <div class="userinfoupdateaba" v-on:click="addclose(false)">取消</div>
+          <div class="userinfoupdateaba" v-on:click="adduser()">确定</div>
         </div>
       </div>
     </div>
@@ -185,7 +252,8 @@ export default {
       infoupdates: {},
       permission: "",
       passWord: "",
-      details: ""
+      details: "",
+      addShow: false
     };
   },
   props: {
@@ -252,6 +320,9 @@ export default {
       }
       this.userlist = retData.Data;
       this.allPages -= 1;
+      if (this.allPages < 0) {
+        this.allPages = 0;
+      }
       //重置选择值
       this.opt = {};
       if (this.pages > this.allPages) {
@@ -358,6 +429,69 @@ export default {
         return;
       }
       this.getuserlist();
+    },
+    addclose: function(mothed = false) {
+      this.addShow = mothed;
+    },
+    adduser: async function() {
+      if (!this.checkadd() && this.checkmobile()) {
+        return;
+      }
+      var retData = await req.post("/user", {
+        able: this.$refs.addable.value == "true" ? true : false,
+        details: this.$refs.adddetails.value,
+        mobile: this.$refs.addmobile.value,
+        passWord: this.$refs.addpassword.value,
+        permission: parseInt(this.$refs.addpermisson.value),
+        user: this.$refs.addname.value
+      });
+      if (retData.Code != 200) {
+        alert(retData.Msg);
+        return;
+      }
+      this.getuserlist();
+      this.addShow = false;
+      alert("添加成功!");
+    },
+    checkmobile: function() {
+      if (this.$refs.addmobile.value.length > 11) {
+        this.$refs.addmobile.value = this.$refs.addmobile.value.slice(0, 11);
+      }
+      if (!/^1[34578]\d{9}$/.test(this.$refs.addmobile.value)) {
+        this.$refs.addmobile.style = "border: 1px solid rgb(245, 5, 5)";
+        return false;
+      }
+      this.$refs.addmobile.style = "border: 1px solid rgb(0, 0, 0)";
+      return true;
+    },
+    checkadd: function() {
+      if (
+        this.$refs.addname.value.length < 4 ||
+        this.$refs.addname.value.length > 20
+      ) {
+        this.$refs.addname.style = "border: 1px solid rgb(245, 5, 5)";
+        return false;
+      }
+      this.$refs.addname.style = "border: 1px solid rgb(0, 0, 0)";
+      if (
+        this.$refs.addpassword.value.length < 4 ||
+        this.$refs.addpassword.value.length > 30
+      ) {
+        this.$refs.addpassword.style = "border: 1px solid rgb(245, 5, 5)";
+        return false;
+      }
+      this.$refs.addpassword.style = "border: 1px solid rgb(0, 0, 0)";
+      if (this.$refs.addmobile.value.length != 11) {
+        this.$refs.addmobile.style = "border: 1px solid rgb(245, 5, 5)";
+        return false;
+      }
+      this.$refs.addmobile.style = "border: 1px solid rgb(0, 0, 0)";
+      if (this.$refs.adddetails.value.length > 250) {
+        this.$refs.adddetails.style = "border: 1px solid rgb(245, 5, 5)";
+        return false;
+      }
+      this.$refs.adddetails.style = "border: 1px solid rgb(0, 0, 0)";
+      return true;
     }
   },
   async mounted() {

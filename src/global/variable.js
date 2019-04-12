@@ -17,6 +17,7 @@ const alarm = 9900;
 const pop = 8800;
 const othen = 7700;
 var agreementinfo = {};
+var alarmlist = [1, 2]
 var roominfo = {};
 var userinfo = {
     cookie: "",
@@ -34,5 +35,6 @@ export default {
     roominfo,
     agreementinfo,
     userinfo,
-    localhost
+    localhost,
+    alarmlist
 }

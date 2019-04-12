@@ -56,7 +56,7 @@
             </div>
           </div>
           <div id="roomlist_buttonab" v-on:click="selecttreat">处理</div>
-          <div id="roomlist_buttonac">全部处理</div>
+          <div id="roomlist_buttonac" v-on:click="selecttreat(true)">全部处理</div>
         </div>
         <div class="roomlist_button">
           <div :style="'left: '+(130 - nowPages * 42)+'px'">
@@ -126,13 +126,6 @@ export default {
         this.getalarmdata((status = 0));
       }
     },
-    getalarmlist: async function() {
-      var retData = await req.get("/alarmlist?a=1");
-      if (retData.Code != 200) {
-        return;
-      }
-      this.alarmlist = retData.Data;
-    },
     getalarmdata: async function(status = "") {
       var retData = await req.get(
         "/alarmdata?limit=15" +
@@ -145,7 +138,7 @@ export default {
         return;
       }
       for (const key in retData.Data) {
-        retData.Data[key].alarm = this.alarmlist[
+        retData.Data[key].alarm = this.global.alarmlist[
           parseInt(retData.Data[key].AlarmStatus) - 1
         ].Name;
       }
@@ -195,24 +188,31 @@ export default {
       }
       this.$forceUpdate();
     },
-    selecttreat: function() {
+    selecttreat: function(mothed = false) {
       var ids = new Array();
-      for (const key in this.opt) {
-        if (this.opt.hasOwnProperty(key) && this.opt[key] && key != 0) {
-          ids.push(parseInt(key));
+      if (mothed) {
+        for (const v of this.alarmdata) {
+          ids.push(parseInt(v.ID));
         }
-      }
-      this.opt = {};
-      if (ids.length < 1) {
-        return;
+        this.opt = {};
+        if (ids.length < 1) {
+          return;
+        }
+      } else {
+        for (const key in this.opt) {
+          if (this.opt.hasOwnProperty(key) && this.opt[key] && key != 0) {
+            ids.push(parseInt(key));
+          }
+        }
+        this.opt = {};
+        if (ids.length < 1) {
+          return;
+        }
       }
       this.datapull(ids);
     }
   },
-  async mounted() {
-    await this.getalarmlist();
-    this.getalarmdata();
-  },
+  async mounted() {},
   watch: {
     selectstatus: function() {
       this.pages = 0;

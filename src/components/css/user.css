@@ -145,6 +145,17 @@
     text-align: center;
     font-size: 18px;
 }
+#userinfoadd{
+    left: 850px;
+    height: 28;
+    background: rgb(221, 221, 221);
+    border:1px solid rgb(114, 113, 113);
+    cursor: pointer;
+}
+#userinfoadd:hover{
+    color: #edf5f6;
+    background: rgb(104, 104, 104);
+}
 
 .userinfost{
     position: relative;
@@ -406,8 +417,8 @@
     height: 230px;
     width: 100px;
     margin: 10px;
-    left: 100px;
-    top: 30px;
+    left: 80px;
+    top: 10px;
 }
 #userinfoupdateaacontent{
     width: 300px;
@@ -438,7 +449,10 @@
 #userinfoupdateaacontentt1{
     height: 80px;
 }
-#userinfoupdateaacontentti1{
+#userinfoupdateaacontentt11{
+    height: 80px;
+}
+.userinfoupdateaacontentti1{
     width: 230px;
     height: 30px;
     font-size: 15px;
@@ -457,7 +471,10 @@
     width: 400PX;
     height: 50px;
     top: 15px;
-    left: 140px;
+    left: 130px;
+}
+#userinfoupdateabadd{
+    top: 60px;
 }
 .userinfoupdateaba{
     position: relative;

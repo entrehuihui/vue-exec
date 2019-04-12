@@ -14,7 +14,7 @@
       <div id="devices_status">
         <div v-show="info.Breathe ? false:true" id="devices_heart0">离线</div>
         <div v-show="info.Breathe ? true: false" id="devices_heart1">在线</div>
-        <div v-show="roomStatus && info.Status" id="devices_type">{{info.Mode}}</div>
+        <div v-show="roomStatus && info.Status" id="devices_type">{{info.Modedetails}}</div>
         <div v-show="!roomStatus || !info.Status" id="devices_diable">禁用</div>
       </div>
     </div>
@@ -24,6 +24,7 @@
       :roomNUmName="roomNUmName"
       :roomName="roomName"
       v-on:close="clickhere"
+      v-on:retlinkid="retlinkid"
     ></devicesinfo>
   </div>
 </template>
@@ -73,29 +74,36 @@ export default {
       }
     },
     closeDevice: async function() {
-      var retData = await req.down(this.info.DevEUI, 1);
-      if (retData.Code != 200) {
-        alert(retData.Msg);
-        return;
-      }
-      this.$refs.deviceopen.style.left = "10px";
-    },
-    openDevice: async function() {
       var retData = await req.down(this.info.DevEUI, 2);
       if (retData.Code != 200) {
         alert(retData.Msg);
         return;
       }
+      this.$refs.deviceclose.style.left = "0px";
+      this.$refs.deviceopen.style.left = "10px";
+    },
+    openDevice: async function() {
+      var retData = await req.down(this.info.DevEUI, 1);
+      if (retData.Code != 200) {
+        alert(retData.Msg);
+        return;
+      }
+      this.$refs.deviceopen.style.left = "20px";
       this.$refs.deviceclose.style.left = "10px";
     },
     clickhere: async function(mothed = false, status = false) {
       this.devicesinfoShow = mothed;
       this.close(status);
+    },
+    retlinkid: function(linkid, models) {
+      //把关联设备ID返回给父组件
+      this.$emit("retlinkid", linkid, models);
     }
   },
   components: {
     devicesinfo
-  }
+  },
+  watch: {}
 };
 </script>
 

@@ -44,11 +44,16 @@
 import req from "../global/request.vue";
 import md5 from "js-md5";
 export default {
-  props: {
-    msg: {
-      default: ""
-    }
+  data: function() {
+    return {
+      msg: ""
+    };
   },
+  // props: {
+  //   msg: {
+  //     default: ""
+  //   }
+  // },
   methods: {
     // 失去焦点
     accountOver: function() {

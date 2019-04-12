@@ -55,18 +55,19 @@
     line-height:44px
 }
 #devices_heart0{
-    width: 40%;
+    width: 30%;
     border-bottom-left-radius: 20px;
     color: rgb(212, 23, 23);
 }
 #devices_heart1{
-    width: 40%;
+    width: 30%;
     border-bottom-left-radius: 20px;
     color: rgb(8, 8, 8);
 }
 #devices_type{
-    width: 60%;
+    width: 70%;
     border-bottom-right-radius: 20px;
+    text-align: center;
 }
 
 #devices_diable{
