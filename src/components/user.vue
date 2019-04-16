@@ -289,6 +289,10 @@ export default {
         alert(retData.Msg);
         return;
       }
+      // 更改信息成功 跳转登陆界面
+      req.del("/login");
+      this.global.userinfo = {};
+      this.$router.push("/");
       this.updatestatus = false;
     },
     getuserlist: async function(status = "") {

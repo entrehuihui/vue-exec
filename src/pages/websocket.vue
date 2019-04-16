@@ -21,7 +21,7 @@ export default {
       this.$emit("retdata", data);
     },
     initWebpack() {
-      // 正式地址;
+      // // 正式地址;
       this.wsuri =
         this.url + this.global.userinfo.cookie + "&roomID=" + this.roomid;
       // // 初始化websocket 调试用

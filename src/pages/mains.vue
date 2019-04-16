@@ -425,6 +425,7 @@ async function getRoomLatyout() {
     "/room?status=true&RoomNum=" + this.roomData[this.roomDataIndex].id
   );
   if (retData.Code != 200) {
+    this.roomLayout = [];
     return;
   }
   this.roomLayout = retData.Data;

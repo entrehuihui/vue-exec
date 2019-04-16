@@ -17,8 +17,8 @@ export default {
   post: async function(url, postData) {
     var retData;
     await Vue.prototype.$axios
-      // .post(localhost + url + "?maxiiot=" + global.userinfo.cookie, postData)
-      .post(localhost + url, postData)
+      .post(localhost + url + "?maxiiot=" + global.userinfo.cookie, postData)
+      // .post(localhost + url, postData)
       .then(response => {
         retData = response.data;
       })
@@ -37,8 +37,8 @@ export default {
   get: async function(url) {
     var retData;
     await Vue.prototype.$axios
-      // .get(localhost + url + "&maxiiot=" + global.userinfo.cookie)
-      .get(localhost + url)
+      .get(localhost + url + "&maxiiot=" + global.userinfo.cookie)
+      // .get(localhost + url)
       .then(response => {
         retData = response.data;
       })
@@ -57,8 +57,8 @@ export default {
   put: async function(url, putData) {
     var retData;
     await Vue.prototype.$axios
-      // .put(localhost + url + "?maxiiot=" + global.userinfo.cookie, putData)
-      .put(localhost + url, putData)
+      .put(localhost + url + "?maxiiot=" + global.userinfo.cookie, putData)
+      // .put(localhost + url, putData)
       .then(response => {
         retData = response.data;
       })
@@ -78,8 +78,8 @@ export default {
     console.log(delData);
     var retData;
     await Vue.prototype.$axios
-      // .delete(localhost + url + "?maxiiot=" + global.userinfo.cookie, {
-      .delete(localhost + url, {
+      .delete(localhost + url + "?maxiiot=" + global.userinfo.cookie, {
+        // .delete(localhost + url, {
         data: delData
       })
       .then(response => {
