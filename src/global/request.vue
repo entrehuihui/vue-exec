@@ -9,6 +9,8 @@ import { error } from "util";
 import global from "@/global/variable.js";
 
 Vue.prototype.$axios = axios;
+
+// --------------- //
 // const localhost = "http://120.78.76.139:8999"; //调试地址/
 // const localhost = "http://localhost:8999"; //调试地址
 const localhost = ""; //正式

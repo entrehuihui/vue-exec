@@ -20,13 +20,6 @@
             v-model="inputName"
             type="text"
           >
-          <!-- <select
-            @blur="checkNum"
-            :class="num ?'addroominfo_info_d':'addroominfo_info_d_false'"
-            v-model="inputNum"
-          >
-            <option v-for="v in roomInfoData" :key="v.id" :value="v.id">{{v.Name}}</option>
-          </select>-->
           <input type="text" class="addroominfo_info_d" readonly="readonly" :value="roomNumName">
           <input
             @blur="checkDetails"

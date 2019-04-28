@@ -60,12 +60,12 @@
           <div :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'">已禁用</div>
         </div>
         <div class="roomnumlist_data_g">
-          <div class="roomnumlist_data_g_a" v-on:click="showRoomlist(true, v.id, v.Name)">详情</div>
+          <div class="roomnumlist_data_g_a" v-on:click="roomDel(v.id)">删除</div>
           <div class="roomnumlist_data_g_a" v-on:click="rommStatus(v)">
             <div :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'">启用</div>
             <div :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'">禁用</div>
           </div>
-          <div class="roomnumlist_data_g_a" v-on:click="roomDel(v.id)">删除</div>
+          <div class="roomnumlist_data_g_a" v-on:click="showRoomlist(true, v.id, v.Name)">详情</div>
         </div>
       </div>
     </div>
