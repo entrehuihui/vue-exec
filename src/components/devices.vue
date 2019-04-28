@@ -60,11 +60,15 @@ export default {
     },
     roomStatus: {
       default: false
+    },
+    Breathe: {
+      default: false
     }
   },
   data: function() {
     return {
-      devicesinfoShow: false
+      devicesinfoShow: false,
+      timer: null
     };
   },
   methods: {
@@ -98,12 +102,29 @@ export default {
     retlinkid: function(linkid, models) {
       //把关联设备ID返回给父组件
       this.$emit("retlinkid", linkid, models);
+    },
+    //定时器
+    setTimer() {
+      if (this.timer == null) {
+        this.timer = setInterval(() => {
+          this.info.Breathe = false;
+        }, 1000 * this.info.BreatheNum + 30000); //
+      }
     }
   },
   components: {
     devicesinfo
   },
-  watch: {}
+  watch: {
+    Breathe: function() {
+      clearInterval(this.timer);
+      this.timer = null;
+      this.setTimer();
+    }
+  },
+  created: function() {
+    this.setTimer();
+  }
 };
 </script>
 

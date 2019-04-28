@@ -109,6 +109,7 @@
         :info="v"
         :roomNUmName="roomData[roomDataIndex].Name"
         :roomName="roomLayout[active].Name"
+        :Breathe="v.Breathe"
         v-on:close="mains_getRoomDevicesStatus"
         :roomStatus="roomLayout[active].status"
         v-on:retlinkid="retlinkid"
@@ -171,6 +172,7 @@ import adddevices from "../components/adddevices.vue";
 import websocket from "../pages/websocket.vue";
 import message from "../components/message.vue";
 import user from "../components/user.vue";
+import { format } from "url";
 export default {
   data: function() {
     return {
@@ -187,13 +189,13 @@ export default {
       isShow: false,
       roomDevicesInfo: {},
       addroomnumShow: false,
-      addroomShow: false,
       adddevicesShow: false,
       roomnumListShow: false,
       devicesType: 99,
       alarmdata: [],
       messageShow: false,
       userShow: false,
+      timer: null,
       aralmNum: 0
     };
   },
@@ -235,12 +237,12 @@ export default {
     mysocketdata: function(data) {
       data = JSON.parse(data);
       var index = data.id;
-      // console.log(data);
-      this.roomDevicesInfo[index].Breathe = true;
+      console.log(data);
       // 数据类型判断
       switch (data.types) {
         case 0: //心跳
           // 只要有信息都更新心跳
+          this.roomDevicesInfo[index].Breathe = new Date().getTime();
           break;
         case 1: //数据
           this.roomDevicesInfo[index].Modedetails = data.data.join("/");
@@ -361,6 +363,14 @@ export default {
       this.roomDevicesInfo[linkid[0].ID].info2 = linkid[1];
       this.roomDevicesInfo[linkid[1].ID].info2 = linkid[0];
       return;
+    },
+    //定时器
+    setTimer() {
+      if (this.timer == null) {
+        this.timer = setInterval(() => {
+          this.mains_getRoomDevices();
+        }, 60000); //
+      }
     }
   },
   watch: {},
@@ -371,6 +381,7 @@ export default {
     await this.initagreementsinfo();
     this.mains_select();
     this.getalarmnum();
+    // this.setTimer();
   },
   components: {
     "milieu-info": milieu,
