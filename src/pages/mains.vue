@@ -303,11 +303,12 @@ export default {
               }
               break;
             case 22:
-              this.roomDevicesInfo[index].Img = changeImg(
+              var s = data.data[0].charAt(data.data.length - 1);
+              this.roomDevicesInfo[index].Img = changeImg(22, s);
+              this.roomDevicesInfo[index].Modedetails = req.getMode(
                 22,
-                data.data.charAt(data.data.length - 1)
+                parseInt(s)
               );
-              break;
           }
           break;
         case 2: //报警
