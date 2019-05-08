@@ -1,5 +1,11 @@
 <template>
   <div id="index">
+    <div class="luanguage">
+      <select v-model="languageid">
+        <option value="0">简体中文</option>
+        <option value="1">English</option>
+      </select>
+    </div>
     <div id="login">
       <img id="login_img" src="/static/img/sign_in.png">
       <div id="login_fork">
@@ -32,7 +38,7 @@
             <a>Remember Password</a>
           </div>
           <div>
-            <button id="login_button" v-on:click="login()">登陆</button>
+            <button id="login_button" v-on:click="login()">{{global.language.login}}</button>
           </div>
         </div>
       </div>
@@ -46,7 +52,8 @@ import md5 from "js-md5";
 export default {
   data: function() {
     return {
-      msg: ""
+      msg: "",
+      languageid: 0
     };
   },
   // props: {
@@ -105,6 +112,8 @@ export default {
           name: retData.Data.user,
           mobile: retData.Data.mobile
         };
+        // this.global.languageselect = retData.Data.language;
+        // this.global.language = this.language.init(retData.Data.language);
         this.$router.push("/mains");
       } else {
         this.msg = retData.Msg;
@@ -118,6 +127,17 @@ export default {
         this.$refs.img.style.visibility = "visible";
       }
     }
+  },
+  watch: {
+    languageid: function(newValue) {
+      this.global.languageselect = newValue;
+      this.global.language = this.language.init(newValue);
+    }
+  },
+  mounted() {
+    this.global.languageselect = this.languageid;
+    this.global.language = this.language.init(this.languageid);
+    this.$forceUpdate();
   }
 };
 </script>

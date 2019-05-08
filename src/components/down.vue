@@ -4,32 +4,35 @@
       <!-- 开关 -->
       <div v-if="v.Type == 1" class="downselect">
         <div class="downselecttitle">
-          <strong>开关</strong>
+          <strong>{{global.language.switch}}</strong>
         </div>
-        <div class="downswitch" v-on:click="down(1)">开</div>
-        <div class="downswitch" v-on:click="down(2)">关</div>
+        <div class="downswitch" v-on:click="down(1)">{{global.language.open}}</div>
+        <div class="downswitch" v-on:click="down(2)">{{global.language.close}}</div>
       </div>
       <!-- 更新设备时间 -->
       <div v-if="v.Type == 3" class="downselect">
         <div class="downselecttitle">
-          <strong>更新设备时间</strong>
+          <strong>{{global.language.updatetime}}</strong>
         </div>
-        <div class="downupdatetime" v-on:click="down(3,[new Date().getTime()])">更新</div>
+        <div
+          class="downupdatetime"
+          v-on:click="down(3,[new Date().getTime()])"
+        >{{global.language.update}}</div>
       </div>
       <!-- 临时解除警报 -->
       <div v-if="v.Type == 4" class="downselect">
         <div class="downselecttitle">
-          <strong>临时解除警报</strong>
+          <strong>{{global.language.alarm}}</strong>
         </div>
-        <div class="downupdatetime" v-on:click="down(4,[])">解除</div>
+        <div class="downupdatetime" v-on:click="down(4,[])">{{global.language.cancel}}</div>
       </div>
       <!-- 温湿度最大最小值 -->
       <div v-if="v.Type == 5" class="downselect">
         <div class="downselecttitle">
-          <strong>设置温湿度最大最小值</strong>
+          <strong>{{global.language.temphuim}}</strong>
         </div>
         <div class="downtemp">
-          <div class="downtempa">温度</div>
+          <div class="downtempa">{{global.language.temp}}</div>
           <div class="downtempb">
             <div class="downtempba">max:</div>
             <input class="downtempba" type="number" ref="downtempmax">
@@ -38,7 +41,7 @@
           </div>
         </div>
         <div class="downtemp">
-          <div class="downtempa">湿度</div>
+          <div class="downtempa">>{{global.language.humi}}</div>
           <div class="downtempb">
             <div class="downtempba">max:</div>
             <input class="downtempba" type="number" ref="downhuimmax">
@@ -46,28 +49,32 @@
             <input class="downtempba" type="number" ref="downhuimmin">
           </div>
         </div>
-        <div class="downtempc" v-on:click="checktemp()">确定</div>
+        <div class="downtempc" v-on:click="checktemp()">{{global.language.true}}</div>
       </div>
       <!-- 上传间隔 -->
       <div v-if="v.Type == 6" class="downselect">
         <div class="downselecttitle">
-          <strong>设置上传间隔</strong>
+          <strong>{{global.language.uptime}}</strong>
         </div>
         <div class="downinterval">
-          <div class="downintervala">上传间隔:</div>
+          <div class="downintervala">{{global.language.time}}:</div>
           <div class="downintervala">
-            <input type="number" placeholder="单位:秒" ref="downintervala">
+            <input type="number" placeholder="Unit:second" ref="downintervala">
           </div>
         </div>
-        <div class="downtempc" v-on:click="checkintervala()" id="downintervalat">确定</div>
+        <div
+          class="downtempc"
+          v-on:click="checkintervala()"
+          id="downintervalat"
+        >{{global.language.true}}</div>
       </div>
       <!-- 采样频率 -->
       <div v-if="v.Type == 7" class="downselect">
         <div class="downselecttitle">
-          <strong>设置采样频率</strong>
+          <strong>{{global.language.samtime}}</strong>
         </div>
         <div class="downinterval">
-          <div class="downintervala">采样频率:</div>
+          <div class="downintervala">{{global.language.time}}:</div>
           <div class="downintervala">
             <select ref="downfrequency" value="15">
               <option value="15">15s</option>
@@ -76,27 +83,31 @@
             </select>
           </div>
         </div>
-        <div class="downtempc" v-on:click="checkfrequency()" id="downfrequencyt">确定</div>
+        <div
+          class="downtempc"
+          v-on:click="checkfrequency()"
+          id="downfrequencyt"
+        >{{global.language.true}}</div>
       </div>
       <!-- 心跳间隔 -->
       <div v-if="v.Type == 8" class="downselect">
         <div class="downselecttitle">
-          <strong>设置心跳间隔</strong>
+          <strong>{{global.language.heardtime}}</strong>
         </div>
         <div class="downinterval">
-          <div class="downintervala">心跳间隔:</div>
+          <div class="downintervala">{{global.language.time}}:</div>
           <div class="downintervala">
-            <input type="number" placeholder="单位:分" ref="downheart">
+            <input type="number" placeholder="Unit:minute" ref="downheart">
           </div>
         </div>
-        <div class="downtempc" v-on:click="downheart()" id="downheart">确定</div>
+        <div class="downtempc" v-on:click="downheart()" id="downheart">{{global.language.true}}</div>
       </div>
       <!-- 停止-->
       <div v-if="v.Type == 11" class="downselect">
         <div class="downselecttitle">
-          <strong>设备停止</strong>
+          <strong>{{global.language.devicestop}}</strong>
         </div>
-        <div class="downupdatetime" v-on:click="down(11,[])">停止</div>
+        <div class="downupdatetime" v-on:click="down(11,[])">{{global.language.stop}}</div>
       </div>
     </div>
   </div>
@@ -113,9 +124,9 @@ export default {
     down: function(types = 0, data = []) {
       req.down(this.info.DevEUI, types, data).then(retData => {
         if (retData.Code != 200) {
-          alert("下行失败!");
+          alert(this.global.language.failure);
         } else {
-          alert("下行成功!");
+          alert(this.global.language.success);
         }
       });
     },

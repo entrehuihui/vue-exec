@@ -7,7 +7,9 @@ Vue.config.productionTip = false
 
 //全局变量引用
 import global from '@/global/variable.js'
+import language from '@/global/language.js'
 Vue.prototype.global = global
+Vue.prototype.language = language
 
 /* eslint-disable no-new */
 new Vue({

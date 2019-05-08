@@ -22,19 +22,19 @@ export default {
     },
     initWebpack() {
       // 正式地址;
-      this.wsuri =
-        this.url + this.global.userinfo.cookie + "&roomID=" + this.roomid;
+      // this.wsuri =
+      //   this.url + this.global.userinfo.cookie + "&roomID=" + this.roomid;
       // // 初始化websocket 调试用
       // this.wsuri =
       //   "ws://120.78.76.139:8999/ws?maxiiot_user=" +
       //   this.global.userinfo.cookie +
       //   "&roomID=" +
       //   this.roomid;
-      // this.wsuri =
-      //   "ws://127.0.0.1:8999/ws?maxiiot_user=" +
-      //   this.global.userinfo.cookie +
-      //   "&roomID=" +
-      //   this.roomid;
+      this.wsuri =
+        "ws://127.0.0.1:8999/ws?maxiiot_user=" +
+        this.global.userinfo.cookie +
+        "&roomID=" +
+        this.roomid;
       this.oldwebsocket = this.websock;
       this.websock = new WebSocket(this.wsuri); //这里面的this都指向vue
       this.websock.onopen = this.websocketopen;

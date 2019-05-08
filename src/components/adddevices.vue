@@ -4,7 +4,7 @@
     <div id="adddevices_body">
       <div class="adddevices_body_top">
         <div class="adddevices_body_top_a">
-          <strong>添加设备</strong>
+          <strong>{{global.language.adddevice}}</strong>
         </div>
         <div>
           <strong
@@ -19,17 +19,17 @@
           v-on:click="selectIndexValue(0)"
           :id="selelctIndex == 0 ? 'adddevices_body_title_a_click':''"
           class="adddevices_body_title_a"
-        >控制设备</div>
+        >{{global.language.condevice}}</div>
         <div
           v-on:click="selectIndexValue(1)"
           :id="selelctIndex == 1 ? 'adddevices_body_title_a_click':''"
           class="adddevices_body_title_a"
-        >安防设备</div>
+        >{{global.language.security}}</div>
         <div
           v-on:click="selectIndexValue(2)"
           :id="selelctIndex == 2 ? 'adddevices_body_title_a_click':''"
           class="adddevices_body_title_a"
-        >检测设备</div>
+        >{{global.language.detectdevice}}</div>
       </div>
       <div class="adddevices_body_devices">
         <div class="adddevices_body_devices_a">
@@ -52,10 +52,10 @@
         </div>
         <div>
           <div class="adddevices_body_devices_b" v-on:click="showAddNext">
-            <strong>下一步</strong>
+            <strong>{{global.language.next}}</strong>
           </div>
           <div class="adddevices_body_devices_b" v-on:click="close">
-            <strong>取消</strong>
+            <strong>{{global.language.cancel}}</strong>
           </div>
         </div>
       </div>
@@ -73,12 +73,12 @@
                   v-on:keyup.enter="getDevicesInfo"
                 >
                 <div class="adddevices_inforight_asure" v-on:click="getDevicesInfo">
-                  <strong>确定</strong>
+                  <strong>{{global.language.true}}</strong>
                 </div>
               </div>
             </div>
             <div class="adddevices_inforight_bn">
-              <div class="adddevices_inforight_bnn">名称</div>
+              <div class="adddevices_inforight_bnn">{{global.language.name}}</div>
               <div class="adddevices_inforight_bnn" id="adddevices_inforight_bnneui">EUI</div>
             </div>
             <div class="adddevices_inforight_b">
@@ -101,34 +101,34 @@
             </div>
             <div class="adddevices_infoleftdata">
               <div class="adddevices_infoleftdata_a">
-                <div class="adddevices_infoleftdata_aa">设备名称 :</div>
+                <div class="adddevices_infoleftdata_aa">{{global.language.name}} :</div>
                 <input
                   type="text"
                   v-model="createName"
                   v-on:blur="checkCreateName"
                   ref="createName"
-                  placeholder="设备名长度为4-20个字符"
+                  placeholder="The device name is 4-20 characters long."
                 >
               </div>
               <div class="adddevices_infoleftdata_a">
-                <div class="adddevices_infoleftdata_aa">已选择设备 :</div>
+                <div class="adddevices_infoleftdata_aa">{{global.language.selectdevice}} :</div>
                 <input type="text" v-model="devicesName" readonly="readonly">
               </div>
               <div class="adddevices_infoleftdata_a">
-                <div class="adddevices_infoleftdata_aa">房间 :</div>
+                <div class="adddevices_infoleftdata_aa">{{global.language.room}} :</div>
                 <select ref="selectroom">
                   <option v-for="(v, i) in roomData" :key="i" :value="v.id">{{v.Name}}</option>
                 </select>
               </div>
               <div class="adddevices_infoleftdata_a">
-                <div class="adddevices_infoleftdata_aa">状态 :</div>
+                <div class="adddevices_infoleftdata_aa">{{global.language.status}} :</div>
                 <select v-model="createStatus">
-                  <option :value="true">启用</option>
-                  <option :value="false">禁用</option>
+                  <option :value="true">{{global.language.able}}</option>
+                  <option :value="false">{{global.language.disable}}</option>
                 </select>
               </div>
               <div class="adddevices_infoleftdata_a">
-                <div class="adddevices_infoleftdata_aa">详情 :</div>
+                <div class="adddevices_infoleftdata_aa">{{global.language.details}} :</div>
                 <input type="text" v-model="createDetails">
               </div>
             </div>
@@ -136,10 +136,10 @@
         </div>
         <div>
           <div class="adddevices_body_devices_b" v-on:click="createDevices">
-            <strong>确定</strong>
+            <strong>{{global.language.true}}</strong>
           </div>
           <div class="adddevices_body_devices_b" v-on:click="showAddNext(false)">
-            <strong>返回</strong>
+            <strong>{{global.language.return}}</strong>
           </div>
         </div>
       </div>
@@ -185,11 +185,17 @@ export default {
       if (retData.Code != 200) {
         return;
       }
-      if (retData.Data.length != 0) {
-        this.agreementsIndex = retData.Data[0].ID;
-        this.agreementsName = retData.Data[0].Name;
-      }
+      //语言选择
       this.agreements = retData.Data;
+      if (this.global.languageselect == 1) {
+        for (const key in this.agreements) {
+          this.agreements[key].Name = this.agreements[key].Name1;
+        }
+      }
+      if (this.agreements.length != 0) {
+        this.agreementsIndex = this.agreements[0].ID;
+        this.agreementsName = this.agreements[0].Name;
+      }
     },
     close: async function(mothod = false, status = false) {
       this.$emit("close", false, status);
@@ -219,7 +225,7 @@ export default {
     checkCreateName: function() {
       if (this.createName == "" || this.createName.length < 4) {
         this.$refs.createName.style.border = "1px solid rgb(255, 0, 0)";
-        return "设备名称不符合规则";
+        return this.global.language.addfail1;
       }
       this.$refs.createName.style.border = "1px solid rgb(15, 15, 15)";
       return false;
@@ -231,22 +237,22 @@ export default {
         return;
       }
       if (this.devicesEUI.length != 16) {
-        alert("请先选择要添加的设备!");
+        alert(this.global.language.addfail2);
         return;
       }
       if (
         this.roomData.length <= this.roomDataIndex ||
         this.roomData[this.roomDataIndex].id <= 0
       ) {
-        alert("房间错误,请重新选择!");
+        alert(this.global.language.addfail3);
         return;
       }
       if (this.createDetails.length > 255) {
-        alert("详情过长!");
+        alert(this.global.language.addfail4);
         return;
       }
       if (this.agreementsIndex <= 0) {
-        alert("设备类型错误,请重新选择!");
+        alert(this.global.language.addfail5);
         return;
       }
       var retData = await req.post("/room/devices", {
@@ -260,11 +266,11 @@ export default {
       console.log(retData);
 
       if (retData.Code != 200) {
-        alert("添加失败!");
+        alert(this.global.language.failure);
         return;
       }
       this.close(false, true);
-      alert("添加成功!");
+      alert(this.global.language.success);
     }
   },
   watch: {

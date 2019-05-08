@@ -84,7 +84,7 @@
 .userinfostssb{
     position: relative;
     float: right;
-    width: 100px;
+    width: 300px;
     height: 30px;
     margin: 5px;
     text-align: right;
@@ -106,11 +106,12 @@
 .userupdate{
     position: absolute;
     height: 25px;
-    width: 38px;
+    width: 58px;
     line-height: 25px;
     left: 550px;
     color: #050505;
     top: 105px;
+    text-align: center;
     background: rgb(179, 178, 178);
     text-align: center;
     cursor: pointer;
@@ -119,7 +120,7 @@
     color: #edf5f6
 }
 #userupdatecancel{
-    left: 593px;
+    left: 620px;
 }
 
 .userinfostselect{

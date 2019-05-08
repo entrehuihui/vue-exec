@@ -3,29 +3,29 @@
     <div class="message" v-on:click="Close"></div>
     <div class="messageinfo">
       <div class="messageinfotitle">
-        <strong>报警列表</strong>
+        <strong>{{global.language.alarmlist}}</strong>
         <div class="messageinfoclose" v-on:click="Close">X</div>
       </div>
       <div class="messageinfoselect">
         <div class="messageinfoselectstatus">
-          <strong>消息状态:</strong>
+          <strong>{{global.language.status}}:</strong>
           <select v-model="selectstatus" ref="selectstatus">
-            <option value>无限制</option>
-            <option value="1">已处理</option>
-            <option value="0">未处理</option>
+            <option value>{{global.language.unlimited}}</option>
+            <option value="1">{{global.language.processed}}</option>
+            <option value="0">{{global.language.unprocessed}}</option>
           </select>
         </div>
       </div>
       <div class="messageinfost">
         <div class="messageinfosta">
           <div class="messageinfosnumber"></div>
-          <div class="messageinfosnumber">序号</div>
-          <div class="messageinfosdepict">描述</div>
-          <div class="messageinfostime">时间</div>
+          <div class="messageinfosnumber">{{global.language.number}}</div>
+          <div class="messageinfosdepict">{{global.language.details}}</div>
+          <div class="messageinfostime">{{global.language.time}}</div>
           <div class="messageinfosrooma">DevEUI</div>
-          <div class="messageinfosroomb">设备</div>
-          <div class="messageinfosroomc">状态</div>
-          <div class="messageinfosroomc">操作</div>
+          <div class="messageinfosroomb">{{global.language.name}}</div>
+          <div class="messageinfosroomc">{{global.language.status}}</div>
+          <div class="messageinfosroomc">{{global.language.manipulate}}</div>
         </div>
         <div
           v-for="(v, i) in alarmdata"
@@ -43,9 +43,13 @@
           <div class="messageinfostime">{{new Date(v.AlarmTime*1000).toLocaleString()}}</div>
           <div class="messageinfosrooma">{{v.DevEUI}}</div>
           <div class="messageinfosroomb">{{v.DevName}}</div>
-          <div class="messageinfosroomccc" v-show="!v.Status">未处理</div>
-          <div class="messageinfosroomccc" v-show="v.Status">已处理</div>
-          <div class="messageinfosroomcc" v-show="!v.Status" v-on:click="datapull([v.ID])">处理</div>
+          <div class="messageinfosroomccc" v-show="!v.Status">{{global.language.unprocessed}}</div>
+          <div class="messageinfosroomccc" v-show="v.Status">{{global.language.processed}}</div>
+          <div
+            class="messageinfosroomcc"
+            v-show="!v.Status"
+            v-on:click="datapull([v.ID])"
+          >{{global.language.processed}}</div>
         </div>
       </div>
       <div>
@@ -55,8 +59,11 @@
               <div class="messageinfoopta" v-show="opt[0]"></div>
             </div>
           </div>
-          <div id="roomlist_buttonab" v-on:click="selecttreat">处理</div>
-          <div id="roomlist_buttonac" v-on:click="selecttreat(true)">全部处理</div>
+          <div id="roomlist_buttonab" v-on:click="selecttreat">{{global.language.processed}}</div>
+          <div
+            id="roomlist_buttonac"
+            v-on:click="selecttreat(true)"
+          >{{global.language.allprocessed}}</div>
         </div>
         <div class="roomlist_button">
           <div :style="'left: '+(130 - nowPages * 42)+'px'">
@@ -107,7 +114,7 @@ export default {
         ids: id
       });
       if (retData.Code != 200) {
-        alert("处理失败");
+        alert(global.language.failure);
         return;
       }
       for (const key in this.alarmdata) {

@@ -5,14 +5,14 @@
       <div id="addroom_close" v-on:click="transparentclose()">
         <img src="/static/img/error.png" alt>
       </div>
-      <div id="addroom_input_name">添加户型</div>
+      <div id="addroom_input_name">{{global.language.addroomnum}}</div>
       <div id="addroom_input_top_a">
         <div class="addroom_info_c">
-          <div class="addroom_info_b">户型名称：</div>
-          <div class="addroom_info_b">户型楼层：</div>
-          <div class="addroom_info_b">户型门牌：</div>
-          <div class="addroom_info_b">户型详情：</div>
-          <div class="addroom_info_b">户型状态：</div>
+          <div class="addroom_info_b">{{global.language.name}} :</div>
+          <div class="addroom_info_b">{{global.language.apartment}} :</div>
+          <div class="addroom_info_b">{{global.language.addroomnumber}} :</div>
+          <div class="addroom_info_b">{{global.language.details}} :</div>
+          <div class="addroom_info_b">{{global.language.status}} :</div>
         </div>
         <div class="addroom_info_c">
           <input
@@ -40,14 +40,14 @@
             type="text"
           >
           <select class="addroom_info_d" v-model="inputStatus">
-            <option id="addroom_info_d_true" value="true">启用</option>
-            <option id="addroom_info_d_flase" value="false">禁用</option>
+            <option id="addroom_info_d_true" value="true">{{global.language.able}}</option>
+            <option id="addroom_info_d_flase" value="false">{{global.language.disable}}</option>
           </select>
         </div>
       </div>
       <div class="addroom_bbuttton">
-        <button id="addroom_info_d_true" v-on:click="transparentTrue()">确定</button>
-        <button id="addroom_info_d_false" v-on:click="transparentclose()">取消</button>
+        <button id="addroom_info_d_true" v-on:click="transparentTrue()">{{global.language.true}}</button>
+        <button id="addroom_info_d_false" v-on:click="transparentclose()">{{global.language.cancel}}</button>
       </div>
     </div>
   </div>

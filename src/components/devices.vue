@@ -12,10 +12,10 @@
         <img :src="info.Img" alt>
       </div>
       <div id="devices_status">
-        <div v-show="info.Breathe ? false:true" id="devices_heart0">离线</div>
-        <div v-show="info.Breathe ? true: false" id="devices_heart1">在线</div>
+        <div v-show="info.Breathe ? false:true" id="devices_heart0">{{global.language.offline}}</div>
+        <div v-show="info.Breathe ? true: false" id="devices_heart1">{{global.language.online}}</div>
         <div v-show="roomStatus && info.Status" id="devices_type">{{info.Modedetails}}</div>
-        <div v-show="!roomStatus || !info.Status" id="devices_diable">禁用</div>
+        <div v-show="!roomStatus || !info.Status" id="devices_diable">{{global.language.disable}}</div>
       </div>
     </div>
     <devicesinfo

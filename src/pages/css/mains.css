@@ -54,10 +54,23 @@
     background: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
 }
-
+.mains_title_img{
+    display:inline;
+    position:relative; 
+    left: 30px;
+    margin: 0px;
+    float: left;
+}
 .mains_title img{
     position:relative; 
-    top:5px
+    top:5px;
+}
+.mains_title_a{
+    display:inline;
+    position:relative; 
+    left: 40px;
+    margin: 0px;
+    float: left;
 }
 
 #mains_title_adddevices{
@@ -159,9 +172,9 @@
     line-height:45px;
 }
 #mains_roomName{
-    width: 90px;
     height: 35px;
     position: absolute;
+    float: right;
     top: 35%;
     font-size:22px;
     color:rgb(0, 0, 0);
@@ -169,7 +182,7 @@
 
 #mains_roomNum select{
     position: absolute;
-    left: 95px;
+    left: 120px;
     top: 45%;
     border: none;
     outline: none;
@@ -189,9 +202,8 @@
 .mains_add_room{
     position: absolute;
     top: 45%;
-    left: 310px;
+    left: 330px;
     height: 36px;
-    width: 85px;
     font-size:18px;
     text-align:center;
     background: rgb(35, 192, 231);

@@ -9,44 +9,44 @@
     <!-- 顶部栏 -->
     <div id="roomlist_top">
       <div id="roomlist_title">
-        <h1>布局详情</h1>
+        <h1>{{global.language.details}}</h1>
       </div>
       <div id="roomlist_top_return" v-on:click="returnMains()">
         <img src="/static/img/return.jpg" alt>
       </div>
       <div id="roomlist_select">
         <div>
-          <div class="roomnlist_select_a">楼层:</div>
+          <div class="roomnlist_select_a">{{global.language.floor}}:</div>
           <div>
             <input type="number" v-model="inputFloor">
           </div>
         </div>
         <div>
-          <div class="roomnlist_select_a">布局编号:</div>
+          <div class="roomnlist_select_a">{{global.language.number}}:</div>
           <div>
             <input type="number" v-model="inputNum">
           </div>
         </div>
         <div>
-          <button v-on:click="changePages(0)">确定</button>
-          <button v-on:click="clearnCondition()">清除</button>
+          <button v-on:click="changePages(0)">{{global.language.true}}</button>
+          <button v-on:click="clearnCondition()">{{global.language.cancel}}</button>
         </div>
         <div
           class="roomnlist_select_b"
           v-on:click="showAddroom(true)"
           v-show="global.userinfo.permission<2"
-        >添加</div>
+        >{{global.language.add}}</div>
       </div>
     </div>
     <!-- 数据栏 -->
     <div id="roomlist_data">
       <div class="roomlist_data_info_title">
-        <div class="roomlist_data_a">编号</div>
-        <div class="roomlist_data_b">名称</div>
-        <div class="roomlist_data_c">所属布局</div>
-        <div class="roomlist_data_e">备注</div>
-        <div class="roomlist_data_f">状态</div>
-        <div class="roomlist_data_g">操作</div>
+        <div class="roomlist_data_a">{{global.language.number}}</div>
+        <div class="roomlist_data_b">{{global.language.name}}</div>
+        <div class="roomlist_data_c">{{global.language.apartment}}</div>
+        <div class="roomlist_data_e">{{global.language.details}}</div>
+        <div class="roomlist_data_f">{{global.language.status}}</div>
+        <div class="roomlist_data_g">{{global.language.manipulate}}</div>
       </div>
       <div class="roomlist_data_info" v-for="(v,k) in dataInfo" :key="k+1">
         <div class="roomlist_data_a">{{k+1}}</div>
@@ -54,16 +54,24 @@
         <div class="roomlist_data_c">{{roomNumName}}</div>
         <div class="roomlist_data_e">{{v.Details}}</div>
         <div class="roomlist_data_f">
-          <div :class="v.status ? 'roomlist_data_g_a_true' : 'roomlist_data_g_a_false'">已启用</div>
-          <div :class="v.status ? 'roomlist_data_g_a_false' : 'roomlist_data_g_a_true'">已禁用</div>
+          <div
+            :class="v.status ? 'roomlist_data_g_a_true' : 'roomlist_data_g_a_false'"
+          >{{global.language.able}}</div>
+          <div
+            :class="v.status ? 'roomlist_data_g_a_false' : 'roomlist_data_g_a_true'"
+          >{{global.language.disable}}</div>
         </div>
         <div class="roomlist_data_g">
           <!-- <div class="roomlist_data_g_a">详情</div> -->
           <div class="roomlist_data_g_a" v-on:click="rommStatus(v)">
-            <div :class="v.status ? 'roomlist_data_g_a_false' : 'roomlist_data_g_a_true'">启用</div>
-            <div :class="v.status ? 'roomlist_data_g_a_true' : 'roomlist_data_g_a_false'">禁用</div>
+            <div
+              :class="v.status ? 'roomlist_data_g_a_false' : 'roomlist_data_g_a_true'"
+            >{{global.language.able}}</div>
+            <div
+              :class="v.status ? 'roomlist_data_g_a_true' : 'roomlist_data_g_a_false'"
+            >{{global.language.disable}}</div>
           </div>
-          <div class="roomlist_data_g_a" v-on:click="roomDel(v.id)">删除</div>
+          <div class="roomlist_data_g_a" v-on:click="roomDel(v.id)">{{global.language.delete}}</div>
         </div>
       </div>
     </div>

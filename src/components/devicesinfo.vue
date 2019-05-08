@@ -9,7 +9,7 @@
           v-show="!selectindexShow"
           v-on:click="selectindex(false)"
         >
-          <strong>数据</strong>
+          <strong>{{global.language.data}}</strong>
         </div>
         <div
           class="devicesinfobefortopa"
@@ -17,38 +17,38 @@
           ref="devicesinfobefortopa2"
           v-on:click="selectindex(true)"
         >
-          <strong>下行</strong>
+          <strong>{{global.language.down}}</strong>
         </div>
         <div id="devicesinfobefortop" v-on:click="close(false)">X</div>
       </div>
       <div class="devicesinfoleft">
         <div id="devicesinfotitle">
-          <strong>设备详情</strong>
+          <strong>{{global.language.details}}</strong>
         </div>
         <div class="devicesinfodata" id="devicesinfodataEUI">
           <div class="devicesinfodataa">DevEUI</div>
           <div class="devicesinfodatab">{{infos.DevEUI}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">设备名称</div>
+          <div class="devicesinfodataa">{{global.language.name}}</div>
           <div class="devicesinfodatab">{{infos.DevName}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">设备类型</div>
+          <div class="devicesinfodataa">{{global.language.types}}</div>
           <div class="devicesinfodatab">{{agreementName}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">所属布局</div>
+          <div class="devicesinfodataa">{{global.language.apartment}}</div>
           <div class="devicesinfodatab">{{roomNUmName}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">所属房间</div>
+          <div class="devicesinfodataa">{{global.language.room}}</div>
           <div class="devicesinfodatab">{{roomName}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">设备状态</div>
-          <div v-show="infos.Status" class="devicesinfodatab">启用</div>
-          <div v-show="!infos.Status" class="devicesinfodatab">禁用</div>
+          <div class="devicesinfodataa">{{global.language.status}}</div>
+          <div v-show="infos.Status" class="devicesinfodatab">{{global.language.able}}</div>
+          <div v-show="!infos.Status" class="devicesinfodatab">{{global.language.disable}}</div>
         </div>
         <div class="devicesinfodata">
           <div
@@ -56,51 +56,66 @@
             class="devicesinfodataade"
             id="devicesinfodataade"
             v-on:click="del"
-          >删除</div>
-          <div v-show="!changeStatus" v-on:click="change(true)" class="devicesinfodataade">修改</div>
-          <div v-show="changeStatus" v-on:click="change(false)" class="devicesinfodatature">取消</div>
-          <div v-show="changeStatus" v-on:click="change(false)" class="devicesinfodatature">确定</div>
+          >{{global.language.delete}}</div>
+          <div
+            v-show="!changeStatus"
+            v-on:click="change(true)"
+            class="devicesinfodataade"
+          >{{global.language.update}}</div>
+          <div
+            v-show="changeStatus"
+            v-on:click="change(false)"
+            class="devicesinfodatature"
+          >{{global.language.cancel}}</div>
+          <div
+            v-show="changeStatus"
+            v-on:click="change(false)"
+            class="devicesinfodatature"
+          >{{global.language.true}}</div>
           <div
             v-show="infos.Status && !changeStatus"
             v-on:click="statusChange(false)"
             class="devicesinfodataade"
-          >禁用</div>
+          >{{global.language.disable}}</div>
           <div
             v-show="!infos.Status && !changeStatus"
             v-on:click="statusChange(true)"
             class="devicesinfodataade"
-          >启用</div>
+          >{{global.language.able}}</div>
         </div>
       </div>
       <div v-show="info2.ID" class="devicesinfoleft">
         <div id="devicesinfotitle">
-          <strong>关联设备详情</strong>
+          <strong>{{global.language.linkdevices}}</strong>
         </div>
-        <div class="devicesinfolinkRelease" v-on:click="linkRelease">解除关联</div>
+        <div
+          class="devicesinfolinkRelease"
+          v-on:click="linkRelease"
+        >{{global.language.Disassociate}}</div>
         <div class="devicesinfodata" id="devicesinfodataEUI2">
           <div class="devicesinfodataa">DevEUI</div>
           <div class="devicesinfodatab">{{info2.DevEUI}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">设备名称</div>
+          <div class="devicesinfodataa">{{global.language.name}}</div>
           <div class="devicesinfodatab">{{info2.DevName}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">设备类型</div>
+          <div class="devicesinfodataa">{{global.language.types}}</div>
           <div class="devicesinfodatab">{{agreementName2}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">所属布局</div>
+          <div class="devicesinfodataa">{{global.language.apartment}}</div>
           <div class="devicesinfodatab">{{roomNUmName}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">所属房间</div>
+          <div class="devicesinfodataa">{{global.language.room}}</div>
           <div class="devicesinfodatab">{{roomName}}</div>
         </div>
         <div class="devicesinfodata">
-          <div class="devicesinfodataa">设备状态</div>
-          <div v-show="info2.Status" class="devicesinfodatab">启用</div>
-          <div v-show="!info2.Status" class="devicesinfodatab">禁用</div>
+          <div class="devicesinfodataa">{{global.language.status}}</div>
+          <div v-show="info2.Status" class="devicesinfodatab">{{global.language.able}}</div>
+          <div v-show="!info2.Status" class="devicesinfodatab">{{global.language.disable}}</div>
         </div>
         <div class="devicesinfodata">
           <div
@@ -108,32 +123,32 @@
             class="devicesinfodataade"
             id="devicesinfodataade"
             v-on:click="del"
-          >删除</div>
+          >{{global.language.delete}}</div>
           <div
             v-show="!changeStatus2"
             v-on:click="change(false, true)"
             class="devicesinfodataade"
-          >修改</div>
+          >{{global.language.update}}</div>
           <div
             v-show="changeStatus2"
             v-on:click="change(false, false)"
             class="devicesinfodatature"
-          >取消</div>
+          >{{global.language.cancel}}</div>
           <div
             v-show="changeStatus2"
             v-on:click="change(false, false)"
             class="devicesinfodatature"
-          >确定</div>
+          >{{global.language.true}}</div>
           <div
             v-show="info2.Status && !changeStatus2"
             v-on:click="statusChange(false)"
             class="devicesinfodataade"
-          >禁用</div>
+          >{{global.language.disable}}</div>
           <div
             v-show="!info2.Status && !changeStatus2"
             v-on:click="statusChange(true)"
             class="devicesinfodataade"
-          >启用</div>
+          >{{global.language.able}}</div>
         </div>
       </div>
       <div v-show="!info2.ID && !showAddLink" class="devicesinfoleft" v-on:click="getLinksData">
@@ -144,7 +159,7 @@
       <div v-show="showAddLink" class="devicesinfoleft">
         <div class="linkData">
           <div class="linkDataa1">
-            <div class="linkDataname">设备名</div>
+            <div class="linkDataname">{{global.language.name}}</div>
             <div class="linkDataeui">EUI</div>
           </div>
           <div
@@ -160,8 +175,8 @@
           </div>
         </div>
         <div class="linkDatatrue">
-          <div class="linkDatatruea" v-on:click="selectLink(false)">取消</div>
-          <div class="linkDatatruea" v-on:click="selectLink(true)">确定</div>
+          <div class="linkDatatruea" v-on:click="selectLink(false)">{{global.language.cancel}}</div>
+          <div class="linkDatatruea" v-on:click="selectLink(true)">{{global.language.true}}</div>
         </div>
       </div>
       <div class="devicesinforight">
@@ -203,7 +218,7 @@ export default {
       changeStatus: false,
       changeStatus2: false,
       changeData: false,
-      linkspoint: "点击关联设备",
+      linkspoint: this.global.language.clink,
       showAddLink: false,
       linkData: [],
       linkID: {},
@@ -236,9 +251,9 @@ export default {
         id: this.info.ID
       });
       if (retData.Code != 200) {
-        alert("删除失败!");
+        alert("fail!");
       } else {
-        alert("删除成功!");
+        alert("success!");
       }
       this.changeData = true;
       this.close(false);
@@ -257,7 +272,7 @@ export default {
         status: mothed
       });
       if (retData.Code != 200) {
-        alert("失败!");
+        alert("fail!");
         return;
       }
       this.infos.Status = mothed;
@@ -271,11 +286,11 @@ export default {
         "/room/devices/GetDevicesLinkstrue?roomID=" + this.info.RoomID
       );
       if (retData.Code != 200) {
-        this.linkspoint = "获取出错!";
+        this.linkspoint = this.global.language.failure;
         return;
       }
       if (retData.Data.length < 2) {
-        this.linkspoint = "没有其他设备!";
+        this.linkspoint = "";
         return;
       }
       this.showAddLink = true;
@@ -296,13 +311,13 @@ export default {
       });
       this.showAddLink = false;
       if (retData.Code != 200) {
-        alert("关联失败!");
+        alert(this.global.language.failure);
         return;
       }
       this.info2 = this.linkID;
       //把关联设备ID返回给父组件
       this.$emit("retlinkid", [this.info2, this.info]);
-      alert("关联成功!");
+      alert(this.global.language.success);
       this.decideDatashow();
     },
     getInfo2: async function() {
@@ -326,14 +341,14 @@ export default {
         id: this.info2.ID
       });
       if (retData.Code != 200) {
-        alert("解除失败!");
+        alert(this.global.language.failure);
         return;
       }
       //把关联设备ID返回给父组件
       this.$emit("retlinkid", [this.info2, this.info], true);
       this.info2 = {};
       this.info.info2 = {};
-      alert("解除成功!");
+      alert(this.global.language.success);
       this.decideDatashow();
     },
     setTimer() {
@@ -363,7 +378,7 @@ export default {
         this.changeStatus = false;
         this.changeStatus2 = false;
         this.changeData = false;
-        this.linkspoint = "点击关联设备";
+        this.linkspoint = this.global.language.clink;
         this.showAddLink = false;
         this.linkData = [];
         this.linkID = {};

@@ -12,8 +12,8 @@ Vue.prototype.$axios = axios;
 
 // --------------- //
 // const localhost = "http://120.78.76.139:8999"; //调试地址/
-// const localhost = "http://localhost:8999"; //调试地址
-const localhost = ""; //正式
+const localhost = "http://localhost:8999"; //调试地址
+// const localhost = ""; //正式
 
 export default {
   post: async function(url, postData) {
@@ -110,6 +110,14 @@ export default {
   getMode: getMode
 };
 function getMode(AgreementID, modes) {
+  if (global.languageselect == 1) {
+    return getModeEnglish(AgreementID, modes);
+  } else {
+    return getModeChina(AgreementID, modes);
+  }
+}
+
+function getModeChina(AgreementID, modes) {
   switch (AgreementID) {
     case 2:
       switch (modes) {
@@ -269,5 +277,170 @@ function getMode(AgreementID, modes) {
       }
   }
   return "正常";
+}
+
+function getModeEnglish(AgreementID, modes) {
+  switch (AgreementID) {
+    case 2:
+      switch (modes) {
+        case 3:
+          return "Leave";
+        case 4:
+          return "Ready Leave";
+        case 8:
+          return "In bed";
+      }
+      break;
+    case 7: //电动窗帘机
+    case 8:
+    case 12:
+    case 19:
+      if (modes) {
+        return "Open";
+      } else {
+        return "Close";
+      }
+      break;
+    // case 8: //智能移动插座
+    //   if (modes) {
+    //     return "开关开";
+    //   } else {
+    //     return "开关关";
+    //   }
+    //   break;
+    case 9: //86三键智能开关
+      switch (modes) {
+        case 0:
+          return "Oll close";
+        case 1:
+          return "one open";
+        case 2:
+          return "two open";
+        case 3:
+          return "one and two open";
+        case 4:
+          return "three open";
+        case 5:
+          return "one and three open";
+        case 6:
+          return "two and three open";
+        case 7:
+          return "Oll open";
+      }
+      break;
+    case 11: //红外转发器
+      switch (modes) {
+        case 1:
+          return "Successful learning";
+        case 2:
+          return "Failure learning";
+        case 3:
+          return "out of range";
+        case 4:
+          return "learning";
+        case 5:
+          return "waiting timeout";
+        case 6:
+          return "Control success";
+        case 7:
+          return "Unskilled code";
+      }
+      break;
+    // case 12: //阀门控制器
+    //   if (modes) {
+    //     return "阀门开";
+    //   } else {
+    //     return "阀门关";
+    //   }
+    //   break;
+    case 15: //墙壁遥控面板遥控器
+      var status = [];
+      var one = Math.floor(modes / 100);
+      switch (one) {
+        case 1:
+          status.push("open");
+          break;
+        case 2:
+          status.push("open");
+          break;
+        case 3:
+          status.push("open");
+          break;
+      }
+      var two = Math.floor((modes % 100) / 10);
+      switch (two) {
+        case 1:
+          status.push("open");
+          break;
+        case 2:
+          status.push("open");
+          break;
+        case 3:
+          status.push("open");
+          break;
+      }
+      var tree = Math.floor(modes % 10);
+      switch (tree) {
+        case 1:
+          status.push("open");
+          break;
+        case 2:
+          status.push("open");
+          break;
+        case 3:
+          status.push("open");
+          break;
+      }
+      return status.join("/");
+      break;
+    case 18: //人体感应器
+      if (modes) {
+        return "Someone is close";
+      } else {
+        return "normal";
+      }
+      break;
+    // case 19: //门窗感应器
+    //   if (modes) {
+    //     return "开";
+    //   } else {
+    //     return "关";
+    //   }
+    //   break;
+    case 21: //迷你遥控器（情景）
+      if (modes) {
+        return "button" + modes;
+      }
+      break;
+    case 22: //体征床垫
+      switch (modes) {
+        case 0:
+          return "Leave";
+        case 1:
+          return "Right";
+        case 2:
+          return "Left";
+        case 3:
+          return "Sitting";
+        case 4:
+          return "Lying";
+      }
+      break;
+    case 1: //温湿度计
+    case 3: //跌倒偵測仪
+    case 4: //烟雾侦测器
+    case 5: //红外对射探测器
+    case 6: //燃气探测器
+    case 13: //PM2.5检测仪声光报警器
+    case 14: //声光报警器
+    case 16: //紧急按钮
+    case 17: //水浸报警
+    case 20: //一氧化碳探测器
+    case 23: //体温探测器
+      if (modes) {
+        return global.alarmlist[modes - 1].Name;
+      }
+  }
+  return "normal";
 }
 </script>

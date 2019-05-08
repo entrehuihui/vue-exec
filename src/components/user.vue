@@ -3,16 +3,16 @@
     <div class="user" v-on:click="Close"></div>
     <div class="userinfo">
       <div class="userinfotitle">
-        <strong>用户资料</strong>
+        <strong>{{global.language.userdetails}}</strong>
         <div class="userinfoclose" v-on:click="Close">X</div>
       </div>
       <div class="userinfosts">
         <div class="userinfostssa">
-          <div class="userinfostssb" v-show="!updatestatus">用户名:</div>
-          <div class="userinfostssb" v-show="updatestatus">旧密码:</div>
-          <div class="userinfostssb">手机号码:</div>
-          <div class="userinfostssb" v-show="!updatestatus">权限:</div>
-          <div class="userinfostssb" v-show="updatestatus">密码:</div>
+          <div class="userinfostssb" v-show="!updatestatus">{{global.language.name}}:</div>
+          <div class="userinfostssb" v-show="updatestatus">{{global.language.oldpassword}}:</div>
+          <div class="userinfostssb">{{global.language.mobile}}:</div>
+          <div class="userinfostssb" v-show="!updatestatus">{{global.language.permission}}:</div>
+          <div class="userinfostssb" v-show="updatestatus">{{global.language.newpassword}}:</div>
         </div>
         <div class="userinfostssa" v-show="updatestatus">
           <div class="userinfostssc">
@@ -28,41 +28,62 @@
         <div class="userinfostssa" v-show="!updatestatus">
           <div class="userinfostssc">{{global.userinfo.name}}</div>
           <div class="userinfostssc">{{global.userinfo.mobile}}</div>
-          <div class="userinfostssc" v-show="global.userinfo.permission == 0">超级管理员</div>
-          <div class="userinfostssc" v-show="global.userinfo.permission == 1">管理员</div>
-          <div class="userinfostssc" v-show="global.userinfo.permission == 2">普通用户</div>
+          <div
+            class="userinfostssc"
+            v-show="global.userinfo.permission == 0"
+          >{{global.language.super}}</div>
+          <div
+            class="userinfostssc"
+            v-show="global.userinfo.permission == 1"
+          >{{global.language.admin}}</div>
+          <div
+            class="userinfostssc"
+            v-show="global.userinfo.permission == 2"
+          >{{global.language.man}}</div>
         </div>
-        <div class="userupdate" v-show="!updatestatus" v-on:click="updateinfo(true)">修改</div>
-        <div class="userupdate" v-show="updatestatus" v-on:click="updateinfos()">确定</div>
+        <div
+          class="userupdate"
+          v-show="!updatestatus"
+          v-on:click="updateinfo(true)"
+        >{{global.language.update}}</div>
+        <div
+          class="userupdate"
+          v-show="updatestatus"
+          v-on:click="updateinfos()"
+        >{{global.language.true}}</div>
         <div
           class="userupdate"
           v-show="updatestatus"
           v-on:click="updateinfo(false)"
           id="userupdatecancel"
-        >取消</div>
+        >{{global.language.cancel}}</div>
       </div>
       <div class="userinfostselect" v-show="global.userinfo.permission<2">
-        <div class="userinfostselecta">账户状态:</div>
+        <div class="userinfostselecta">{{global.language.status}}:</div>
         <div class="userinfostselecta">
           <select v-model="selectstatus">
-            <option value>所有</option>
-            <option value="true">启用</option>
-            <option value="false">禁用</option>
+            <option value>{{global.language.all}}</option>
+            <option value="true">{{global.language.able}}</option>
+            <option value="false">{{global.language.disable}}</option>
           </select>
         </div>
-        <div class="userinfostselecta" id="userinfoadd" v-on:click="addclose(true)">添加用户</div>
+        <div
+          class="userinfostselecta"
+          id="userinfoadd"
+          v-on:click="addclose(true)"
+        >{{global.language.adduser}}</div>
       </div>
       <div class="userinfost" v-show="global.userinfo.permission<2">
         <div class="userinfosta">
           <div class="userinfosnumber"></div>
-          <div class="userinfosnumber">序号</div>
-          <div class="userinfosdepict">账号</div>
-          <div class="userinfosdepicta">权限</div>
-          <div class="userinfostime">创建时间</div>
-          <div class="userinfosrooma">手机号</div>
-          <div class="userinfosroomb">备注</div>
-          <div class="userinfosroomc">状态</div>
-          <div class="userinfosroomc">操作</div>
+          <div class="userinfosnumber">{{global.language.number}}</div>
+          <div class="userinfosdepict">{{global.language.name}}</div>
+          <div class="userinfosdepicta">{{global.language.permission}}</div>
+          <div class="userinfostime">{{global.language.time}}</div>
+          <div class="userinfosrooma">{{global.language.mobile}}</div>
+          <div class="userinfosroomb">{{global.language.details}}</div>
+          <div class="userinfosroomc">{{global.language.status}}</div>
+          <div class="userinfosroomc">{{global.language.manipulate}}</div>
         </div>
         <div v-for="(v, i) in userlist" :key="i" class="userinfosta">
           <div class="userinfosnumber">
@@ -72,18 +93,32 @@
           </div>
           <div class="userinfosnumber">{{pages*11+i+1}}</div>
           <div class="userinfosdepict">{{v.User}}</div>
-          <div class="userinfosdepicta" v-show="v.Permission==0?true:false">管理员</div>
-          <div class="userinfosdepicta" v-show="v.Permission==1?true:false">管理员</div>
-          <div class="userinfosdepicta" v-show="v.Permission==2?true:false">普通用户</div>
+          <div
+            class="userinfosdepicta"
+            v-show="v.Permission==0?true:false"
+          >{{global.language.super}}</div>
+          <div
+            class="userinfosdepicta"
+            v-show="v.Permission==1?true:false"
+          >{{global.language.admin}}</div>
+          <div class="userinfosdepicta" v-show="v.Permission==2?true:false">{{global.language.man}}</div>
           <div class="userinfostime">{{new Date(v.CreatedAt).toLocaleString()}}</div>
           <div class="userinfosrooma">{{v.Mobile}}</div>
           <div class="userinfosroomb">{{v.Details}}</div>
-          <div class="userinfosroomccc" v-show="!v.Able">已禁用</div>
-          <div class="userinfosroomccc" v-show="v.Able">已启用</div>
-          <div class="userinfosroomcc" v-on:click="disablieuser(true, i)" v-show="!v.Able">启用</div>
-          <div class="userinfosroomcc" v-on:click="disablieuser(false, i)" v-show="v.Able">禁用</div>
-          <div class="userinfosroomcc" v-on:click="infoupdate(true, v)">修改</div>
-          <div class="userinfosroomcc" v-on:click="deluser([v.ID])">删除</div>
+          <div class="userinfosroomccc" v-show="!v.Able">{{global.language.disable}}</div>
+          <div class="userinfosroomccc" v-show="v.Able">{{global.language.able}}</div>
+          <div
+            class="userinfosroomcc"
+            v-on:click="disablieuser(true, i)"
+            v-show="!v.Able"
+          >{{global.language.able}}</div>
+          <div
+            class="userinfosroomcc"
+            v-on:click="disablieuser(false, i)"
+            v-show="v.Able"
+          >{{global.language.disable}}</div>
+          <div class="userinfosroomcc" v-on:click="infoupdate(true, v)">{{global.language.update}}</div>
+          <div class="userinfosroomcc" v-on:click="deluser([v.ID])">{{global.language.delete}}</div>
         </div>
       </div>
       <div v-show="global.userinfo.permission<2">
@@ -93,10 +128,10 @@
               <div class="userinfoopta" v-show="opt[0]"></div>
             </div>
           </div>
-          <div id="roomlist_buttonab" v-on:click="selecttreat('del')">删除</div>
-          <div id="roomlist_buttonab" v-on:click="selecttreat(false)">禁用</div>
+          <div id="roomlist_buttonab" v-on:click="selecttreat('del')">{{global.language.delete}}</div>
+          <div id="roomlist_buttonab" v-on:click="selecttreat(false)">{{global.language.disable}}</div>
           <!-- <div id="roomlist_buttonac">全部禁用</div> -->
-          <div id="roomlist_buttonab" v-on:click="selecttreat(true)">启用</div>
+          <div id="roomlist_buttonab" v-on:click="selecttreat(true)">{{global.language.able}}</div>
           <!-- <div id="roomlist_buttonac">全部启用</div> -->
         </div>
         <div class="roomlist_button">
@@ -121,27 +156,27 @@
       <div class="userinfoupdatea">
         <div class="userinfoupdateatitle">
           <div>
-            <strong>修改用户信息</strong>
+            <strong>{{global.language.update}}</strong>
           </div>
           <div class="userinfoupdateatitleclose" v-on:click="infoupdate(false)">X</div>
         </div>
         <div class="userinfoupdateaa">
-          <div class="userinfoupdateaat">用户名:</div>
-          <div class="userinfoupdateaat">权限:</div>
-          <div class="userinfoupdateaat">密码:</div>
-          <div class="userinfoupdateaat" id="userinfoupdateaat1">备注:</div>
+          <div class="userinfoupdateaat">{{global.language.name}}:</div>
+          <div class="userinfoupdateaat">{{global.language.permission}}:</div>
+          <div class="userinfoupdateaat">{{global.language.newpassword}}:</div>
+          <div class="userinfoupdateaat" id="userinfoupdateaat1">{{global.language.details}}:</div>
         </div>
         <div class="userinfoupdateaa" id="userinfoupdateaacontent">
           <div class="userinfoupdateaacontentt">{{infoupdates.User}}</div>
           <div class="userinfoupdateaacontentt">
             <select ref="userpermisson" :value="infoupdates.Permission">
-              <option v-show="!global.userinfo.permission" value="1">管理员</option>
-              <option value="2">普通用户</option>
+              <option v-show="!global.userinfo.permission" value="1">{{global.language.admin}}</option>
+              <option value="2">{{global.language.man}}</option>
             </select>
           </div>
           <div class="userinfoupdateaacontentt">
             <input
-              placeholder="不修改不填"
+              placeholder
               ref="userpassword"
               class="userinfoupdateaacontentti1"
               type="password"
@@ -149,7 +184,7 @@
           </div>
           <div class="userinfoupdateaacontentt" id="userinfoupdateaacontentt1">
             <textarea
-              placeholder="不修改不填"
+              placeholder
               ref="userdetails"
               id="userinfoupdateaacontentti2"
               cols="30"
@@ -158,8 +193,8 @@
           </div>
         </div>
         <div class="userinfoupdateab">
-          <div class="userinfoupdateaba" v-on:click="infoupdate(false)">取消</div>
-          <div class="userinfoupdateaba" v-on:click="infoupdatesput()">确定</div>
+          <div class="userinfoupdateaba" v-on:click="infoupdate(false)">{{global.language.cancel}}</div>
+          <div class="userinfoupdateaba" v-on:click="infoupdatesput()">{{global.language.true}}</div>
         </div>
       </div>
     </div>
@@ -168,31 +203,31 @@
       <div class="userinfoupdatea">
         <div class="userinfoupdateatitle" id="userinfoupdateatitleadd">
           <div>
-            <strong>添加用户</strong>
+            <strong>{{global.language.adduser}}</strong>
           </div>
           <div class="userinfoupdateatitleclose" v-on:click="addclose(false)">X</div>
         </div>
         <div class="userinfoupdateaa">
-          <div class="userinfoupdateaat">用户名:</div>
-          <div class="userinfoupdateaat">权限:</div>
-          <div class="userinfoupdateaat">密码:</div>
-          <div class="userinfoupdateaat">手机号:</div>
-          <div class="userinfoupdateaat">状态:</div>
-          <div class="userinfoupdateaat" id="userinfoupdateaat1">备注:</div>
+          <div class="userinfoupdateaat">{{global.language.name}}:</div>
+          <div class="userinfoupdateaat">{{global.language.permission}}:</div>
+          <div class="userinfoupdateaat">{{global.language.newpassword}}:</div>
+          <div class="userinfoupdateaat">{{global.language.mobile}}:</div>
+          <div class="userinfoupdateaat">{{global.language.status}}:</div>
+          <div class="userinfoupdateaat" id="userinfoupdateaat1">{{global.language.details}}:</div>
         </div>
         <div class="userinfoupdateaa" id="userinfoupdateaacontent">
           <div class="userinfoupdateaacontentt">
-            <input placeholder="账号名" ref="addname" class="userinfoupdateaacontentti1" type="text">
+            <input placeholder="name" ref="addname" class="userinfoupdateaacontentti1" type="text">
           </div>
           <div class="userinfoupdateaacontentt">
             <select ref="addpermisson" :value="2">
-              <option v-show="!global.userinfo.permission" value="1">管理员</option>
-              <option value="2">普通用户</option>
+              <option v-show="!global.userinfo.permission" value="1">{{global.language.admin}}</option>
+              <option value="2">{{global.language.man}}</option>
             </select>
           </div>
           <div class="userinfoupdateaacontentt">
             <input
-              placeholder="密码"
+              placeholder="password"
               ref="addpassword"
               class="userinfoupdateaacontentti1"
               type="password"
@@ -201,7 +236,7 @@
           <div class="userinfoupdateaacontentt">
             <input
               v-on:keyup="checkmobile()"
-              placeholder="手机号"
+              placeholder="mobile"
               ref="addmobile"
               class="userinfoupdateaacontentti1"
               type="number"
@@ -209,13 +244,13 @@
           </div>
           <div class="userinfoupdateaacontentt">
             <select ref="addable" :value="false">
-              <option value="false">禁用</option>
-              <option value="true">启用</option>
+              <option value="false">{{global.language.disable}}</option>
+              <option value="true">{{global.language.able}}</option>
             </select>
           </div>
           <div class="userinfoupdateaacontentt" id="userinfoupdateaacontentt11">
             <textarea
-              placeholder="详情,可为空"
+              placeholder
               ref="adddetails"
               id="userinfoupdateaacontentti2"
               cols="30"
@@ -224,8 +259,8 @@
           </div>
         </div>
         <div class="userinfoupdateab" id="userinfoupdateabadd">
-          <div class="userinfoupdateaba" v-on:click="addclose(false)">取消</div>
-          <div class="userinfoupdateaba" v-on:click="adduser()">确定</div>
+          <div class="userinfoupdateaba" v-on:click="addclose(false)">{{global.language.cancel}}</div>
+          <div class="userinfoupdateaba" v-on:click="adduser()">{{global.language.true}}</div>
         </div>
       </div>
     </div>
@@ -455,7 +490,7 @@ export default {
       }
       this.getuserlist();
       this.addShow = false;
-      alert("添加成功!");
+      alert("suceess!");
     },
     checkmobile: function() {
       if (this.$refs.addmobile.value.length > 11) {

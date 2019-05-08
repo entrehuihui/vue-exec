@@ -9,45 +9,45 @@
     <!-- 顶部栏 -->
     <div id="roomnumlist_top">
       <div id="roomnumlist_title">
-        <h1>布局列表</h1>
+        <h1>{{global.language.apartmentlist}}</h1>
       </div>
       <div id="roomnumlist_top_return" v-on:click="returnMains()">
         <img src="/static/img/return.jpg" alt>
       </div>
       <div id="roomnumlist_select">
         <div>
-          <div class="roomnumnlist_select_a">楼层:</div>
+          <div class="roomnumnlist_select_a">{{global.language.floor}}:</div>
           <div>
             <input type="number" v-model="inputFloor">
           </div>
         </div>
         <div>
-          <div class="roomnumnlist_select_a">布局编号:</div>
+          <div class="roomnumnlist_select_a">{{global.language.number}}:</div>
           <div>
             <input type="number" v-model="inputNum">
           </div>
         </div>
         <div>
-          <button v-on:click="changePages(0)">确定</button>
-          <button v-on:click="clearnCondition()">清除</button>
+          <button v-on:click="changePages(0)">{{global.language.true}}</button>
+          <button v-on:click="clearnCondition()">{{global.language.cancel}}</button>
         </div>
         <div
           class="roomnumnlist_select_b"
           v-on:click="showAddroom(true)"
           v-show="global.userinfo.permission<2"
-        >添加</div>
+        >{{global.language.add}}</div>
       </div>
     </div>
     <!-- 数据栏 -->
     <div id="roomnumlist_data">
       <div class="roomnumlist_data_info_title">
-        <div class="roomnumlist_data_a">编号</div>
-        <div class="roomnumlist_data_b">名称</div>
-        <div class="roomnumlist_data_c">楼层</div>
-        <div class="roomnumlist_data_d">房屋编号</div>
-        <div class="roomnumlist_data_e">备注</div>
-        <div class="roomnumlist_data_f">状态</div>
-        <div class="roomnumlist_data_g">操作</div>
+        <div class="roomnumlist_data_a">{{global.language.number}}</div>
+        <div class="roomnumlist_data_b">{{global.language.name}}</div>
+        <div class="roomnumlist_data_c">{{global.language.floor}}</div>
+        <div class="roomnumlist_data_d">{{global.language.number}}</div>
+        <div class="roomnumlist_data_e">{{global.language.details}}</div>
+        <div class="roomnumlist_data_f">{{global.language.status}}</div>
+        <div class="roomnumlist_data_g">{{global.language.manipulate}}</div>
       </div>
       <div class="roomnumlist_data_info" v-for="(v,k) in dataInfo" :key="k+1">
         <div class="roomnumlist_data_a">{{k+1}}</div>
@@ -56,16 +56,27 @@
         <div class="roomnumlist_data_d">{{v.RoomNum}}</div>
         <div class="roomnumlist_data_e">{{v.Details}}</div>
         <div class="roomnumlist_data_f">
-          <div :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'">已启用</div>
-          <div :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'">已禁用</div>
+          <div
+            :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'"
+          >{{global.language.able}}</div>
+          <div
+            :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'"
+          >{{global.language.disable}}</div>
         </div>
         <div class="roomnumlist_data_g">
-          <div class="roomnumlist_data_g_a" v-on:click="roomDel(v.id)">删除</div>
+          <div class="roomnumlist_data_g_a" v-on:click="roomDel(v.id)">{{global.language.delete}}</div>
           <div class="roomnumlist_data_g_a" v-on:click="rommStatus(v)">
-            <div :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'">启用</div>
-            <div :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'">禁用</div>
+            <div
+              :class="v.status ? 'roomnumlist_data_g_a_false' : 'roomnumlist_data_g_a_true'"
+            >{{global.language.able}}</div>
+            <div
+              :class="v.status ? 'roomnumlist_data_g_a_true' : 'roomnumlist_data_g_a_false'"
+            >{{global.language.disable}}</div>
           </div>
-          <div class="roomnumlist_data_g_a" v-on:click="showRoomlist(true, v.id, v.Name)">详情</div>
+          <div
+            class="roomnumlist_data_g_a"
+            v-on:click="showRoomlist(true, v.id, v.Name)"
+          >{{global.language.details}}</div>
         </div>
       </div>
     </div>
@@ -140,7 +151,7 @@ export default {
         alert(retData.Msg);
         return;
       }
-      alert("成功");
+      alert(global.language.success);
       this.getRomlist();
     },
     roomDel: async function(id) {
@@ -154,7 +165,7 @@ export default {
         alert(retData.Msg);
         return;
       }
-      alert("删除成功");
+      alert(global.language.success);
       this.getRomlist();
     },
     getRomlist: async function() {

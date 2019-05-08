@@ -9,40 +9,56 @@
         :id="devicesType == 99 ? 'mains_title_change':''"
         v-on:click="mains_getRoomDevices()"
       >
-        <img src="/static/img/hvsetting.png" alt>
-        <a>
-          <strong>所有设备</strong>
-        </a>
+        <div class="mains_title_img">
+          <img src="/static/img/hvsetting.png" alt>
+        </div>
+        <div class="mains_title_a">
+          <a>
+            <strong>{{global.language.alldevice}}</strong>
+          </a>
+        </div>
       </div>
       <div
         class="mains_title"
         :id="devicesType == 0 ? 'mains_title_change':''"
         v-on:click="mains_getRoomDevices(-1, 0)"
       >
-        <img src="/static/img/hvdevice.png" alt>
-        <a>
-          <strong>控制设备</strong>
-        </a>
+        <div class="mains_title_img">
+          <img src="/static/img/hvdevice.png" alt>
+        </div>
+        <div class="mains_title_a">
+          <a>
+            <strong>{{global.language.condevice}}</strong>
+          </a>
+        </div>
       </div>
       <div
         class="mains_title"
         :id="devicesType == 1 ? 'mains_title_change':''"
         v-on:click="mains_getRoomDevices(-1, 1)"
       >
-        <img src="/static/img/hvanfang.png" alt>
-        <a>
-          <strong>安防设备</strong>
-        </a>
+        <div class="mains_title_img">
+          <img src="/static/img/hvanfang.png" alt>
+        </div>
+        <div class="mains_title_a">
+          <a>
+            <strong>{{global.language.security}}</strong>
+          </a>
+        </div>
       </div>
       <div
         class="mains_title"
         :id="devicesType == 2 ? 'mains_title_change':''"
         v-on:click="mains_getRoomDevices(-1, 2)"
       >
-        <img src="/static/img/hvjiance.png" alt>
-        <a>
-          <strong>监测设备</strong>
-        </a>
+        <div class="mains_title_img">
+          <img src="/static/img/hvjiance.png" alt>
+        </div>
+        <div class="mains_title_a">
+          <a>
+            <strong>{{global.language.detectdevice}}</strong>
+          </a>
+        </div>
       </div>
       <div
         class="mains_title"
@@ -51,16 +67,18 @@
         v-show="global.userinfo.permission<2"
       >
         <!-- <img src="/static/img/hvjiance.png" alt> -->
-        <a>
-          <strong>+添加设备</strong>
-        </a>
+        <div class="mains_title_a">
+          <a>
+            <strong>{{global.language.adddevice}}</strong>
+          </a>
+        </div>
       </div>
     </div>
     <div id="mains_topall">
       <div id="mains_top">
         <div id="mains_Setting">
           <div id="mains_roomNum">
-            <div id="mains_roomName">户型名称</div>
+            <div id="mains_roomName">{{global.language.apartment}}</div>
             <select v-on:click="mains_select()" ref="mains_select">
               <option v-for="(v,i) in roomData" :key="i">{{v.Name}}</option>
             </select>
@@ -69,7 +87,7 @@
                 class="mains_add_room"
                 id="mians_add_room_a"
                 v-on:click="mains_addRoomNum(true)"
-              >户型列表</div>
+              >{{global.language.apartmentlist}}</div>
             </div>
           </div>
           <div id="mains_set">
@@ -134,16 +152,16 @@
       <div class="devicesalarm"></div>
       <div class="devicesalarminfo">
         <div class="devicesalarminfotitle">
-          实时报警数据
+          {{global.language.nowalarm}}
           <div class="devicesalarminfoclose" v-on:click="mysocketdataClose">X</div>
         </div>
         <div class="devicesalarminfost">
           <div class="devicesalarminfosta">
-            <div class="devicesalarminfosdepict">描述</div>
-            <div class="devicesalarminfostime">时间</div>
-            <div class="devicesalarminfosrooma">地点</div>
-            <div class="devicesalarminfosroomb">设备</div>
-            <div class="devicesalarminfosroomc">操作</div>
+            <div class="devicesalarminfosdepict">{{global.language.describe}}</div>
+            <div class="devicesalarminfostime">{{global.language.time}}</div>
+            <div class="devicesalarminfosrooma">{{global.language.location}}</div>
+            <div class="devicesalarminfosroomb">{{global.language.devices}}</div>
+            <div class="devicesalarminfosroomc">{{global.language.manipulate}}</div>
           </div>
           <div
             v-for="(v, i) in alarmdata"
@@ -155,7 +173,10 @@
             <div class="devicesalarminfostime">{{v.time}}</div>
             <div class="devicesalarminfosrooma">{{v.roomNum}}-{{v.room}}</div>
             <div class="devicesalarminfosroomb">{{v.name}}</div>
-            <div class="devicesalarminfosroomcc" v-on:click="mysocketdatapull(v.id, v.alarmid)">处理</div>
+            <div
+              class="devicesalarminfosroomcc"
+              v-on:click="mysocketdatapull(v.id, v.alarmid)"
+            >{{global.language.process}}</div>
           </div>
         </div>
       </div>
@@ -218,13 +239,25 @@ export default {
         this.$router.push("/");
         return;
       }
+      //语言选择 --
       for (const v of retData.Data) {
-        this.global.agreementinfo[v.ID] = {
-          Name: v.Name,
-          Heartbeat: v.Heartbeat,
-          Style: v.Style,
-          Switchs: v.Switchs
-        };
+        if (this.global.languageselect == 1) {
+          this.global.agreementinfo[v.ID] = {
+            ID: v.ID,
+            Name: v.Name1,
+            Heartbeat: v.Heartbeat,
+            Style: v.Style,
+            Switchs: v.Switchs
+          };
+        } else {
+          this.global.agreementinfo[v.ID] = {
+            ID: v.ID,
+            Name: v.Name,
+            Heartbeat: v.Heartbeat,
+            Style: v.Style,
+            Switchs: v.Switchs
+          };
+        }
       }
       var retData = await req.get("/alarmlist?a=1");
       if (retData.Code != 200) {
@@ -232,12 +265,18 @@ export default {
         this.$router.push("/");
         return;
       }
+      //语言选择 --
+      if (this.global.languageselect == 1) {
+        for (const key in retData.Data) {
+          retData.Data[key].Name = retData.Data[key].Name1;
+        }
+      }
       this.global.alarmlist = retData.Data;
     },
     mysocketdata: function(data) {
       data = JSON.parse(data);
       var index = data.id;
-      console.log(data);
+      console.log(data, this.roomDevicesInfo[index].ID);
       // 数据类型判断
       switch (data.types) {
         case 0: //心跳
@@ -275,7 +314,7 @@ export default {
           var alarm = {};
           alarm.id = data.id;
           alarm.room = data.data[1];
-          alarm.alarm = data.data[2];
+          alarm.alarm = this.global.alarmlist[data.data[2]].Name;
           alarm.alarmid = data.data[3];
           alarm.time = new Date(data.times * 1000).toLocaleString();
           alarm.name = data.name;

@@ -6,7 +6,7 @@
       </div>
       <div>
         <div class="milieu_data">
-          <div class="milieu_name">温度</div>
+          <div class="milieu_name">{{global.language.temperature}}</div>
           <div class="milieu_datainfo">{{temp}}</div>
         </div>
       </div>
@@ -17,7 +17,7 @@
       </div>
       <div>
         <div class="milieu_data">
-          <div class="milieu_name">湿度</div>
+          <div class="milieu_name">{{global.language.humidity}}</div>
           <div class="milieu_datainfo">{{elec}}</div>
         </div>
       </div>
@@ -28,7 +28,7 @@
       </div>
       <div>
         <div class="milieu_data">
-          <div class="milieu_name">PM2.5</div>
+          <div class="milieu_name">{{global.language.PM25}}</div>
           <div class="milieu_datainfo">{{PM25}}</div>
         </div>
       </div>
