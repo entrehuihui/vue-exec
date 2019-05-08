@@ -188,6 +188,9 @@
         >
           <linedata :options="v" :keys="info.ID+'echart'+i"></linedata>
         </div>
+        <div v-if="infos.AgreementID==22 && line.length==1" class="linedatapng">
+          <img class="linedatapnga" src="/static/img/pic.jpg" alt>
+        </div>
         <div v-show="selectindexValue" class="devicesinforighta">
           <down v-if="info.ID" :info="info" key="info.ID + '_'+info.ID">{{info.instructionInfos}}</down>
         </div>

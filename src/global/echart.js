@@ -25,6 +25,17 @@ function line(datainfos) {
                 data: datainfo.Data[key]
             });
         }
+        var ymax = 0;
+        switch (datainfo.AgreementID) {
+            case 22:
+                ymax = 5;
+                break;
+            case 2:
+                ymax = 8;
+                break;
+            default:
+                break;
+        }
         opt.push({
             title: {
                 text: global.agreementinfo[datainfo.AgreementID].Name,
@@ -57,7 +68,8 @@ function line(datainfos) {
                 type: "value",
                 axisLabel: {
                     formatter: "{value}"
-                }
+                },
+                max: ymax,
             },
             series: series
         })

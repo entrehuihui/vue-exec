@@ -315,7 +315,7 @@ export default {
           var alarm = {};
           alarm.id = data.id;
           alarm.room = data.data[1];
-          alarm.alarm = this.global.alarmlist[data.data[2]].Name;
+          alarm.alarm = this.global.alarmlist[data.data[2] - 1].Name;
           alarm.alarmid = data.data[3];
           alarm.time = new Date(data.times * 1000).toLocaleString();
           alarm.name = data.name;
